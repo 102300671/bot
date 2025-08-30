@@ -71,7 +71,7 @@ FLUSH PRIVILEGES;
 ### 3. 数据迁移（如果需要）
 如果之前使用过签到插件，需要运行迁移脚本：
 ```bash
-cd QQBot/yuri/plugins
+cd bot/qqbot/yuri/plugins
 python migrate_signin_db.py
 ```
 

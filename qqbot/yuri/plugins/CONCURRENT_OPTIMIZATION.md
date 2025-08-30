@@ -203,7 +203,7 @@ async def reliable_operation():
 
 运行测试脚本验证优化效果：
 ```bash
-cd QQBot/yuri/plugins
+cd bot/qqbot/yuri/plugins
 python test_concurrent.py
 ```
 
