@@ -1,0 +1,57 @@
+# Python 缓存文件
+qqbot/yuri/plugins/__pycache__/
+__pycache__/
+*.py[cod]
+*$py.class
+
+# 环境变量文件
+qqbot/yuri/.env.prod
+.env
+.env.local
+.env.development
+.env.test
+
+# 虚拟环境
+qqbot/yuri/.venv
+.venv/
+venv/
+env/
+
+# 日志文件
+*.log
+logs/
+
+# 数据库文件
+*.db
+*.sqlite
+*.sqlite3
+
+# IDE 配置文件
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 操作系统生成的文件
+.DS_Store
+Thumbs.db
+
+# 临时文件
+*.tmp
+*.temp
+.cache/
+
+# 依赖管理
+Pipfile.lock
+poetry.lock
+
+# 测试覆盖率
+.coverage
+htmlcov/
+.pytest_cache/
+
+# 构建输出
+dist/
+build/
+*.egg-info/
