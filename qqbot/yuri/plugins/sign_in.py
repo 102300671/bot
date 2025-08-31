@@ -547,7 +547,7 @@ async def _broadcast_simple(bot: Bot, message: str):
           
     # 这里可以根据需要设置要通知的群组和用户      
     notice_groups = [284205050]  # 示例群号      
-    notice_users = [2193807541, 1185329732]  # 示例用户ID      
+    notice_users = [2193807541]  # 示例用户ID      
       
     for gid in notice_groups:      
         try:      

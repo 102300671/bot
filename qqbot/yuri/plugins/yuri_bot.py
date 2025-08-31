@@ -28,8 +28,8 @@ CONTEXT_TTL = 600
 BOT_PREFIX = "小豆泥："      
       
 HELP_ENABLED = True      
-STARTUP_NOTICE_GROUPS = [284205050，908188794]      
-STARTUP_NOTICE_USERS = [2193807541, 1185329732]      
+STARTUP_NOTICE_GROUPS = [284205050]      
+STARTUP_NOTICE_USERS = [2193807541]      
 
 # 速率限制器 - AI聊天功能
 ai_rate_limiter = RateLimiter(max_calls=20, time_window=60.0)  # 每分钟最多20次AI调用      
