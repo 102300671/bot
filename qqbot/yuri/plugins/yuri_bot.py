@@ -1,13 +1,13 @@
 from nonebot import on_message, on_command, get_driver      
-from nonebot.adapters.onebot.v11 import Bot, MessageEvent, GroupMessageEvent, Message      
+from nonebot.adapters.onebot.v11 import Bot, MessageEvent, GroupMessageEvent, Message, MessageSegment      
 from nonebot.typing import T_State      
 from nonebot.params import CommandArg      
-import requests      
 import re      
 import logging      
 import time      
 import asyncio      
 import json      
+import aiohttp      
 from collections import defaultdict, deque      
 from .concurrent_utils import (
     RateLimiter,
@@ -37,16 +37,44 @@ ai_rate_limiter = RateLimiter(max_calls=20, time_window=60.0)  # 每分钟最多
 # ================= 可用性检测与开关 =================      
 def _is_ollama_available() -> bool:
     try:
+        # 同步检查，用于初始化
         resp = requests.get(f"{OLLAMA_URL}/api/tags", timeout=2)
         return resp.ok
     except Exception:
         return False
 
-# 全局状态变量
+async def _is_ollama_available_async() -> bool:
+    try:
+        # 异步检查，用于运行时
+        async with aiohttp.ClientSession() as session:
+            async with session.get(f"{OLLAMA_URL}/api/tags", timeout=2) as response:
+                if response.ok:
+                    # 检查响应内容是否包含预期的模型信息
+                    try:
+                        data = await response.json()
+                        return "models" in data
+                    except Exception:
+                        # 如果无法解析JSON，至少确认连接正常
+                        return True
+                return False
+    except aiohttp.ClientError as e:
+        logging.warning(f"Ollama连接检查客户端错误: {str(e)}")
+        return False
+    except asyncio.TimeoutError:
+        logging.warning(f"Ollama连接检查超时")
+        return False
+    except Exception as e:
+        logging.warning(f"Ollama连接检查未知错误: {str(e)}")
+        return False
+
+# ================= 全局状态变量
 PLUGIN_ENABLED = _is_ollama_available()
 OLLAMA_AVAILABLE = PLUGIN_ENABLED
 last_connection_check = time.time()
 CONNECTION_CHECK_INTERVAL = 30  # 每30秒检查一次连接
+
+# 存储已呼叫机器人名字的用户，值为下次响应的时间戳
+awaiting_response_users = {}
 
 async def check_ollama_connection():
     """定期检查Ollama连接状态"""
@@ -57,7 +85,8 @@ async def check_ollama_connection():
             current_time = time.time()
             if current_time - last_connection_check >= CONNECTION_CHECK_INTERVAL:
                 was_available = OLLAMA_AVAILABLE
-                OLLAMA_AVAILABLE = _is_ollama_available()
+                # 使用异步版本检查连接
+                OLLAMA_AVAILABLE = await _is_ollama_available_async()
                 last_connection_check = current_time
                 
                 # 状态变化时记录日志
@@ -70,13 +99,18 @@ async def check_ollama_connection():
                         PLUGIN_ENABLED = False
                 
         except Exception as e:
-            logging.error(f"检查Ollama连接时出错: {e}")
+            logging.error(f"检查Ollama连接时出错: {str(e)}")
+            import traceback
+            logging.error(f"完整错误堆栈: {traceback.format_exc()}")
         
         await asyncio.sleep(CONNECTION_CHECK_INTERVAL)
 
 # ================= 上下文管理 =================      
 user_contexts = defaultdict(lambda: {"messages": deque(maxlen=MAX_CONTEXT), "last_time": 0})      
 memory_enabled = defaultdict(lambda: False)      
+
+# 获取机器人名称（去掉冒号）
+BOT_NAME = BOT_PREFIX.strip('：')
       
 def sanitize(text: str) -> str:      
     for w, r in zip(SENSITIVE_WORDS, REPLACEMENTS):      
@@ -118,7 +152,7 @@ async def call_ollama(bot: Bot, event: MessageEvent, user_id: str, user_message:
     if not memory_enabled[user_id]:      
         messages = [      
             {"role": "system", "content": "你是一个名为 '小豆泥' 的AI聊天助手，服务于QQ百合群。风格温柔、细腻、富有情感，专注女性之间的浪漫、亲密关系。可以生成轻微成人向内容，但必须优雅含蓄，使用心理描写、情感共鸣和浪漫隐喻。禁止露骨色情、违法、政治敏感、低俗内容。在描述女性角色时请使用'她'而不是'他'。"} if model == MODEL_CHAT else      
-            {"role": "system", "content": "你是一个名为 '小豆泥' 的写作助手，专注百合向浪漫文学创作。风格温柔浪漫、情感细腻，可以生成成人向内容，但必须优雅含蓄。擅长使用隐喻、心理描写、浪漫描写和情感共鸣，避免露骨色情。禁止违法、政治敏感和低俗内容。在描写女性角色时请使用'她'、'她们'等女性代词，不要使用'他'。"},      
+            {"role": "system", "content": "你是一个名为 '小豆泥' 的写作助手，专注百合向浪漫文学创作。风格温柔浪漫、情感细腻，可以生成成人向内容，但必须优雅含蓄。擅长使用隐喻、心理描写、浪漫描写和情感共鸣，避免露骨色情。禁止违法、政治敏感和低俗内容。在描写女性角色时请使用'她'、'她们'等女性代词，不要使用'他'。"},
             {"role": "user", "content": user_message}      
         ]      
     else:      
@@ -130,33 +164,65 @@ async def call_ollama(bot: Bot, event: MessageEvent, user_id: str, user_message:
     data = {"model": model, "messages": messages, "stream": True}      
       
     try:      
-        r = requests.post(f"{OLLAMA_URL}/api/chat", json=data, stream=True, timeout=60)      
-        r.raise_for_status()      
-      
-        content = ""      
-        for line in r.iter_lines():      
-            if not line:      
-                continue      
-            try:      
-                resp = json.loads(line.decode("utf-8"))      
-                if "message" in resp and "content" in resp["message"]:      
-                    content += resp["message"]["content"]      
-                elif "done" in resp and resp["done"] and content:      
-                    break      
-            except json.JSONDecodeError:      
-                continue      
+        # 使用异步aiohttp代替同步requests
+        async with aiohttp.ClientSession() as session:      
+            async with session.post(f"{OLLAMA_URL}/api/chat", json=data, timeout=60) as response:      
+                response.raise_for_status()      
+                
+                content = ""      
+                # 异步读取流式响应，增加读取行的超时处理
+                last_line_time = time.time()
+                read_timeout = 30  # 单个行的读取超时时间（秒）
+                
+                try:
+                    while True:
+                        # 检查读取是否超时
+                        if time.time() - last_line_time > read_timeout:
+                            raise asyncio.TimeoutError(f"流式读取响应超时({read_timeout}秒)")
+                        
+                        # 设置单次读取的超时
+                        try:
+                            line = await asyncio.wait_for(response.content.readline(), timeout=read_timeout)
+                            if not line:
+                                # 响应结束
+                                break
+                            last_line_time = time.time()
+                            
+                            try:
+                                resp = json.loads(line.decode("utf-8"))
+                                if "message" in resp and "content" in resp["message"]:
+                                    content += resp["message"]["content"]
+                                elif "done" in resp and resp["done"]:
+                                    break
+                            except json.JSONDecodeError:
+                                continue
+                        except asyncio.TimeoutError as e:
+                            # 单次读取超时，检查是否已经有内容，如果有就返回
+                            if content:
+                                logging.warning(f"流式读取超时，但已获取部分内容，返回已读取内容")
+                                break
+                            raise e
+                except asyncio.TimeoutError:
+                    # 流式读取完全超时，尝试非流式调用
+                    logging.warning(f"流式调用超时，尝试使用非流式调用")
+                    content = ""
       
         if not content:      
             try:      
-                data_no_stream = {"model": model, "messages": messages, "stream": False}      
-                r2 = requests.post(f"{OLLAMA_URL}/api/chat", json=data_no_stream, timeout=60)      
-                r2.raise_for_status()      
-                resp = r2.json()      
-                if "message" in resp and "content" in resp["message"]:      
-                    content = resp["message"]["content"]      
-            except Exception as fallback_error:      
-                logging.error(f"非流式调用也失败: {fallback_error}")      
-                content = "（AI 没有生成任何内容，请检查模型是否正常运行）"      
+                data_no_stream = {"model": model, "messages": messages, "stream": False}
+                # 非流式调用超时时间设置为90秒，给模型更多时间响应
+                async with aiohttp.ClientSession() as session:      
+                    async with session.post(f"{OLLAMA_URL}/api/chat", json=data_no_stream, timeout=90) as response:      
+                        response.raise_for_status()      
+                        resp = await response.json()      
+                        if "message" in resp and "content" in resp["message"]:      
+                            content = resp["message"]["content"]      
+            except Exception as fallback_error:
+                logging.error(f"非流式调用也失败: {str(fallback_error)}")
+                # 记录完整的异常堆栈信息以便调试
+                import traceback
+                logging.error(f"完整错误堆栈: {traceback.format_exc()}")
+                content = f"（AI 没有生成任何内容，错误信息：{str(fallback_error)}）"      
       
         content = sanitize(content)      
       
@@ -165,9 +231,26 @@ async def call_ollama(bot: Bot, event: MessageEvent, user_id: str, user_message:
       
         return content      
       
-    except Exception as e:      
-        logging.error(f"Ollama 调用错误: {e}")      
-        raise e      
+    except Exception as e:
+        logging.error(f"Ollama 调用错误: {str(e)}")
+        # 记录完整的异常堆栈信息以便调试
+        import traceback
+        logging.error(f"完整错误堆栈: {traceback.format_exc()}")
+        
+        # 更友好的错误处理：根据不同类型的错误返回不同的提示信息
+        error_type = type(e).__name__
+        if error_type == 'asyncio.TimeoutError':
+            # 超时错误，可能是Ollama处理时间过长或网络问题
+            return f"（AI思考时间太长了呢，可能是网络不太好或者Ollama正忙，请稍后再试哦~）"
+        elif error_type == 'aiohttp.ClientError':
+            # 客户端错误，可能是连接问题
+            return f"（连接Ollama服务失败了呢，请检查服务是否正常运行~）"
+        elif error_type == 'json.JSONDecodeError':
+            # JSON解析错误，可能是响应格式问题
+            return f"（收到的AI响应格式有些问题，请稍后再试哦~）"
+        else:
+            # 其他未预期的错误
+            return f"（AI调用出错了呢，错误类型：{error_type}，请稍后再试~）"
       
 # ================= 消息转发功能 =================      
 async def send_as_forward(bot: Bot, event: MessageEvent, content: list | str):      
@@ -251,11 +334,18 @@ async def call_generate_stream(bot: Bot, event: MessageEvent, prompt: str):
         except Exception as e:      
             error_msg = f"{BOT_PREFIX}调用出错: {str(e)}"      
             if hasattr(event, "group_id") and event.group_id:      
-                await bot.send_group_msg(group_id=event.group_id, message=error_msg)      
+                # 群聊中@用户      
+                await bot.send_group_msg(group_id=event.group_id, message=MessageSegment.at(user_id) + error_msg)      
             else:      
                 await bot.send_private_msg(user_id=event.user_id, message=error_msg)
     
-    await task_manager.execute(write_operation())      
+    try:
+        await task_manager.execute(write_operation())
+    except Exception as e:
+        # 记录异常但不影响其他任务
+        logging.error(f"执行写作任务时发生异常: {str(e)}")
+        import traceback
+        logging.error(f"完整错误堆栈: {traceback.format_exc()}")      
       
 # ================= 聊天消息处理 =================      
 async def call_chat(bot: Bot, event: MessageEvent, user_id: str, msg: str):      
@@ -273,17 +363,25 @@ async def call_chat(bot: Bot, event: MessageEvent, user_id: str, msg: str):
         try:      
             content = await call_ollama(bot, event, user_id, msg, model=MODEL_CHAT)      
             if hasattr(event, "group_id") and event.group_id:      
-                await bot.send_group_msg(group_id=event.group_id, message=f"{BOT_PREFIX}{content}")      
+                # 群聊中@用户      
+                await bot.send_group_msg(group_id=event.group_id, message=MessageSegment.at(user_id) + f"{BOT_PREFIX}{content}")      
             else:      
                 await bot.send_private_msg(user_id=event.user_id, message=f"{BOT_PREFIX}{content}")      
         except Exception as e:      
             error_msg = f"{BOT_PREFIX}调用出错: {str(e)}"      
             if hasattr(event, "group_id") and event.group_id:      
-                await bot.send_group_msg(group_id=event.group_id, message=error_msg)      
+                # 群聊中@用户      
+                await bot.send_group_msg(group_id=event.group_id, message=MessageSegment.at(user_id) + error_msg)      
             else:      
                 await bot.send_private_msg(user_id=event.user_id, message=error_msg)      
     
-    await task_manager.execute(chat_operation())
+    try:
+        await task_manager.execute(chat_operation())
+    except Exception as e:
+        # 记录异常但不影响其他任务
+        logging.error(f"执行聊天任务时发生异常: {str(e)}")
+        import traceback
+        logging.error(f"完整错误堆栈: {traceback.format_exc()}")
       
 async def call_chat_stream(bot: Bot, event: MessageEvent, user_id: str, msg: str):      
     await call_chat(bot, event, user_id, msg)      
@@ -385,73 +483,43 @@ async def disable_notice(bot: Bot, event: MessageEvent):
     await bot.send(event, "（提示消息已关闭，启动时将不会发送通知~）")
 
 # ================= 消息处理 =================
-matcher = on_message(priority=10, block=True)
+matcher = on_message(priority=10, block=False)
 
 @matcher.handle()
 async def handle_message(bot: Bot, event: MessageEvent, state: T_State):
-    msg = event.get_plaintext().strip()      
-    is_private = not hasattr(event, "group_id") or event.group_id is None      
-    
-    if not is_private:      
-        if not getattr(event, "to_me", False) and not getattr(event, "is_tome", lambda: False)():      
-            return      
-        msg = re.sub(rf"^\s*@?{bot.self_id}\s*", "", msg).strip()      
-    
-    if not msg:      
-        await matcher.finish("（你想和我聊点什么呢？）")      
-    
-    user_id = str(event.user_id)      
-    
-    # 检查是否为命令类消息（以/开头），如果是则不处理
-    if msg.startswith("/"):
-        # 命令类消息不处理，让其他插件处理
-        return
-    
-    # 检查Ollama连接状态
-    if not OLLAMA_AVAILABLE:
-        await matcher.finish(f"{BOT_PREFIX}系统正在待机中，等待Ollama连接恢复...")
-        return
-    
-    # 普通聊天消息才走Ollama
-    await call_chat_stream(bot, event, user_id, msg)
-      
-# ================== 启动/关闭提示 ==================      
-driver = get_driver()
+    msg = event.get_plaintext().strip()
+    is_private = not hasattr(event, "group_id") or event.group_id is None
+    user_id = str(event.user_id)
+    current_time = time.time()
 
-async def _broadcast_simple(bot: Bot, message: str):
-    """简化版广播函数"""
-    if not HELP_ENABLED:
-        return
-        
-    for gid in STARTUP_NOTICE_GROUPS:
-        try:
-            await bot.send_group_msg(group_id=gid, message=message)
-        except Exception as e:
-            logging.error(f"发送群 {gid} 提示失败: {e}")
+    # 清理过期的等待响应用户（10分钟内未发送消息则过期）
+    for uid in list(awaiting_response_users.keys()):
+        if current_time - awaiting_response_users[uid] > 600:
+            del awaiting_response_users[uid]
 
-    for uid in STARTUP_NOTICE_USERS:
-        try:
-            await bot.send_private_msg(user_id=uid, message=message)
-        except Exception as e:
-            logging.error(f"发送私聊 {uid} 提示失败: {e}")
-
-@driver.on_bot_connect
-async def _on_bot_connect(bot: Bot):
-    # 启动连接检查任务
-    asyncio.create_task(check_ollama_connection())
-    
-    if not HELP_ENABLED:
+    # 检查是否为命令类消息（以/开头或包含表情包制作相关关键词），如果是则不处理
+    if msg.startswith("/") or "表情包制作" in msg or "表情列表" in msg or "表情包列表" in msg or "签到" in msg:
         return
-        
-    await asyncio.sleep(2)  # 等待连接稳定
-    
-    if OLLAMA_AVAILABLE:
-        await _broadcast_simple(bot, f"{BOT_PREFIX}AI聊天插件启动完成！发送 /help 查看可用功能~")
+
+    # 去掉未连接Ollama时的提示
+    # if not OLLAMA_AVAILABLE:
+    #     await matcher.finish(f"{BOT_PREFIX}系统正在待机中，等待Ollama连接恢复...")
+    #     return
+
+    # 只响应@机器人（群聊），私聊直接响应
+    if not is_private:
+        # 只有@机器人才响应
+        if getattr(event, "to_me", False) or getattr(event, "is_tome", lambda: False)():
+            msg = re.sub(rf"^\s*@?{bot.self_id}\s*", "", msg).strip()
+            if msg:
+                await call_chat_stream(bot, event, user_id, msg)
+            else:
+                await matcher.finish(f"{BOT_PREFIX}你想和我聊点什么呢？")
+        else:
+            return  # 没有@机器人，不响应
     else:
-        await _broadcast_simple(bot, f"{BOT_PREFIX}AI聊天插件已启动，但Ollama未连接，进入待机状态。连接恢复后将自动启用AI功能~")
-
-@driver.on_bot_disconnect
-async def _on_bot_disconnect(bot: Bot):
-    if not HELP_ENABLED:
-        return
-    await _broadcast_simple(bot, f"{BOT_PREFIX}AI聊天插件即将下线，感谢使用~")
+        # 私聊直接响应
+        if msg:
+            await call_chat_stream(bot, event, user_id, msg)
+        else:
+            await matcher.finish(f"{BOT_PREFIX}你想和我聊点什么呢？")

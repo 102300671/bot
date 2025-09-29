@@ -28,7 +28,7 @@ __plugin_meta__ = PluginMetadata(
       
 # 数据库配置      
 DB_CONFIG = {      
-    'host': 'localhost',      
+    'host': '192.168.159.83',      
     'user': 'signin',      
     'password': 'signin',      
     'db': 'nonebot_signin',      
@@ -42,7 +42,12 @@ DB_CONFIG = {
 # 全局变量      
 BOT_PREFIX = "小豆泥："      
 HELP_ENABLED = True      
-BOT_ENABLED = True      
+BOT_ENABLED = True       
+
+# 获取机器人名称（去掉冒号）
+BOT_NAME = BOT_PREFIX.strip('：')
+# 导入主机器人插件的awaiting_response_users变量，实现状态共享
+from .yuri_bot import awaiting_response_users
 
 # 连接池管理器
 pool_manager = ConnectionPoolManager(DB_CONFIG)
@@ -194,43 +199,114 @@ async def send_as_forward(bot: Bot, event: MessageEvent, content: list | str):
             messages=forward_msg      
         )      
       
-# ================= 开启/关闭提示命令 =================      
-enable_notice_cmd = on_command("提示开", priority=10, block=True)      
-disable_notice_cmd = on_command("提示关", priority=10, block=True)      
-      
-@enable_notice_cmd.handle()      
-async def enable_notice(bot: Bot, event: MessageEvent):      
+# ================= 开启/关闭提示命令 =================
+enable_notice_cmd = on_command("提示开", priority=10, block=True, rule=None)
+
+@enable_notice_cmd.handle()
+async def enable_notice(bot: Bot, event: MessageEvent):
+    # 检查用户是否已呼叫机器人名字
+    user_id = event.get_user_id()
+    if user_id not in awaiting_response_users:
+        # 检查消息是否包含机器人名字
+        msg = event.get_plaintext().strip()
+        if BOT_NAME not in msg:
+            return
+        else:
+            # 如果消息中包含机器人名字且是命令，记录用户并继续处理
+            awaiting_response_users[user_id] = datetime.now().timestamp()
+    else:
+        # 用户已呼叫机器人名字，处理命令
+        del awaiting_response_users[user_id]
+        
     global HELP_ENABLED      
     HELP_ENABLED = True      
     await bot.send(event, "（提示消息已开启，启动时会发送通知~）")      
-      
-@disable_notice_cmd.handle()      
-async def disable_notice(bot: Bot, event: MessageEvent):      
+
+disable_notice_cmd = on_command("提示关", priority=10, block=True, rule=None)
+
+@disable_notice_cmd.handle()
+async def disable_notice(bot: Bot, event: MessageEvent):
+    # 检查用户是否已呼叫机器人名字
+    user_id = event.get_user_id()
+    if user_id not in awaiting_response_users:
+        # 检查消息是否包含机器人名字
+        msg = event.get_plaintext().strip()
+        if BOT_NAME not in msg:
+            return
+        else:
+            # 如果消息中包含机器人名字且是命令，记录用户并继续处理
+            awaiting_response_users[user_id] = datetime.now().timestamp()
+    else:
+        # 用户已呼叫机器人名字，处理命令
+        del awaiting_response_users[user_id]
+        
     global HELP_ENABLED      
     HELP_ENABLED = False      
     await bot.send(event, "（提示消息已关闭，启动时将不会发送通知~）")      
       
-# ================= 开启/关闭机器人命令 =================      
-enable_bot_cmd = on_command("开启机器人", priority=10, block=True)      
-disable_bot_cmd = on_command("关闭机器人", priority=10, block=True)      
-      
-@enable_bot_cmd.handle()      
-async def enable_bot(bot: Bot, event: MessageEvent):      
+# ================= 开启/关闭机器人命令 =================
+enable_bot_cmd = on_command("开启机器人", priority=10, block=True, rule=None)
+
+@enable_bot_cmd.handle()
+async def enable_bot(bot: Bot, event: MessageEvent):
+    # 检查用户是否已呼叫机器人名字
+    user_id = event.get_user_id()
+    if user_id not in awaiting_response_users:
+        # 检查消息是否包含机器人名字
+        msg = event.get_plaintext().strip()
+        if BOT_NAME not in msg:
+            return
+        else:
+            # 如果消息中包含机器人名字且是命令，记录用户并继续处理
+            awaiting_response_users[user_id] = datetime.now().timestamp()
+    else:
+        # 用户已呼叫机器人名字，处理命令
+        del awaiting_response_users[user_id]
+        
     global BOT_ENABLED      
     BOT_ENABLED = True      
     await bot.send(event, "（机器人已开启，可以正常使用~）")      
-      
-@disable_bot_cmd.handle()      
-async def disable_bot(bot: Bot, event: MessageEvent):      
+
+disable_bot_cmd = on_command("关闭机器人", priority=10, block=True, rule=None)
+
+@disable_bot_cmd.handle()
+async def disable_bot(bot: Bot, event: MessageEvent):
+    # 检查用户是否已呼叫机器人名字
+    user_id = event.get_user_id()
+    if user_id not in awaiting_response_users:
+        # 检查消息是否包含机器人名字
+        msg = event.get_plaintext().strip()
+        if BOT_NAME not in msg:
+            return
+        else:
+            # 如果消息中包含机器人名字且是命令，记录用户并继续处理
+            awaiting_response_users[user_id] = datetime.now().timestamp()
+    else:
+        # 用户已呼叫机器人名字，处理命令
+        del awaiting_response_users[user_id]
+        
     global BOT_ENABLED      
     BOT_ENABLED = False      
     await bot.send(event, "（机器人已关闭，将不再响应任何命令~）")      
       
-# 签到命令 - 支持@机器人和普通命令两种方式      
-sign_cmd = on_command("签到", aliases={"打卡", "sign"}, rule=to_me(), priority=10, block=True)      
+# 签到命令
+sign_cmd = on_command("签到", aliases={"打卡", "sign"}, priority=10, block=True, rule=None)      
       
 @sign_cmd.handle()      
-async def handle_sign(bot: Bot, event: GroupMessageEvent):      
+async def handle_sign(bot: Bot, event: GroupMessageEvent):
+    # 检查用户是否已呼叫机器人名字
+    user_id = event.get_user_id()
+    if user_id not in awaiting_response_users:
+        # 检查消息是否包含机器人名字
+        msg = event.get_plaintext().strip()
+        if BOT_NAME not in msg:
+            return
+        else:
+            # 如果消息中包含机器人名字且是命令，记录用户并继续处理
+            awaiting_response_users[user_id] = datetime.now().timestamp()
+    else:
+        # 用户已呼叫机器人名字，处理命令
+        del awaiting_response_users[user_id]      
     # 检查机器人是否启用      
     if not BOT_ENABLED:      
         return      
@@ -326,11 +402,24 @@ async def handle_sign(bot: Bot, event: GroupMessageEvent):
     # 通过任务管理器执行
     await task_manager.execute(sign_operation())      
       
-# 查询积分命令 - 支持@机器人和普通命令      
-points_cmd = on_command("积分", aliases={"我的积分", "points"}, rule=to_me(), priority=10, block=True)      
+# 查询积分命令
+points_cmd = on_command("积分", aliases={"我的积分", "points"}, priority=10, block=True, rule=None)      
       
 @points_cmd.handle()      
-async def handle_points(bot: Bot, event: GroupMessageEvent):      
+async def handle_points(bot: Bot, event: GroupMessageEvent):
+    # 检查用户是否已呼叫机器人名字
+    user_id = event.get_user_id()
+    if user_id not in awaiting_response_users:
+        # 检查消息是否包含机器人名字
+        msg = event.get_plaintext().strip()
+        if BOT_NAME not in msg:
+            return
+        else:
+            # 如果消息中包含机器人名字且是命令，记录用户并继续处理
+            awaiting_response_users[user_id] = datetime.now().timestamp()
+    else:
+        # 用户已呼叫机器人名字，处理命令
+        del awaiting_response_users[user_id]      
     # 检查机器人是否启用      
     if not BOT_ENABLED:      
         return      
@@ -352,11 +441,24 @@ async def handle_points(bot: Bot, event: GroupMessageEvent):
     
     await task_manager.execute(points_operation())      
       
-# 积分排行榜命令 - 支持@机器人和普通命令      
-leaderboard_cmd = on_command("积分排行", aliases={"积分榜", "排行榜"}, rule=to_me(), priority=10, block=True)      
+# 积分排行榜命令
+leaderboard_cmd = on_command("积分排行", aliases={"积分榜", "排行榜"}, priority=10, block=True, rule=None)      
       
 @leaderboard_cmd.handle()      
-async def handle_leaderboard(bot: Bot, event: GroupMessageEvent, args: Message = CommandArg()):      
+async def handle_leaderboard(bot: Bot, event: GroupMessageEvent, args: Message = CommandArg()):
+    # 检查用户是否已呼叫机器人名字
+    user_id = event.get_user_id()
+    if user_id not in awaiting_response_users:
+        # 检查消息是否包含机器人名字
+        msg = event.get_plaintext().strip()
+        if BOT_NAME not in msg:
+            return
+        else:
+            # 如果消息中包含机器人名字且是命令，记录用户并继续处理
+            awaiting_response_users[user_id] = datetime.now().timestamp()
+    else:
+        # 用户已呼叫机器人名字，处理命令
+        del awaiting_response_users[user_id]      
     # 检查机器人是否启用      
     if not BOT_ENABLED:      
         return      
@@ -392,11 +494,24 @@ async def handle_leaderboard(bot: Bot, event: GroupMessageEvent, args: Message =
     
     await task_manager.execute(leaderboard_operation())      
       
-# 补签命令 - 支持@机器人和普通命令      
-resign_cmd = on_command("补签", aliases={"补打卡"}, rule=to_me(), priority=10, block=True)      
+# 补签命令
+resign_cmd = on_command("补签", aliases={"补打卡"}, priority=10, block=True, rule=None)      
       
 @resign_cmd.handle()      
-async def handle_resign(bot: Bot, event: GroupMessageEvent):      
+async def handle_resign(bot: Bot, event: GroupMessageEvent):
+    # 检查用户是否已呼叫机器人名字
+    user_id = event.get_user_id()
+    if user_id not in awaiting_response_users:
+        # 检查消息是否包含机器人名字
+        msg = event.get_plaintext().strip()
+        if BOT_NAME not in msg:
+            return
+        else:
+            # 如果消息中包含机器人名字且是命令，记录用户并继续处理
+            awaiting_response_users[user_id] = datetime.now().timestamp()
+    else:
+        # 用户已呼叫机器人名字，处理命令
+        del awaiting_response_users[user_id]      
     # 检查机器人是否启用      
     if not BOT_ENABLED:      
         return      
@@ -469,11 +584,24 @@ async def handle_resign(bot: Bot, event: GroupMessageEvent):
     
     await task_manager.execute(resign_operation())      
       
-# 积分流水查询 - 支持@机器人和普通命令      
-points_history_cmd = on_command("积分流水", aliases={"积分记录"}, rule=to_me(), priority=10, block=True)      
+# 积分流水查询
+points_history_cmd = on_command("积分流水", aliases={"积分记录"}, priority=10, block=True, rule=None)      
       
 @points_history_cmd.handle()      
-async def handle_points_history(bot: Bot, event: GroupMessageEvent, args: Message = CommandArg()):      
+async def handle_points_history(bot: Bot, event: GroupMessageEvent, args: Message = CommandArg()):
+    # 检查用户是否已呼叫机器人名字
+    user_id = event.get_user_id()
+    if user_id not in awaiting_response_users:
+        # 检查消息是否包含机器人名字
+        msg = event.get_plaintext().strip()
+        if BOT_NAME not in msg:
+            return
+        else:
+            # 如果消息中包含机器人名字且是命令，记录用户并继续处理
+            awaiting_response_users[user_id] = datetime.now().timestamp()
+    else:
+        # 用户已呼叫机器人名字，处理命令
+        del awaiting_response_users[user_id]      
     # 检查机器人是否启用      
     if not BOT_ENABLED:      
         return      
@@ -513,11 +641,24 @@ async def handle_points_history(bot: Bot, event: GroupMessageEvent, args: Messag
     
     await task_manager.execute(history_operation())      
       
-# 帮助命令 - 支持@机器人和普通命令      
-help_cmd = on_command("help", aliases={"帮助"}, priority=10, block=True)      
+# 帮助命令
+help_cmd = on_command("help", aliases={"帮助"}, priority=10, block=True, rule=None)      
       
 @help_cmd.handle()      
-async def handle_help(bot: Bot, event: MessageEvent):      
+async def handle_help(bot: Bot, event: MessageEvent):
+    # 检查用户是否已呼叫机器人名字
+    user_id = event.get_user_id()
+    if user_id not in awaiting_response_users:
+        # 检查消息是否包含机器人名字
+        msg = event.get_plaintext().strip()
+        if BOT_NAME not in msg:
+            return
+        else:
+            # 如果消息中包含机器人名字且是命令，记录用户并继续处理
+            awaiting_response_users[user_id] = datetime.now().timestamp()
+    else:
+        # 用户已呼叫机器人名字，处理命令
+        del awaiting_response_users[user_id]      
     # 检查机器人是否启用      
     if not BOT_ENABLED:      
         return      
@@ -539,6 +680,42 @@ async def handle_help(bot: Bot, event: MessageEvent):
       
 # ================== 启动/关闭提示 ==================      
 driver = get_driver()      
+
+# 添加消息处理函数，用于检测呼叫机器人名字
+from nonebot import on_message
+from nonebot.adapters.onebot.v11 import MessageEvent
+
+# 处理普通消息，用于检测是否呼叫了机器人名字
+message_matcher = on_message(priority=15, block=False)
+
+@message_matcher.handle()
+async def handle_message(bot: Bot, event: MessageEvent):
+    # 如果机器人未启用，不处理
+    if not BOT_ENABLED:
+        return
+        
+    msg = event.get_plaintext().strip()
+    user_id = event.get_user_id()
+    current_time = datetime.now().timestamp()
+    
+    # 清理过期的等待响应用户（10分钟内未发送消息则过期）
+    for uid in list(awaiting_response_users.keys()):
+        if current_time - awaiting_response_users[uid] > 600:
+            del awaiting_response_users[uid]
+    
+    # 检查是否为命令消息，如果是则不处理
+    if msg.startswith("/"):
+        return
+    
+    # 检查是否呼叫了机器人名字
+    if BOT_NAME in msg and user_id not in awaiting_response_users:
+        # 用户呼叫了机器人名字，记录用户并提示
+        awaiting_response_users[user_id] = current_time
+        # 回复时@用户
+        reply_msg = f"{BOT_PREFIX}我在听~\n请直接发送命令，如签到、积分等~"
+        if hasattr(event, 'group_id') and event.group_id:
+            reply_msg = MessageSegment.at(user_id) + reply_msg
+        await bot.send(event, reply_msg)
       
 async def _broadcast_simple(bot: Bot, message: str):      
     """简化版广播函数"""      

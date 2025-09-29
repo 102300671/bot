@@ -9,7 +9,7 @@ import logging
 
 # 数据库配置
 DB_CONFIG = {
-    'host': 'localhost',
+    'host': '192.168.159.83',
     'user': 'signin',
     'password': 'signin',
     'db': 'nonebot_signin',
