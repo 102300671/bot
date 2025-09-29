@@ -9,6 +9,8 @@ import asyncio
 import base64
 from collections import defaultdict, deque
 import time
+import re
+import html as html_escape
 
 # 自定义RateLimiter类，替代原来从concurrent_utils导入的版本
 class RateLimiter:
@@ -49,12 +51,146 @@ BOT_PREFIX = "小豆泥："
 # 速率限制器
 rate_limiter = RateLimiter(max_calls=20, time_window=60.0)  # 每分钟最多20次操作
 
+# ================= 全局黑名单配置 =================
+URL_BLACKLIST = [
+    "127.0.0.1",
+    "localhost",
+    "file://",
+    "file:",
+    "0.0.0.0",
+    "::1",
+    "169.254.",  # 链路本地地址
+    "192.168.",  # 私有地址
+    "10.",       # 私有地址
+    "172.16.", "172.17.", "172.18.", "172.19.", "172.20.", "172.21.", "172.22.", "172.23.", 
+    "172.24.", "172.25.", "172.26.", "172.27.", "172.28.", "172.29.", "172.30.", "172.31.",  # 私有地址
+]
+
 # ================= 辅助函数 =================
 def setup():
     logging.info("HTML渲染演示插件已加载")
 
-# 示例1：将文本转换为图片
+def is_url_blocked(url: str) -> bool:
+    """检查URL是否在黑名单中"""
+    url_lower = url.lower()
+    for blocked in URL_BLACKLIST:
+        if blocked in url_lower:
+            return True
+    return False
 
+def contains_dangerous_content(html_content: str) -> bool:
+    """检查HTML内容是否包含危险的代码"""
+    # 方法1：直接检查黑名单内容（处理简单拼接）
+    html_lower = html_content.lower()
+    for blocked in URL_BLACKLIST:
+        if blocked in html_lower:
+            return True
+    
+    # 方法2：尝试解码HTML实体
+    try:
+        # 简单的HTML实体解码
+        decoded_html = html_content
+        decoded_html = decoded_html.replace('&lt;', '<').replace('&gt;', '>').replace('&quot;', '"').replace('&#39;', "'").replace('&amp;', '&')
+        
+        # 检查解码后的内容
+        decoded_lower = decoded_html.lower()
+        for blocked in URL_BLACKLIST:
+            if blocked in decoded_lower:
+                return True
+    except:
+        pass
+    
+    # 方法3：检查script标签中的字符串拼接模式
+    script_patterns = [
+        r"document\.write\s*\(",
+        r"document\.writeln\s*\(",
+        r"innerHTML\s*=",
+        r"outerHTML\s*=",
+        r"insertAdjacentHTML\s*\(",
+        r"eval\s*\(",
+        r"setTimeout\s*\(",
+        r"setInterval\s*\(",
+        r"Function\s*\(",
+    ]
+    
+    for pattern in script_patterns:
+        if re.search(pattern, html_lower, re.IGNORECASE):
+            return True
+    
+    return False
+
+def sanitize_html_content(html_content: str) -> str:
+    """彻底清理HTML内容，移除所有脚本和危险元素"""
+    
+    # 移除所有script标签
+    html_content = re.sub(r'<script\b[^>]*>.*?</script>', '', html_content, flags=re.IGNORECASE | re.DOTALL)
+    
+    # 移除所有事件处理器 (onclick, onload, etc.)
+    event_handlers = [
+        'onabort', 'onblur', 'onchange', 'onclick', 'ondblclick', 'onerror', 'onfocus',
+        'onkeydown', 'onkeypress', 'onkeyup', 'onload', 'onmousedown', 'onmousemove',
+        'onmouseout', 'onmouseover', 'onmouseup', 'onreset', 'onresize', 'onselect',
+        'onsubmit', 'onunload'
+    ]
+    
+    for handler in event_handlers:
+        html_content = re.sub(f'{handler}\\s*=\\s*["\'][^"\']*["\']', '', html_content, flags=re.IGNORECASE)
+        html_content = re.sub(f'{handler}\\s*=\\s*[^\\s>]+', '', html_content, flags=re.IGNORECASE)
+    
+    # 移除危险的标签
+    dangerous_tags = ['iframe', 'object', 'embed', 'frame', 'frameset', 'meta']
+    for tag in dangerous_tags:
+        html_content = re.sub(f'<{tag}\\b[^>]*>.*?</{tag}>', '', html_content, flags=re.IGNORECASE | re.DOTALL)
+        html_content = re.sub(f'<{tag}\\b[^>]*>', '', html_content, flags=re.IGNORECASE)
+    
+    # 移除javascript: URL
+    html_content = re.sub(r'\bhref\s*=\s*["\']\s*javascript:\s*[^"\']*["\']', 'href="#"', html_content, flags=re.IGNORECASE)
+    html_content = re.sub(r'\bsrc\s*=\s*["\']\s*javascript:\s*[^"\']*["\']', 'src="#"', html_content, flags=re.IGNORECASE)
+    
+    # 移除包含黑名单URL的任何属性
+    for blocked in URL_BLACKLIST:
+        html_content = re.sub(f'\\b(?:href|src|action|data)\\s*=\\s*["\'][^"\']*{re.escape(blocked)}[^"\']*["\']', '', html_content, flags=re.IGNORECASE)
+    
+    return html_content
+
+def create_safe_html_template(html_content: str) -> str:
+    """创建安全的HTML模板，禁用所有JavaScript执行"""
+    safe_html = f"""
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>安全渲染</title>
+        <style>
+            body {{
+                font-family: Arial, sans-serif;
+                margin: 20px;
+                background: white;
+            }}
+            .security-notice {{
+                background: #fff3cd;
+                border: 1px solid #ffeaa7;
+                padding: 10px;
+                margin-bottom: 20px;
+                border-radius: 5px;
+                color: #856404;
+            }}
+        </style>
+    </head>
+    <body>
+        <div class="security-notice">
+            安全提示：此内容已通过安全过滤，JavaScript已被禁用。
+        </div>
+        <div id="content">
+            {html_content}
+        </div>
+    </body>
+    </html>
+    """
+    return safe_html
+
+# 示例1：将文本转换为图片
 text_to_image_cmd = on_command("text2img", aliases={"文本转图片"}, priority=5, block=True)
 
 @text_to_image_cmd.handle()
@@ -260,9 +396,9 @@ async def handle_browser_operation(bot: Bot, event: MessageEvent, args: Message 
     # 获取用户输入的URL
     url = args.extract_plain_text().strip()
 
-    # 黑名单校验，禁止访问本地回环地址
-    if "127.0.0.1" in url or "localhost" in url:
-        await browser_operation_cmd.finish(f"{BOT_PREFIX}禁止访问本地回环地址")
+    # 使用全局黑名单校验
+    if is_url_blocked(url):
+        await browser_operation_cmd.finish(f"{BOT_PREFIX}禁止访问该地址")
         return
 
     # 如果用户没有提供URL或URL为空，使用默认URL
@@ -339,6 +475,22 @@ async def handle_html_to_image(bot: Bot, event: MessageEvent, args: Message = Co
         </body>
         </html>
         """
+    else:
+        # 严格的安全检查
+        if contains_dangerous_content(html_text):
+            await html_to_image_cmd.finish(f"{BOT_PREFIX}检测到危险的HTML内容，禁止渲染")
+            return
+        
+        # 彻底清理HTML内容
+        html_text = sanitize_html_content(html_text)
+        
+        # 再次检查清理后的内容
+        if contains_dangerous_content(html_text):
+            await html_to_image_cmd.finish(f"{BOT_PREFIX}HTML内容无法安全处理，禁止渲染")
+            return
+        
+        # 使用安全模板包装用户内容
+        html_text = create_safe_html_template(html_text)
 
     try:
         img_bytes = await html_to_pic(

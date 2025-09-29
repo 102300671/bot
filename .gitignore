@@ -6,6 +6,7 @@ __pycache__/
 
 # 环境变量文件
 qqbot/yuri/.env.prod
+qqbot/codetf/.env.prod
 .env
 .env.local
 .env.development
@@ -13,6 +14,7 @@ qqbot/yuri/.env.prod
 
 # 虚拟环境
 qqbot/yuri/.venv
+qqbot/codetf/.venv
 .venv/
 venv/
 env/
