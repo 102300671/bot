@@ -1,0 +1,17 @@
+[project]
+name = "minecraft"
+version = "0.1.0"
+description = "minecraft"
+readme = "README.md"
+requires-python = ">=3.9, <4.0"
+
+[tool.nonebot]
+adapters = [
+    { name = "OneBot V11", module_name = "nonebot.adapters.onebot.v11" },
+    { name = "Telegram", module_name = "nonebot.adapters.telegram" },
+    { name = "Minecraft", module_name = "nonebot.adapters.minecraft" },
+    { name = "Discord", module_name = "nonebot.adapters.discord" }
+]
+plugins = ["nonebot_plugin_mcqq"]
+plugin_dirs = []
+builtin_plugins = ["echo", "single_session"]

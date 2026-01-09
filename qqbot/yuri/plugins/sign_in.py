@@ -28,7 +28,7 @@ __plugin_meta__ = PluginMetadata(
       
 # 数据库配置      
 DB_CONFIG = {      
-    'host': '192.168.159.83',      
+    'host': 'localhost',      
     'user': 'signin',      
     'password': 'signin',      
     'db': 'nonebot_signin',      
