@@ -16,6 +16,9 @@ from .concurrent_utils import (
     task_manager,
     RateLimiter
 )
+import sys
+sys.path.insert(0, '/home/jianying/code/bot/qqbot/yuri')
+from config.bot_scope_config import bot_scope_config
 
 # 插件元数据      
 __plugin_meta__ = PluginMetadata(      
@@ -207,12 +210,11 @@ async def enable_notice(bot: Bot, event: MessageEvent):
     # 检查用户是否已呼叫机器人名字
     user_id = event.get_user_id()
     if user_id not in awaiting_response_users:
-        # 检查消息是否包含机器人名字
-        msg = event.get_plaintext().strip()
-        if BOT_NAME not in msg:
+        # 检查消息是否@机器人或包含机器人名字
+        if not is_at_or_mention(bot, event):
             return
         else:
-            # 如果消息中包含机器人名字且是命令，记录用户并继续处理
+            # 如果消息中@机器人或包含机器人名字且是命令，记录用户并继续处理
             awaiting_response_users[user_id] = datetime.now().timestamp()
     else:
         # 用户已呼叫机器人名字，处理命令
@@ -229,12 +231,11 @@ async def disable_notice(bot: Bot, event: MessageEvent):
     # 检查用户是否已呼叫机器人名字
     user_id = event.get_user_id()
     if user_id not in awaiting_response_users:
-        # 检查消息是否包含机器人名字
-        msg = event.get_plaintext().strip()
-        if BOT_NAME not in msg:
+        # 检查消息是否@机器人或包含机器人名字
+        if not is_at_or_mention(bot, event):
             return
         else:
-            # 如果消息中包含机器人名字且是命令，记录用户并继续处理
+            # 如果消息中@机器人或包含机器人名字且是命令，记录用户并继续处理
             awaiting_response_users[user_id] = datetime.now().timestamp()
     else:
         # 用户已呼叫机器人名字，处理命令
@@ -249,15 +250,19 @@ enable_bot_cmd = on_command("开启机器人", priority=10, block=True, rule=Non
 
 @enable_bot_cmd.handle()
 async def enable_bot(bot: Bot, event: MessageEvent):
-    # 检查用户是否已呼叫机器人名字
     user_id = event.get_user_id()
+    
+    # 检查是否是管理员
+    if not bot_scope_config.is_admin(int(user_id)):
+        return
+    
+    # 检查用户是否已呼叫机器人名字
     if user_id not in awaiting_response_users:
-        # 检查消息是否包含机器人名字
-        msg = event.get_plaintext().strip()
-        if BOT_NAME not in msg:
+        # 检查消息是否@机器人或包含机器人名字
+        if not is_at_or_mention(bot, event):
             return
         else:
-            # 如果消息中包含机器人名字且是命令，记录用户并继续处理
+            # 如果消息中@机器人或包含机器人名字且是命令，记录用户并继续处理
             awaiting_response_users[user_id] = datetime.now().timestamp()
     else:
         # 用户已呼叫机器人名字，处理命令
@@ -271,15 +276,19 @@ disable_bot_cmd = on_command("关闭机器人", priority=10, block=True, rule=No
 
 @disable_bot_cmd.handle()
 async def disable_bot(bot: Bot, event: MessageEvent):
-    # 检查用户是否已呼叫机器人名字
     user_id = event.get_user_id()
+    
+    # 检查是否是管理员
+    if not bot_scope_config.is_admin(int(user_id)):
+        return
+    
+    # 检查用户是否已呼叫机器人名字
     if user_id not in awaiting_response_users:
-        # 检查消息是否包含机器人名字
-        msg = event.get_plaintext().strip()
-        if BOT_NAME not in msg:
+        # 检查消息是否@机器人或包含机器人名字
+        if not is_at_or_mention(bot, event):
             return
         else:
-            # 如果消息中包含机器人名字且是命令，记录用户并继续处理
+            # 如果消息中@机器人或包含机器人名字且是命令，记录用户并继续处理
             awaiting_response_users[user_id] = datetime.now().timestamp()
     else:
         # 用户已呼叫机器人名字，处理命令
@@ -292,47 +301,89 @@ async def disable_bot(bot: Bot, event: MessageEvent):
 # 签到命令
 sign_cmd = on_command("签到", aliases={"打卡", "sign"}, priority=10, block=True, rule=None)      
       
+def is_at_or_mention(bot: Bot, event: GroupMessageEvent) -> bool:
+    """检查消息是否@了机器人或包含机器人名字"""
+    print(f"[SIGN_IN DEBUG] is_at_or_mention called", flush=True)
+    # 检查是否@了机器人（使用 to_me 属性或检查消息段）
+    if getattr(event, 'to_me', False):
+        print(f"[SIGN_IN DEBUG] is_at_or_mention: to_me=True", flush=True)
+        return True
+    # 检查消息段中是否有@机器人
+    for segment in event.message:
+        if segment.type == "at" and str(segment.data.get("qq")) == str(bot.self_id):
+            print(f"[SIGN_IN DEBUG] is_at_or_mention: found at segment", flush=True)
+            return True
+    # 检查原始消息中是否包含@机器人（通过检查 event.raw_message）
+    raw_msg = getattr(event, 'raw_message', '')
+    if f"[CQ:at,qq={bot.self_id}]" in raw_msg:
+        print(f"[SIGN_IN DEBUG] is_at_or_mention: found in raw_message", flush=True)
+        return True
+    # 检查是否包含机器人名字
+    msg = event.get_plaintext().strip()
+    if BOT_NAME in msg:
+        print(f"[SIGN_IN DEBUG] is_at_or_mention: found BOT_NAME in msg", flush=True)
+        return True
+    print(f"[SIGN_IN DEBUG] is_at_or_mention: no mention found, raw_msg={raw_msg}, msg={msg}, bot_id={bot.self_id}", flush=True)
+    return False
+      
 @sign_cmd.handle()      
 async def handle_sign(bot: Bot, event: GroupMessageEvent):
+    print(f"[SIGN_IN DEBUG] handle_sign called: user_id={event.get_user_id()}, msg={event.get_plaintext()}", flush=True)
     # 检查用户是否已呼叫机器人名字
     user_id = event.get_user_id()
     if user_id not in awaiting_response_users:
-        # 检查消息是否包含机器人名字
-        msg = event.get_plaintext().strip()
-        if BOT_NAME not in msg:
+        # 检查消息是否@机器人或包含机器人名字
+        if not is_at_or_mention(bot, event):
+            print(f"[SIGN_IN DEBUG] is_at_or_mention returned False, returning", flush=True)
             return
         else:
-            # 如果消息中包含机器人名字且是命令，记录用户并继续处理
+            # 如果消息中@机器人或包含机器人名字且是命令，记录用户并继续处理
             awaiting_response_users[user_id] = datetime.now().timestamp()
     else:
         # 用户已呼叫机器人名字，处理命令
         del awaiting_response_users[user_id]      
     # 检查机器人是否启用      
-    if not BOT_ENABLED:      
-        return      
+    if not BOT_ENABLED:
+        print(f"[SIGN_IN DEBUG] BOT_ENABLED=False, returning", flush=True)
+        return
+    
+    # 检查是否在启用范围内
+    user_id_int = int(event.get_user_id())
+    group_id_int = event.group_id
+    if not bot_scope_config.is_enabled_for(user_id_int, group_id_int):
+        print(f"[SIGN_IN DEBUG] user/group not in enabled scope, returning", flush=True)
+        return
       
     user_id = event.get_user_id()      
     group_id = str(event.group_id)      
     today = datetime.now().date()      
     
+    print(f"[SIGN_IN DEBUG] passed initial checks, proceeding with sign operation", flush=True)
+    
     # 速率限制检查
     rate_key = f"sign_{user_id}_{group_id}"
+    print(f"[SIGN_IN DEBUG] checking rate limit for {rate_key}", flush=True)
     if not await rate_limiter.acquire(rate_key):
+        print(f"[SIGN_IN DEBUG] rate limit exceeded, returning", flush=True)
         await sign_cmd.finish(MessageSegment.at(user_id) + " 操作过于频繁，请稍后再试~")
         return
+    print(f"[SIGN_IN DEBUG] rate limit passed", flush=True)
     
     # 使用任务管理器执行签到操作
     async def sign_operation():
+        print(f"[SIGN_IN DEBUG] sign_operation started: user_id={user_id}, group_id={group_id}", flush=True)
         # 获取用户锁，确保并发安全
         user_lock = get_user_lock(user_id, group_id)
         
         async with user_lock:
             try:
                 # 获取用户昵称      
-                username = await get_user_nickname(event)      
+                username = await get_user_nickname(event)
+                print(f"[SIGN_IN DEBUG] sign_operation: got username={username}", flush=True)
                 
                 # 获取用户信息      
-                user_info = await get_or_create_user(user_id, group_id, username)      
+                user_info = await get_or_create_user(user_id, group_id, username)
+                print(f"[SIGN_IN DEBUG] sign_operation: got user_info={user_info}", flush=True)      
                 
                 async with db_transaction(pool_manager) as (conn, cursor):
                     # 检查今天是否已签到      
@@ -340,7 +391,8 @@ async def handle_sign(bot: Bot, event: GroupMessageEvent):
                         "SELECT * FROM sign_records WHERE user_id = %s AND group_id = %s AND sign_date = %s",      
                         (user_id, group_id, today)      
                     )      
-                    if await cursor.fetchone():      
+                    if await cursor.fetchone():
+                        print(f"[SIGN_IN DEBUG] user already signed in today, sending message", flush=True)
                         await sign_cmd.finish(MessageSegment.at(user_id) + " 你今天已经签到过了哦~")      
                     
                     # 获取昨天日期      
@@ -392,15 +444,20 @@ async def handle_sign(bot: Bot, event: GroupMessageEvent):
                         f"继续加油哦~"      
                     )      
                     
-                    await sign_cmd.finish(reply_msg)      
+                    await sign_cmd.finish(reply_msg)
+                    print(f"[SIGN_IN DEBUG] sign_operation: reply sent successfully", flush=True)
                     
-            except FinishedException:      
-                return      
-            except Exception as e:      
+            except FinishedException:
+                print(f"[SIGN_IN DEBUG] sign_operation: FinishedException", flush=True)
+                return
+            except Exception as e:
+                print(f"[SIGN_IN DEBUG] sign_operation: error={e}", flush=True)
                 await sign_cmd.finish(MessageSegment.at(user_id) + f" 签到失败: {e}")
     
     # 通过任务管理器执行
-    await task_manager.execute(sign_operation())      
+    print(f"[SIGN_IN DEBUG] executing sign_operation via task_manager", flush=True)
+    await task_manager.execute(sign_operation())
+    print(f"[SIGN_IN DEBUG] sign_operation completed", flush=True)      
       
 # 查询积分命令
 points_cmd = on_command("积分", aliases={"我的积分", "points"}, priority=10, block=True, rule=None)      
@@ -410,12 +467,11 @@ async def handle_points(bot: Bot, event: GroupMessageEvent):
     # 检查用户是否已呼叫机器人名字
     user_id = event.get_user_id()
     if user_id not in awaiting_response_users:
-        # 检查消息是否包含机器人名字
-        msg = event.get_plaintext().strip()
-        if BOT_NAME not in msg:
+        # 检查消息是否@机器人或包含机器人名字
+        if not is_at_or_mention(bot, event):
             return
         else:
-            # 如果消息中包含机器人名字且是命令，记录用户并继续处理
+            # 如果消息中@机器人或包含机器人名字且是命令，记录用户并继续处理
             awaiting_response_users[user_id] = datetime.now().timestamp()
     else:
         # 用户已呼叫机器人名字，处理命令
@@ -449,12 +505,11 @@ async def handle_leaderboard(bot: Bot, event: GroupMessageEvent, args: Message =
     # 检查用户是否已呼叫机器人名字
     user_id = event.get_user_id()
     if user_id not in awaiting_response_users:
-        # 检查消息是否包含机器人名字
-        msg = event.get_plaintext().strip()
-        if BOT_NAME not in msg:
+        # 检查消息是否@机器人或包含机器人名字
+        if not is_at_or_mention(bot, event):
             return
         else:
-            # 如果消息中包含机器人名字且是命令，记录用户并继续处理
+            # 如果消息中@机器人或包含机器人名字且是命令，记录用户并继续处理
             awaiting_response_users[user_id] = datetime.now().timestamp()
     else:
         # 用户已呼叫机器人名字，处理命令
@@ -502,12 +557,11 @@ async def handle_resign(bot: Bot, event: GroupMessageEvent):
     # 检查用户是否已呼叫机器人名字
     user_id = event.get_user_id()
     if user_id not in awaiting_response_users:
-        # 检查消息是否包含机器人名字
-        msg = event.get_plaintext().strip()
-        if BOT_NAME not in msg:
+        # 检查消息是否@机器人或包含机器人名字
+        if not is_at_or_mention(bot, event):
             return
         else:
-            # 如果消息中包含机器人名字且是命令，记录用户并继续处理
+            # 如果消息中@机器人或包含机器人名字且是命令，记录用户并继续处理
             awaiting_response_users[user_id] = datetime.now().timestamp()
     else:
         # 用户已呼叫机器人名字，处理命令
@@ -592,12 +646,11 @@ async def handle_points_history(bot: Bot, event: GroupMessageEvent, args: Messag
     # 检查用户是否已呼叫机器人名字
     user_id = event.get_user_id()
     if user_id not in awaiting_response_users:
-        # 检查消息是否包含机器人名字
-        msg = event.get_plaintext().strip()
-        if BOT_NAME not in msg:
+        # 检查消息是否@机器人或包含机器人名字
+        if not is_at_or_mention(bot, event):
             return
         else:
-            # 如果消息中包含机器人名字且是命令，记录用户并继续处理
+            # 如果消息中@机器人或包含机器人名字且是命令，记录用户并继续处理
             awaiting_response_users[user_id] = datetime.now().timestamp()
     else:
         # 用户已呼叫机器人名字，处理命令
@@ -649,12 +702,11 @@ async def handle_help(bot: Bot, event: MessageEvent):
     # 检查用户是否已呼叫机器人名字
     user_id = event.get_user_id()
     if user_id not in awaiting_response_users:
-        # 检查消息是否包含机器人名字
-        msg = event.get_plaintext().strip()
-        if BOT_NAME not in msg:
+        # 检查消息是否@机器人或包含机器人名字
+        if not is_at_or_mention(bot, event):
             return
         else:
-            # 如果消息中包含机器人名字且是命令，记录用户并继续处理
+            # 如果消息中@机器人或包含机器人名字且是命令，记录用户并继续处理
             awaiting_response_users[user_id] = datetime.now().timestamp()
     else:
         # 用户已呼叫机器人名字，处理命令
@@ -703,13 +755,25 @@ async def handle_message(bot: Bot, event: MessageEvent):
         if current_time - awaiting_response_users[uid] > 600:
             del awaiting_response_users[uid]
     
-    # 检查是否为命令消息，如果是则不处理
+    # 检查是否@了机器人
+    is_at_bot = False
+    for segment in event.message:
+        if segment.type == "at" and segment.data.get("qq") == str(bot.self_id):
+            is_at_bot = True
+            break
+    
+    # 检查是否为命令消息，如果是则不发送提示（让命令处理器处理）
     if msg.startswith("/"):
+        # 如果是@机器人+命令，不发送提示，直接返回
+        if is_at_bot:
+            return
         return
     
     # 检查是否呼叫了机器人名字
-    if BOT_NAME in msg and user_id not in awaiting_response_users:
-        # 用户呼叫了机器人名字，记录用户并提示
+    is_mention_name = BOT_NAME in msg
+    
+    if (is_at_bot or is_mention_name) and user_id not in awaiting_response_users:
+        # 用户@了机器人或呼叫了机器人名字，记录用户并提示
         awaiting_response_users[user_id] = current_time
         # 回复时@用户
         reply_msg = f"{BOT_PREFIX}我在听~\n请直接发送命令，如签到、积分等~"
@@ -742,27 +806,9 @@ async def _broadcast_simple(bot: Bot, message: str):
 async def _on_bot_connect(bot: Bot):      
     # 初始化数据库      
     await init_database()      
-    await asyncio.sleep(2)  # 等待连接稳定      
-    await _broadcast_simple(bot, f"{BOT_PREFIX}签到插件启动完成！发送 /help 查看可用功能~")      
       
-@driver.on_bot_disconnect      
-async def _on_bot_disconnect(bot: Bot):      
-    logging.info(f"{BOT_PREFIX}签到插件即将下线（将在 shutdown 钩子里发送通知）")      
-
 @driver.on_shutdown
 async def _on_shutdown():
-    # 在应用关闭阶段发送下线通知，此时连接通常仍然可用
-    if not HELP_ENABLED:
-        return
-    try:
-        for bot in nonebot.get_bots().values():
-            try:
-                await _broadcast_simple(bot, f"{BOT_PREFIX}签到插件即将下线，感谢使用~")
-            except Exception as e:
-                logging.error(f"关闭前发送提示失败: {e}")
-    except Exception as e:
-        logging.error(f"下线通知流程异常: {e}")
-    
     # 关闭连接池管理器
     await pool_manager.close()
     

@@ -4,12 +4,31 @@ version = "0.1.0"
 description = "yuri"
 readme = "README.md"
 requires-python = ">=3.9, <4.0"
+dependencies = [
+    "nonebot-plugin-htmlrender>=0.6.7",
+    "nonebot_plugin_memes>=0.8.1",
+    "nonebot-plugin-groupmate-waifu>=1.6.1",
+    "nonebot-plugin-wife>=0.0.3",
+    "nonebot-adapter-onebot",
+    "nonebot-adapter-qq",
+    "nonebot2[aiohttp,fastapi,httpx,quart,websockets]>=2.4.4",
+]
+
+[tool.setuptools]
+packages = ["plugins"]
 
 [tool.nonebot]
-adapters = [
-    { name = "OneBot V11", module_name = "nonebot.adapters.onebot.v11" },
-    { name = "QQ", module_name = "nonebot.adapters.qq" }
-]
-plugins = ["nonebot_plugin_memes", "nonebot_plugin_htmlrender", "nonebot_plugin_groupmate_waifu", "nonebot_plugin_wife"]
 plugin_dirs = ["plugins"]
 builtin_plugins = ["echo"]
+[tool.nonebot.plugins]
+"@local" = []
+nonebot_plugin_memes = ["nonebot_plugin_memes"]
+nonebot-plugin-htmlrender = ["nonebot_plugin_htmlrender"]
+nonebot-plugin-groupmate-waifu = ["nonebot_plugin_groupmate_waifu"]
+nonebot-plugin-wife = ["nonebot_plugin_wife"]
+
+
+[tool.nonebot.adapters]
+"@local" = []
+nonebot-adapter-onebot = [{name = "OneBot V11", module_name = "nonebot.adapters.onebot.v11"}]
+nonebot-adapter-qq = [{name = "QQ", module_name = "nonebot.adapters.qq"}]

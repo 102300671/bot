@@ -15,6 +15,9 @@ from .concurrent_utils import (
     retry_with_backoff
 )
       
+import sys
+sys.path.insert(0, '/home/jianying/code/bot/qqbot/yuri')
+from config.bot_scope_config import bot_scope_config
 # ================= 配置 =================      
 OLLAMA_URL = "http://127.0.0.1:11434"      
 MODEL_CHAT = "yuri_chat"      
@@ -499,6 +502,12 @@ async def handle_message(bot: Bot, event: MessageEvent, state: T_State):
 
     # 检查是否为命令类消息（以/开头或包含表情包制作相关关键词），如果是则不处理
     if msg.startswith("/") or "表情包制作" in msg or "表情列表" in msg or "表情包列表" in msg or "签到" in msg:
+        return
+
+    # 检查是否在启用范围内
+    user_id_int = int(event.user_id)
+    group_id_int = event.group_id if hasattr(event, 'group_id') and event.group_id else None
+    if not bot_scope_config.is_enabled_for(user_id_int, group_id_int):
         return
 
     # 去掉未连接Ollama时的提示

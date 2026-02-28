@@ -1,0 +1,14 @@
+{
+    "monitored_groups": [
+        {
+            "group_id": "908188794",
+            "monitored_users": ["2363974849"],
+            "notify_users": ["2193807541"]
+        },
+        {
+            "group_id": "1090064295",
+            "monitored_users": ["2363974849"],
+            "notify_users": ["2193807541"]
+        }
+    ]
+}

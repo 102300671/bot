@@ -1,0 +1,12 @@
+{
+    "server_address": "zz3.shiyuegame.cloud:20177",
+    "check_interval_minutes": 1,
+    "monitored_players": [
+        "6000",
+        "0sanqian00"
+    ],
+    "notify_qq_list": [
+        "2193807541"
+    ],
+    "online_status": {}
+}

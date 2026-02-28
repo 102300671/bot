@@ -1,0 +1,17 @@
+{
+  "enabled_groups": [
+    284205050,
+    908188794
+  ],
+  "enabled_users": [
+    1185329732,
+    2193807541
+  ],
+  "disabled_groups": [],
+  "disabled_users": [],
+  "mode": "whitelist",
+  "admin_users": [
+    1185329732,
+    2193807541
+  ]
+}
