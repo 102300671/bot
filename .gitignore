@@ -7,6 +7,7 @@ __pycache__/
 # 环境变量文件
 qqbot/yuri/.env.prod
 qqbot/codetf/.env.prod
+minecraft/.env.prod
 .env
 .env.local
 .env.development
