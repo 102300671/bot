@@ -55,7 +55,14 @@ async def get_server_players(server: str) -> Optional[Set[str]]:
                         if isinstance(player_list, list):
                             return {p.get("name", "") if isinstance(p, dict) else str(p) for p in player_list}
                         return set()
-                    return set()
+                    else:
+                        # 服务器不在线或API返回错误
+                        error_msg = data.get("error", {}).get("ip", "未知错误")
+                        logging.error(f"[玩家监控] 服务器 {server} 不在线或API返回错误: {error_msg}")
+                        return set()
+    except aiohttp.ClientError as e:
+        # 网络相关错误，包括DNS解析失败
+        logging.error(f"[玩家监控] 网络错误，无法连接到服务器 {server}: {e}")
     except Exception as e:
         logging.error(f"[玩家监控] 获取服务器玩家列表失败: {e}")
     return None
