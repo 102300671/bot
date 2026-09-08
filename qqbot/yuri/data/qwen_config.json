@@ -1,0 +1,11 @@
+{
+  "client_id": "your_client_id",
+  "client_secret": "your_client_secret",
+  "redirect_uri": "http://localhost:8080/callback",
+  "token_url": "https://oauth.openai.com/token",
+  "api_url": "https://api.openai.com/v1/chat/completions",
+  "model": "qwen-turbo",
+  "scope": "chat.completions",
+  "access_token": "",
+  "token_expires_at": 0
+}

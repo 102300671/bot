@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# 虚拟环境
+.venv/
+venv/
+
+# 环境配置（含密钥，提交前请复制为 .env.example 提交模板）
+.env
+.env.*
+!.env.example
+
+# NoneBot 运行产物与日志
+bot.log
+*.log
+nonebot.log
+
+# htmlrender 浏览器缓存与本地临时产物
+data/nonebot_plugin_htmlrender/
+data/*.html
+data/*.png
+data/*.json
+
+# IDE / 系统文件
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db

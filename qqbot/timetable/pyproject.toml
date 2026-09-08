@@ -1,0 +1,35 @@
+[project]
+name = "timetable"
+version = "0.1.0"
+description = "timetable"
+readme = "README.md"
+requires-python = ">=3.10, <4.0"
+dependencies = [
+    "nonebot2[fastapi,httpx,websockets]>=2.5.0",
+    "nonebot-adapter-qq>=1.7.2",
+    "nonebot-plugin-status>=0.9.0",
+    "nonebot-plugin-docs>=2.5.0",
+    "nonebot-plugin-sentry>=2.0.0",
+    "nonebot-plugin-apscheduler>=0.5.0",
+    "nonebot-plugin-localstore>=0.7.4",
+    "nonebot-plugin-htmlrender>=0.8.1",
+]
+
+[tool.nonebot]
+plugin_dirs = ["plugins"]
+builtin_plugins = ["echo", "single_session"]
+
+[tool.nonebot.adapters]
+nonebot-adapter-qq = [
+    { name = "QQ", module_name = "nonebot.adapters.qq" }
+]
+"@local" = []
+
+[tool.nonebot.plugins]
+"@local" = []
+nonebot-plugin-status = ["nonebot_plugin_status"]
+nonebot-plugin-docs = ["nonebot_plugin_docs"]
+nonebot-plugin-sentry = ["nonebot_plugin_sentry"]
+nonebot-plugin-apscheduler = ["nonebot_plugin_apscheduler"]
+nonebot-plugin-localstore = ["nonebot_plugin_localstore"]
+nonebot-plugin-htmlrender = ["nonebot_plugin_htmlrender"]

@@ -1,0 +1,1771 @@
+服务器状态查看 (nonebot-plugin-status)   ✅ 👍 通过戳一戳获取服务器状态        
+haruka_bot                               ❌    将B站UP主的动态和直播信息推送至Q
+(haruka-bot)                                   Q                               
+RAM - 基于规则的授权管理                 ❌    为 Matcher 配置一条或多条 Rule  
+(nonebot-plugin-rauthman)                      来实现功能的授权管理            
+NoneBot 离线文档 (nonebot-plugin-docs)   ✅ 👍 在本地查看 NoneBot 文档         
+Sentry日志监控                           ✅ 👍 使用Sentry监控机器人日志并处理报
+(nonebot-plugin-sentry)                        错                              
+定时任务 (nonebot-plugin-apscheduler)    ✅ 👍 APScheduler 定时任务插件        
+图片搜索                                 ❌    从基本上所有你想的出名字的搜图平
+(nonebot-plugin-picsearcher)                   台找图片                        
+nonebot_plugin_navicat                   ❌    Nonebot数据库支持               
+(nonebot-plugin-navicat)                                                       
+多语种翻译插件                           ✅    接口来自 腾讯机器翻译 TMT       
+(nonebot-plugin-translator)                                                    
+MQTT (nonebot-plugin-mqtt)               ❌    Nonebot2 MQTT 插件              
+songpicker2                              ✅    点播歌曲，支持候选菜单、热评显示
+(nonebot-plugin-songpicker2)                   ，数据源为网易云                
+字符串管理工具                           ❌    通过字符串标签在文件中集中管理字
+(nonebot-plugin-strman)                        符串                            
+Bison (nonebot-bison)                    ✅    通用订阅推送插件                
+网易云无损音乐下载 (nonebot-plugin-ncm)  ❌    网易云 无损音乐 点歌/下载       
+CoC骰娘                                  ✅    CoC相关指令插件，包含属性骰、技 
+(nonebot-plugin-cocdicer)                      能骰、理智检查、角色卡管理等功能
+                                               。                              
+猜猜看                                   ❌    多次互动猜名字游戏，自带猜城市名
+(nonebot-plugin-guess)                         ，可定制                        
+缩写查询器 (nonebot-plugin-abbrreply)    ❌    输入拼音首字母，猜测文字        
+NoneBot biliav小程序 查看插件            ❌    NoneBot biliav小程序 查看插件   
+(nonebot_plugin_biliav)                                                        
+analysis_bilibili                        ✅    自动解析bilibili链接内容        
+(nonebot-plugin-analysis-bilibili)                                             
+本地数据存储 (nonebot-plugin-localstore) ✅ 👍 存储插件数据至本地文件          
+Alconna 插件                             ✅ 👍 提供 ArcletProject/Alconna 的 No
+(nonebot-plugin-alconna)                       nebot2 适配版本与工具           
+Minecraft 服务器状态查询                 ❌    顾名思义                        
+(nonebot-plugin-mcstatus)                                                      
+Nonebot2 Help Menu (nonebot-plugin-help) ❌    Nonebot2轻量级帮助插件          
+命令别名 (nonebot_plugin_alias)          ✅    为机器人指令创建别名            
+撤回 (nonebot_plugin_withdraw)           ✅    自助撤回机器人发出的消息        
+nonebot_plugin_pixivrank_search          ❌    基于RSSHUB阅读器的P站排行和P站搜
+(nonebot-plugin-pixivrank-search)              图                              
+nonebot_plugin_russian                   ❌    群内小游戏，使用金币赌注的俄罗斯
+(nonebot-plugin-russian)                       轮盘                            
+nonebot_plugin_setu                      ❌    基于loliconImage Api的涩图插件，
+(nonebot-plugin-setu)                          内置涩图CD                      
+和风天气                                 ✅    和风天气图片显示插件，支持每日定
+(nonebot-plugin-heweather)                     时推送                          
+nonebot-plugin-autohelp                  ❌    响应help/菜单/帮助(群消息或私信)
+(nonebot-plugin-autohelp)                      并提供已载入插件的帮助信息（如命
+                                               令名，aliases，模块文档）       
+nonebot-plugin-flexperm                  ❌    精细化的 NoneBot 权限管理插件   
+(nonebot-plugin-flexperm)                                                      
+Epic喜加一                               ✅    定时推送 Epic Game Store 每周免 
+(nonebot-plugin-epicfree)                      费游戏信息                      
+ELF_RSS                                  ❌    QQ机器人 RSS订阅 插件，订阅源建 
+(ELF-RSS)                                      议选择 RSSHub                   
+nb2chan (nb2chan)                        ❌    Nonebot2酱推送                  
+nonebot-plugin-setu-now                  ✅    另一个色图插件                  
+(nonebot-plugin-setu-now)                                                      
+leetcode提醒机器人                       ❌     安装该插件后能往指定qq和指定qq 
+(nonebot-plugin-leetcode)                      群定时发送leetcode每日一题      
+nonebot_plugin_youthstudy                ❌    基于nonebot的青年大学习插件，用 
+(nonebot-plugin-youthstudy)                    来获取最新一期的青年大学习答案  
+趣味占卜 (nonebot_plugin_shindan)        ✅    使用ShindanMaker网站的趣味占卜  
+在线运行代码 (nonebot-plugin-code)       ✅    在线运行编程代码，语句          
+picsbank (nonebot-plugin-picsbank)       ❌    匹配图片进行回答                
+剧集更新列表 (nonebot-plugin-tvseries)   ❌    获取聚集更新                    
+lol比赛信息                              ❌    简单的lol比赛信息插件，订阅后会 
+(nonebot_plugin_lolmatch)                      定时推送当日比赛结果            
+OlivOS.nb2 (OlivOS.nb2)                  ❌    在 NoneBot2 中加载 OlivOS 插件  
+nonebot-plugin-htmlrender                ✅    提供可插拔 HTML 渲染与独立的类型
+(nonebot-plugin-htmlrender)                    化栅格场景能力                  
+不简易群管 (nonebot-plugin-admin)        ❌    NoneBot2 群管理插件             
+表情包制作 (nonebot_plugin_memes)        ✅    制作各种沙雕表情包              
+群聊复读机 (nonebot-plugin-repeater)     ❌    谁不喜欢+1呢？                  
+群文件直链提取器                         ❌    提取群文件的下载直链。          
+(nonebot-plugin-directlinker)                                                  
+转发姬 (nonebot-plugin-forwarder)        ❌    群聊消息实时转发                
+掷骰子 (nonebot_plugin_roll)             ✅    掷骰！扔出指定个数的多面骰子🎲  
+疯狂星期四                               ✅    持续疯狂！KFC疯狂星期四🍗       
+(nonebot_plugin_crazy_thursday)                                                
+新冠疫情查询                             ❌    查询国内城市新冠疫情信息与政策  
+(nonebot-plugin-covid19-news)                                                  
+人生重开 (nonebot_plugin_remake)         ✅    人生重开模拟器                  
+天气查询 (nonebot-plugin-weather-lite)   ❌    使用wttr.in的在线天气查询。     
+今日运势 (nonebot-plugin-fortune)        ❌    抽签！占卜你的今日运势🙏        
+塔罗牌 (nonebot_plugin_tarot)            ❌    塔罗牌！魔法占卜🔮              
+emoji合成 (nonebot_plugin_emojimix)      ✅    将两个emoji合成为一张图片       
+今天吃什么                               ❌    选择恐惧症？让Bot决定你今天吃什 
+(nonebot-plugin-what2eat)                      么🍕                            
+数据存储 (nonebot-plugin-datastore)      ✅    NoneBot 数据存储插件            
+棋类游戏 (nonebot_plugin_boardgame)      ✅    五子棋、黑白棋、围棋            
+词云 (nonebot-plugin-wordcloud)          ✅    利用群消息生成词云              
+聊天记录 (nonebot_plugin_chatrecorder)   ✅    记录机器人收到和发出的消息      
+群聊反闪照 (nonebot-plugin-antiflash)    ❌    顾名思义🎇                      
+nonebot-plugin-word-bank2                ✅    无数据库的轻量问答插件          
+(nonebot-plugin-word-bank2)                                                    
+文字转图片 (nonebot-plugin-txt2img)      ✅    使用 Pillow 进行文字转图片      
+おはよう！ (nonebot-plugin-morning)      ❌    早晚安记录作息，培养优质睡眠😴  
+pixiv.net p站查询图片                    ❌    pixiv.net p站查询图片(支持动图和
+(nonebot-plugin-pixiv)                         多图)                           
+YetAnotherPicSearch                      ✅    基于 NoneBot2 及 PicImageSearch 
+(YetAnotherPicSearch)                          的另一个 NoneBot 搜图插件       
+原神抽卡记录分析                         ❌    统计及导出原神祈愿记录，在 QQ 里
+(nonebot-plugin-gachalogs)                     鉴定原神欧皇吧！                
+每日一句 (nonebot-plugin-everyday-en)    ❌    每日一句英文句子，可选定时发送  
+QQ自动续火花                             ❌    通过每天定时发送“/echo 花花”实现
+(nonebot-plugin-fire)                          续火花                          
+二维码识别与发送 (nonebot-plugin-qrcode) ❌    qq聊天二维码插件                
+游戏王卡查 (nonebot-plugin-ygo)          ❌    nonebot的游戏王卡查插件         
+bilibili通知插件                         ❌    将up主更新、番剧更新、主播开播等
+(nonebot-plugin-bilibilibot)                   信息推送到QQ                    
+色图生成                                 ❌    用于生成指定色彩图片的 NoneBot2 
+(nonebot-plugin-color)                         插件                            
+21点游戏插件                             ❌    一个基于签到积分的21点游戏与积分
+(nonebot-plugin-blackjack)                     对战插件                        
+Arcaea查分插件                           ❌    Arcaea查分插件(recent, best30)  
+(nonebot-plugin-arcaeabot)                                                     
+成分姬 (nonebot_plugin_ddcheck)          ✅    查询B站用户关注的VTuber成分     
+第二个leetcode查询插件                   ❌    可查询用户信息、获取每日一题与随
+(nonebot-plugin-leetcode2)                     机一题和搜索题目。              
+Wiki推送                                 ✅    适用于 nonebot2 的 MediaWiki 查 
+(nonebot-plugin-mediawiki)                     询插件                          
+猜单词 (nonebot_plugin_wordle)           ✅    wordle猜单词游戏                
+快速搜索                                 ❌    指引群友快速 访 ~~(tui)~~ 问 ~~(
+(nonebot-plugin-giyf)                          dao)~~ 谷歌娘（在中国大陆大概就 
+                                               是度娘了～）                    
+语句抽象化 (nonebot-plugin-abstract)     ❌    能够将你的语句变得抽象起来~     
+多适配器帮助函数 (nonebot-plugin-params) ❌    提供编写多适配器插件的帮助函数  
+猜成语 (nonebot_plugin_handle)           ✅    汉字Wordle 猜成语               
+扫雷 (nonebot_plugin_minesweeper)        ✅    扫雷游戏                        
+nonebot_plugin_draw                      ❌    模拟抽签的一个本地化插件        
+(nonebot-plugin-draw)                                                          
+随机唐可可 (nonebot-plugin-randomtkk)    ❌    找到唐可可！                    
+nonebot-plugin-dida                      ❌    基于Nonebot的滴答清单插件,可创建
+(nonebot-plugin-dida)                          普通任务/子任务,按照条件查询任务
+支付宝到账语音                           ❌    发送支付宝到账语音, 支持金额范围
+(nonebot-plugin-alipayvoice)                   为0.01~999999999999.99          
+答案之书                                 ❌    愿一切无解都有解！解除你的迷惑，
+(nonebot-plugin-answersbook)                   终结你的纠结！                  
+一言 (nonebot-plugin-hitokoto)           ❌    总有一句话能打动你的心          
+B站视频封面提取                          ❌    提取B站视频的封面，支持链接、av 
+(nonebot-plugin-bilicover)                     号、bv号                        
+象棋 (nonebot_plugin_cchess)             ✅    象棋，支持人机和对战            
+国际象棋 (nonebot_plugin_chess)          ✅    国际象棋，支持人机和对战        
+charpic (nonebot-plugin-charpic)         ✅    合成字符画                      
+miragetank (nonebot-plugin-miragetank)   ✅    合成/分离幻影坦克图片           
+语录娱乐 (nonebot-plugin-yulu)           ❌    语录娱乐小插件                  
+走迷宫 (nonebot-plugin-maze)             ❌    和机器人玩迷宫游戏              
+摸鱼日历 (nonebot-plugin-moyu)           ❌    摸鱼一时爽, 一直摸鱼一直爽      
+MockingBird语音                          ❌    利用MockingBird来生成语音，并支 
+(nonebot-plugin-mockingbird)                   持多种语音切换                  
+百度翻译 (nonebot-plugin-baidutranslate) ❌    调用百度翻译API进行常用语种互译 
+nonebot_plugin_tortoise_orm              ✅    Tortoise ORM 插件               
+(nonebot-plugin-tortoise-orm)                                                  
+nonebot_plugin_dailysign                 ❌    简单的签到插件                  
+(nonebot-plugin-dailysign)                                                     
+Tetris Stats                             ✅    一个用于查询 Tetris 相关游戏玩家
+(nonebot-plugin-tetris-stats)                  数据的插件                      
+B站视频伪分享卡片                        ❌    将用户发送的B站视频ID转为(伪)分 
+(nonebot-plugin-bilibili-viode)                享卡片的形式                    
+图片操作 (nonebot_plugin_imagetools)     ❌    简单图片操作                    
+Warframe时间查询                         ❌    查询Warframe的平原与地球时间状态
+(nonebot-plugin-warframe-clock)                                                
+Hikari-战舰世界水表查询 (hikari-bot)     ❌    顾名思义                        
+who_at_me (nonebot-plugin-who-at-me)     ❌    看看是谁又艾特了我              
+疫情小助手                               ❌    疫情小助手 支持查地区 风险地区  
+(nonebot-plugin-covid-19-by)                   境外输入等                      
+nonebot_plugin_reboot [重启 bot]         ❌    用命令重启机器人                
+(nonebot-plugin-reboot)                                                        
+setu4                                    ✅    内置数据库的setu插件, 尝试降低因
+(nonebot-plugin-setu4)                         为风控发不出图的概率            
+smart_reply                              ✅    nonebot2的融合了openai, newbing,
+(nonebot-plugin-smart-reply)                    词库的智障回复插件             
+历史上的今天                             ❌    发送每日历史上的今天            
+(nonebot-plugin-today-in-history)                                              
+bittorrent (nonebot-plugin-BitTorrent)   ✅    磁力搜索插件                    
+黑白名单 (nonebot-plugin-namelist)       ❌    简易黑白用户名单管理            
+面包店小游戏 (nonebot-plugin-bread-shop) ❌    面包店休闲小游戏                
+PicMenu                                  ❌    为已安装的插件提供可视化的帮助菜
+(nonebot-plugin-PicMenu)                       单                              
+赛马 (nonebot-plugin-horserace)          ❌    群内青春版赛马小游戏            
+一起燚xN吧 (nonebot-plugin-firexN)       ❌    为了火花,冲冲冲                 
+战地1、5战绩查询工具                     ❌    QQ私聊或群聊发送战地游戏ID，返回
+(nonebot-plugin-bfinfo)                        基础信息以及最佳兵种、最佳枪械、
+                                               最佳载具、最佳模式信息          
+OSUBot (nonebot-plugin-osubot)           ✅    OSU查分插件                     
+ACC计算工具                              ❌    能够计算段位的单曲acc，支持malod
+(nonebot-plugin-acc-calculate)                 yv3段位regular、ex              
+KawaiiRobot                              ✅    使用 Kyomotoi/AnimeThesaurus 的 
+(nonebot-plugin-kawaii-robot)                  NoneBot2 的回复（文i）插件      
+处理好友添加和群邀请                     ❌    一个基于NoneBot2的插件，用于处理
+(nonebot-plugin-addfriend)                     被请求加QQ好友和QQ群的请求      
+群昵称时间 (nonebot-plugin-date-name)    ❌    一个可以群昵称显示现在时间的插件
+易命令                                   ❌    一个基于NoneBot2的简单的用于动态
+(nonebot-plugin-easycommand)                   地添加命令或添加定时任务的插件  
+推送钩子 (nonebot-plugin-report)         ❌    使用 webhook 向用户推送消息     
+「能不能好好说话？」缩写翻译             ❌    拼音首字母及阿拉伯数字缩写翻译  
+(nonebot-plugin-hammer-nbnhhsh)                                                
+MC_QQ                                    ✅    基于NoneBot的与Minecraft Server 
+(nonebot-plugin-mcqq)                          互通消息的插件                  
+疫情小助手-频道版                        ❌    👉 疫情小助手 频道版👈          
+(nonebot-plugin-covid-19-by-guild)                                             
+wiki条目搜索、获取简介                   ❌    通过mediawiki api进行条目搜索、 
+(nonebot-plugin-wiki)                          生成简介（biliwiki部分通过网页解
+                                               析实现）                        
+多功能群管                               ❌    与简易群管属于同个产品，就是多了
+(nonebot-plugin-groupmanager)                  一个入群欢迎，感谢@幼稚园园长 开
+                                               发的原版插件的帮助              
+小游戏合集                               ✅    各种群内小游戏                  
+(nonebot-plugin-game-collection)                                               
+nonebot-plugin-drawer                    ❌    适用于 Nonebot2 的AI画画插件    
+(nonebot-plugin-drawer)                                                        
+每日人品 (nonebot-plugin-jrrp-n)         ❌    不基于random的每日人品插件      
+日韩中 VITS 模型原神拟声                 ❌    现在是琪亚娜时间~               
+(nonebot-plugin-moegoe)                                                        
+PixivBot                                 ✅    发送随机Pixiv插画、画师更新推送 
+(nonebot-plugin-pixivbot)                      、定时订阅推送……                
+工作性价比计算器                         ✅    工作性价比计算器，算算你有多惨  
+(nonebot-plugin-workscore)                                                     
+帮助 (nonebot-plugin-treehelp)           ✅    获取插件帮助信息                
+HAM助手 (nonebot-plugin-cqsat)           ❌    业余无线电相关工具              
+课表查询 (nonebot-plugin-course)         ❌    查询课表，今天还有什么课        
+B话排行榜                                ✅    调查群U的B话数量，以一定的顺序排
+(nonebot-plugin-dialectlist)                   序后排序出来。                  
+此乃面麻小助手！！                       ❌    面麻小插件...来成为现充吧！！   
+(nonebot-plugin-offline-mahjong-helper)                                        
+send (nonebot-plugin-send)               ❌    通知和反馈基本功能              
+自识别todo                               ❌    一款自动识别提醒内容，可生成todo
+(nonebot-plugin-todo-nlp)                      图片并定时推送的nonebot2插件，v1
+                                               1适配器可用                     
+不背单词 (nonebot-plugin-wordsnorote)    ❌    不是吧，真的有人拿QQ背单词么？！
+赛博浅草寺 (nonebot-plugin-CyberSensoji) ❌    随机抽取浅草寺的一签运势        
+原神角色展柜查询                         ❌    移植自 @yoimiya-kokomi/miao-plug
+(nonebot-plugin-gspanel)                       in 的原神游戏内角色展柜数据查询 
+原神每日材料查询                         ❌    原神每日天赋培养、武器突破材料查
+(nonebot-plugin-gsmaterial)                    询，通过 Project Amber 数据库（ 
+                                               支持部分尚未实装角色）自动更新每
+                                               日数据～                        
+米游社小助手插件                         ✅    米游社工具-每日米游币任务、游戏 
+(nonebot-plugin-mystool)                       签到、商品兑换、免抓包登录      
+星际战甲事件查询                         ❌    查询星际战甲国服世界状态：警报/ 
+(nonebot-plugin-warframe)                      裂隙/突击/赏金等（赏金请用 地球 
+                                               赏金/金星赏金/火卫二赏金）      
+Minecraft Server 消息互通                ✅    采用本地读取 log 信息的方法的 Mi
+(nonebot-plugin-mcqq-server)                   necraft Server 消息互通插件。   
+图像超分辨率重建                         ❌    对图像进行超分辨率重建，可以理解
+(nonebot-plugin-RealESRGAN)                    成将图像变大变清晰，不过线上重建
+                                               的效果没有本地的好，具体可以查阅
+                                               仓库                            
+狼人杀插件 (nonebot-plugin-wolf-kill)    ❌    在群里玩狼人杀                  
+nonebot物联网插件                        ❌    为nonebot接入物联网提供方案，目 
+(nonebot-plugin-iot)                           前支持天猫精灵终端，后续会增加  
+Bwiki Navigator                          ❌    Bwiki助手（官方移植版）         
+(nonebot-plugin-bwiki-navigator)                                               
+漂流瓶 (nonebot_plugin_bottle)           ❌    群与群互通的漂流瓶插件          
+vits角色语音合成本地化                   ❌    基于nonebot2和vits的本地化角色语
+(nonebot-plugin-tts-gal)                       音合成插件                      
+阿里云盘福利码自动兑换                   ❌    基于nonebot2与aligo的阿里云盘兑 
+(nonebot-plugin-alicdk-get)                    换码自动获取和兑换插件。        
+PicStatus (nonebot-plugin-picstatus)     ✅    以图片形式显示当前设备的运行状态
+图灵机器人 (nonebot-plugin-tuling)       ❌    接入图灵机器人做聊天            
+在线编曲 (nonebot-plugin-makemidi)       ❌    在线编曲                        
+文字识别 (nonebot-plugin-ocr)            ❌    识别图片中的文字                
+监听者 (nonebot-plugin-listener)         ❌    监听指定消息并转发到指定群      
+BiliRequestAll                           ✅    通过B站UID审核入群              
+(nonebot-plugin-BiliRequestAll)                                                
+轮盘禁言小游戏                           ✅                                    
+(nonebot-plugin-russian-ban)                                                   
+游戏王小程序查价                         ❌    集换社游戏王的卡价查询          
+(nonebot-plugin-ygo-trade)                                                     
+novelai                                  ❌    一个支持novelai、naifu、webui， 
+(nonebot-plugin-novelai)                       支持中文功能丰富的ai绘图插件    
+ayaka小游戏合集                          ❌    背包，签到，印加宝藏，接龙（原神
+(ayaka-games)                                  /成语），谁是卧底，抢30，mana， 
+                                               加一秒，24点/48点，文字税，祈祷 
+                                               ，原神随机事件                  
+ayaka衍生插件 - 时区助手                 ❌    提供不同时区时间询问服务        
+(nonebot-plugin-ayaka-timezone)                                                
+ayaka衍生插件 - 坏词撤回                 ❌    撤回有问题的发言                
+(nonebot-plugin-ayaka-prevent-bad-words)                                       
+                                                                               
+二次元图像鉴赏 (nonebot-plugin-savor)    ❌    二次元图像分析                  
+kfcrazy                                  ❌    肯德基查询插件，输入地区即可查询
+(nonebot-plugin-kfcrazy)                       全国店铺的数据，支持疯狂星期四  
+随机抽图/语音 (nonebot-plugin-random)    ❌    Nonebot2 通用抽图/语音插件      
+黑名单 (nonebot-plugin-blacklist)        ✅    黑名单插件                      
+反嘴臭 (nonebot-plugin-antiinsult)       ✅    反嘴臭插件                      
+文本生成器 (nonebot-plugin-oddtext)      ✅    抽象话等多种文本生成            
+日麻寄分器                               ❌    为群友提供日麻计分及榜单统计功能
+(nonebot-plugin-mahjong-scoreboard)                                            
+二次元化图像                             ❌    对三次元图像动漫化, 打开二次元的
+(nonebot-plugin-cartoon)                       大门                            
+麻将小工具                               ✅    手牌分析、番符点数查询、……      
+(nonebot-plugin-mahjong-utils)                                                 
+动漫资源插件 (nonebot-plugin-animeres)   ✅    根据关键字搜索动漫资源          
+随个人                                   ❌    Nonebot2 简易插件随个人，随个群 
+(nonebot-plugin-person)                        友当幸运观众🤪                  
+Apex API Query                           ✅    Apex Legends API 查询插件       
+(nonebot-plugin-apex-api-query)                                                
+投胎模拟器 (nonebot-plugin-reborn)       ❌    重生后你会到哪里？              
+b站用户信息查询                          ❌    查询b站用户粉丝数、舰团信息；主 
+(nonebot-plugin-searchbiliinfo)                播直播收益数据（总收益、礼物、SC
+                                               、上舰）；用户观看直播信息（观看
+                                               、弹幕记录）；通过关键词搜昵称、
+                                               UID等                           
+Colab-NovelAI                            ❌    解放你的双手，让Colab持续给你提 
+(nonebot-plugin-colab-novelai)                 供算力生产色图！                
+Sky光遇 (nonebot-plugin-sky)             ✅    光遇的每日任务及活动相关查询插件
+免费版NovelAI生图插件                    ❌    一个用于nonebot2的简约AI绘图插件
+(nonebot-plugin-zyk-novelai)                   。没有繁琐的使用指令，配置过程简
+                                               单迅捷，代码简洁易懂，还有更多功
+                                               能将会陆续加入。                
+谁在窥屏 (nonebot-plugin-repeep)         ❌    用于获取QQ中当前窥屏用户信息    
+GsCode (nonebot-plugin-gscode)           ❌    查询原神/星穹铁道前瞻直播兑换码 
+记事本 (nonebot-plugin-note)             ❌    一个有提醒功能的记事本          
+b站图片下载                              ❌    b站封面提取，动态图片/专栏图片下
+(nonebot-plugin-bilibili-image)                载                              
+动画截图场景追溯                         ❌    调用trace.moe的API查询动画截图源
+(nonebot-plugin-trace-moe)                     自的作品名和时间段              
+免费快捷点歌插件                         ❌    一个用于nonebot2的点歌插件。操作
+(nonebot-plugin-zyk-music)                     简单粗暴，交互简洁易懂.         
+ChatGPT (nonebot-plugin-chatgpt)         ❌    AI 聊天对话                     
+雀魂查询 (nonebot-plugin-majsoul)        ✅    根据牌谱屋的数据查询雀魂账号信息
+图片背景消除                             ❌    适用于onebot v11的基于remove.bg 
+(nonebot-plugin-remove-bg)                     的图片背景消除插件              
+全群广播 (nonebot-plugin-broadcast)      ❌    将你的消息广播到全部群聊中      
+汇率换算 (nonebot-plugin-exchangerate)   ❌    支持汇率换算与汇率查询          
+权限控制                                 ✅    对功能进行权限控制以及调用次数限
+(nonebot-plugin-access-control)                制                              
+随机配色方案                             ❌    调用colormind.io的API随机获取一 
+(nonebot-plugin-colormind)                     种配色方案                      
+戒x打卡日记                              ❌    适用于nonebot2 v11的戒x打卡日记 
+(nonebot-plugin-abstain-diary)                 插件                            
+QQ群文件备份                             ✅    异步备份 QQ 群文件到本地，并可将
+(nonebot-plugin-backup)                        备份恢复到群文件                
+熊老板-喷喷喷场地信息查询                ❌    一个查询斯普拉遁3场地信息的插件 
+(nonebot-plugin-kuma-san)                                                      
+GPT3 (nonebot-plugin-gpt3)               ❌    openai官方api的会话插件         
+只因进化录                               ❌    q群挂机小游戏。开局一只因，进化 
+(nonebot-plugin-ikun-evolution)                全靠吞                          
+随机禁言                                 ❌    随机禁言一名群员或自己n分钟（n通
+(nonebot-plugin-random-ban)                    过传入数字然后随机实现）        
+防撤回 (nonebot-plugin-antirecall)       ❌    防撤回                          
+MC服务器信息查询插件                     ✅    如名                            
+(nonebot_plugin_mc_server_status)                                              
+不要复读                                 ❌    防止代码炸了在群里复读刷屏，让你
+(nonebot-plugin-no-repeat)                     写插件的时候更安全              
+战地群聊天插件                           ❌    群内绑定战地一/五账号，快速查询 
+(nonebot-plugin-bfchat)                        战地战绩，查看服务器信息        
+群友召唤术 (nonebot-plugin-summon)       ❌    让 BOT 帮你召唤群友!            
+PING (nonebot-plugin-ping)               ❌    PING/QRCODE/WHOIS               
+腾讯云图像变换                           ❌    ✨基于腾讯云合成图的以图绘图的No
+(nonebot-plugin-face2cartoonpic)               nebot插件✨                     
+服务状态查询                             ✅    API服务状态监测                 
+(nonebot-plugin-servicestate)                                                  
+AnimalVoice_Convert                      ❌    ✨支持切噜语和兽语的Nonebot译者 
+(nonebot-plugin-animalvoice)                   插件✨                          
+命令探查                                 ❌    命令探查，缓解下载了新插件却不会
+(nonebot-plugin-ayaka-scan-cmd)                使用的焦虑                      
+HttpCat🐱猫猫http状态码                  ❌    ✨Nonebot猫猫http状态码插件✨   
+(nonebot-plugin-HttpCat)                                                       
+主动消息撤回 (nonebot-plugin-revoke)     ✅    让机器人撤回自己发出的消息      
+动态API色图插件                          ✅    Nonebot2 可动态管理API的setu(色 
+(nonebot_plugin_setu_customization)            图)插件                         
+求生之路小助手                           ✅    可用于管理求生之路查服和本地管理
+(nonebot-plugin-l4d2-server)                                                   
+群聊学习                                 ✅    学习群友们的发言、复读以及主动发
+(nonebot-plugin-learning-chat)                 言                              
+对对联 (nonebot-plugin-couplets)         ✅    人工智能和你对对联              
+图像标注 (nonebot-plugin-Imagelabels)    ❌    基于yolov5的图像标注插件        
+☁云签到☁ (nonebot-plugin-cloudsignx)     ✅    基于云端的签到综合积分系统。    
+查找图片出处                             ✅    通过saucenao、ascii2d、Google、Y
+(nonebot-plugin-imgexploration)                andx查询图片出处                
+Hypixel数据查询 (nonebot-plugin-hypixel) ❌    查询Hypixel的数据               
+整点报时 (nonebot_plugin_nowtime)        ✅    每时每刻正点报时                
+回声洞                                   ❌    PCL2内群的回声洞，添加了审核功能
+(nonebot-plugin-cave)                          。                              
+星座运势 (nonebot-plugin-xingzuo)        ❌    返回星座的运势                  
+Bing每日图片获取                         ❌    获取Bing每日一图                
+(nonebot-plugin-BingImage)                                                     
+心灵鸡汤 (nonebot-plugin-soup)           ✅    来一碗心灵鸡汤吧                
+原神实时公告                             ❌    实时展示官网最新前20条公告      
+(nonebot-plugin-yuanshen-notice)                                               
+哔哩哔哩q群登录                          ❌    实现哔哩哔哩q群登录的插件       
+(nonebot-plugin-bilibili-yuan)                                                 
+简单翻译插件                             ✅    免key翻译，使用谷歌翻译，但需要 
+(nonebot_plugin_easy_translate)                梯子                            
+orange_dice                              ❌    具有技能鉴定、人物卡、日志记录的
+(nonebot-plugin-orangedice)                    COC用插件                       
+语音功能                                 ❌    语音功能适配插件，包括语音事件响
+(nonebot-plugin-record)                        应器，语音识别、语音合成等功能  
+喵喵自记菜谱                             ✅    记录生活中的小菜谱              
+(nonebot_plugin_nya_cook_menu)                                                 
+犯人在跳舞 (criminal-dance)              ❌    文字版桌游，犯人在跳舞          
+PicMCStat                                ❌    将一个 Minecraft 服务器的 MOTD  
+(nonebot-plugin-picmcstat)                     信息绘制为一张图片              
+反向词典 (nonebot-plugin-wantwords)      ❌    在nonebot使用wantwords反向词典  
+植物大战僵尸小游戏                       ❌    通过签到获取金币购买植物或者僵尸
+(nonebot-plugin-pvz)                           ，放置植物在草坪上抵御入侵，或者
+                                               进行僵尸入侵来吃掉别人的脑子    
+对话超管 (nonebot-plugin-report-manager) ❌    群员通过Bot对话超管             
+青岚Bot                                  ❌    基于NoneBot2与鹊桥的Minecraft Se
+(qinglan-bot)                                  rver消息互通机器人              
+群管 (nonebot-plugin-easy-group-manager) ❌    简易群管                        
+群频互通                                 ❌    将QQ群与QQ频道的消息互通        
+(nonebot-plugin-group-link-guild)                                              
+nonebot-plugin-mcport                    ❌    我的世界JAVA服务器通过RCON连接远
+(nonebot-plugin-mcport)                        程执行命令                      
+XDU校园服务                              ❌    Nonebot2插件，提供基础的西电校园
+(nonebot-plugin-xdu-support)                   服务，如课表提醒，体育打卡查询及
+                                               提醒，晨午晚检打卡和马原测试等功
+                                               能。                            
+查找轻小说 (nonebot-plugin-zyk-lightNVL) ❌    基于哔哩轻小说网站的爬虫插件    
+dog                                      ✅    随机返回一句舔狗日记...嘤嘤嘤和 
+(nonebot-plugin-dog)                           其他文案的插件                  
+uuid生成器                               ❌    通过 uuid4 与 uuid5 生成 uuid ，
+(nonebot-plugin-uuid)                          并且支持快速去除短横线          
+更人性化的GPT-Ai聊天插件                 ❌    一个基于NoneBot框架的Ai聊天插件 
+(nonebot-plugin-naturel-gpt)                   ，对接OpenAi文本生成接口，优化了
+                                               群聊场景的上下文支持。          
+impact                                   ✅    让群友们眼前一黑的nonebot2淫趴插
+(nonebot-plugin-impact)                        件                              
+MC Ping                                  ✅    获取 Minecraft JE/BE 服务器 Motd
+(nonebot-plugin-mcping)                         图片信息                       
+B站热搜 (nonebot-plugin-b23)             ✅    获取B站热搜(移动端)             
+AutoReply                                ✅    配置文件高度可自定义的自动回复插
+(nonebot-plugin-autoreply)                     件                              
+来张色图                                 ✅    从多个api获取色图并根据场景整合 
+(nonebot_plugin_setu_collection)               的色图插件                      
+娶群友 (nonebot-plugin-groupmate-waifu)  ✅    娶一个群友做老婆                
+每日人品2                                ❌    带数据库可查询历史平均人品的jrrp
+(nonebot-plugin-jrrp2)                         插件                            
+牛子PK (nonebot-plugin-dicky-pk)         ✅    🥵                              
+nonebot-plugin-eventmonitor              ✅    监控群事件的插件，支持戳一戳，成
+(nonebot-plugin-eventmonitor)                  员变动，群荣誉变化等提示的插件  
+今天吃什么（图片版）                     ✅    随机发送吃的或者喝的图片        
+(nonebot-plugin-whateat-pic)                                                   
+通用指令阻断                             ✅    通用指令阻断                    
+(nonebot-plugin-matcher-block)                                                 
+ACMReminder                              ❌    订阅牛客/CF/AT平台的比赛信息    
+(nonebot_plugin_acm_reminder)                                                  
+舞萌DX成绩查询 (nonebot-plugin-maimai)   ✅    水鱼自建服务器的改适配版本      
+OneBot 实现 (nonebot-plugin-all4one)     ✅    让 NoneBot2 成为 OneBot 实现！  
+原神深境螺旋数据查询                     ❌    原神深渊讨伐列表、渊月祝福、玩家
+(nonebot-plugin-gsabyss)                       战斗统计等信息查询，数据来自 Hon
+                                               ey Hunter World 和 Akasha Databa
+                                               se                              
+明日方舟工具箱                           ❌    基于 OneBot 适配器的 NoneBot2 明
+(nonebot-plugin-arktools)                      日方舟小工具箱插件              
+你画我猜组队                             ❌    自动创建gartic房间，主题为综合，
+(nonebot-plugin-gartic-room)                   将房间链接发送到群聊            
+链接分享解析器                           ✅    NoneBot2链接分享解析器插件。解析
+(nonebot-plugin-resolver)                      视频、图片链接/小程序插件，tikto
+                                               k、bilibili、twitter等实时发送！
+Bing Chat (nonebot-plugin-bing-chat)     ❌    使用新版必应的聊天功能          
+峯驰物流                                 ✅    一个帮助处理不同 adapter 消息的 
+(nonebot-plugin-send-anything-anywhere)        适配和发送的插件                
+发病语录                                 ✅    随机返回一条发病语录            
+(nonebot-plugin-random-stereotypes)                                            
+修仙_2.0 (nonebot-plugin-xiuxian-2)      ❌    基于原版修仙的修改与重构        
+今天练什么                               ❌    根据随意编造的数据查询相关运动动
+(nonebot-plugin-h2e)                           作的信息                        
+OpenAI chatbot (nonebot-plugin-oachat)   ❌    没有上下文关联的OpenAI对话机器人
+wf的wm市场                               ❌    warframe游戏的WM市场查询        
+(nonebot-plugin-warframe-mode)                                                 
+战地一入群审批                           ❌    战地一通过游戏id的入群审核并其修
+(nonebot-plugin-bf1-groptools)                 改群名片为id                    
+爱发电订单号进群审核                     ❌    审核入群信息判断是否同意进群    
+(nonebot-plugin-afd)                                                           
+nonebot_plugin_eventdone                 ❌    远程同意好友                    
+(nonebot-plugin-eventdone)                                                     
+网抑云 (nonebot-plugin-ncm-saying)       ❌    一开口就老网抑云了              
+60s日历 (nonebot-plugin-60s)             ❌    每天60秒读懂世界                
+AutoRepeater                             ❌    连续发送2条相同消息，机器人就会 
+(nonebot-plugin-AutoRepeater)                  自动 +1。包括普通消息，QQ表情,还
+                                               有图片（表情包）。支持图片夹文字
+                                               和表情夹文字的消息！具有动态多群
+                                               控制和跟随撤回功能（手表API可能 
+                                               无法监测）。                    
+小爱课表                                 ✅    一键导入课表、查看课表、提醒上课
+(nonebot-plugin-ai-timetable)                  、查询课程，使用/课表帮助查看指 
+                                               令列表                          
+Sanae                                    ❌    早苗连接器,也可转发其他onebotv11
+(nonebot-plugin-sanae)                         到nb2~                          
+明日方舟抽卡记录分析                     ❌    明日方舟抽卡记录分析与导出      
+(nonebot-plugin-arkrecord)                                                     
+ChatGPT官方接口版                        ❌    适配新版OpenAI API的nonebot插件 
+(nonebot-plugin-chatgpt-turbo)                 ，可以调用官方稳定版ChatGPT进行 
+                                               回复                            
+多功能ChatGPT插件                        ❌    基于chatGPT-3.5-turbo API的noneb
+(nonebot-plugin-chatgpt-on-qq)                 ot插件                          
+和团子聊天！                             ❌    来和团子聊天吧~  Powered by chat
+(nonebot-plugin-tuan-chatgpt)                  gpt                             
+ChatPDF文章分析                          ❌    在nonebot中使用ChatPDF的最小实现
+(nonebot-plugin-chatpdf)                       来中分析文章内容                
+RimoFun                                  ✅    用 RimoChan 开发的工具做的一个有
+(nonebot-plugin-rimofun)                       趣的插件                        
+群聊自定义表情包                         ❌    发送 表情名称 加 (.jpg或.png或.g
+(nonebot-plugin-customemote)                   if)后缀，就会发送设置好的表情。 
+                                               快速方便，聊天必备。            
+发6 (nonebot-plugin-justsix)             ❌    发送6，机器人就回复6            
+修仙模拟器                               ❌    基于原版修仙的修改              
+(nonebot-plugin-simulator-xiuxian)                                             
+括号补全 (nonebot-plugin-bracket)        ✅    补全消息中的括号，治愈强迫症    
+gshisbanner                              ❌    这是一个在机器人上获取原神历史卡
+(nonebot-plugin-gshisbanner)                   池的插件                        
+unoconv文件转换                          ❌    基于unoconv的文件转换工具，支持 
+(nonebot-plugin-unoconv)                       输出pdf、doc、jpg等格式         
+apex信息查询                             ❌    查询apex玩家信息、地图等信息    
+(nonebot-plugin-apexranklookup)                                                
+随机狗妈 (nonebot-plugin-randomnana)     ❌    随机抽取神乐七奈表情包图片      
+群聊语录库                               ✅    一款QQ群语录库——支持上传聊天截图
+(nonebot-plugin-quote)                         为语录，随机投放语录，关键词搜索
+                                               语录精准投放                    
+表情包制作 (nonebot_plugin_memes_api)    ✅    制作各种沙雕表情包              
+随机点名 (nonebot-plugin-rrc)            ❌    就是群聊点名，让学生感受刺激    
+热搜查询 (nonebot-plugin-hotsearch)      ❌    获取各个网站的热搜排行          
+基于OpenAI的AI模拟面试官                 ❌    本插件基于OpenAI的API开发，在non
+(nonebot-plugin-ai-interviewer)                ebot框架下实现一个聊天式的可自定
+                                               义面试职位的AI辅助面试官。      
+ChatGLM                                  ❌    基于ChatGLM-6B模型，提供本地中文
+(nonebot-plugin-chatglm)                       （汉语）聊天机器人功能          
+ChatGLM-6B API版                         ❌    通过ChatGLM-6B API来和已经部署好
+(nonebot-plugin-chatglm6b)                     的ChatGLM对话                   
+Hello World (nonebot-plugin-helloworld)  ❌    你好，世界                      
+通括膨胀 (nonebot-plugin-overbracket)    ✅    让你的机器人随机发括号          
+口癖 (nonebot-plugin-miao)               ✅    让Bot的发言添加口癖             
+颠倒问号                                 ❌    发送单个问号 `?` 或 `？`, bot会 
+(nonebot-plugin-questionmark)                  自动回复颠倒的问号 `¿`          
+米游社cos (nonebot-plugin-genshin-cos)   ✅    获取原神coser图片               
+ChatGPT网页端API                         ❌    免费、无限使用ChatGPT，PLUS账号 
+(nonebot-plugin-chatgpt-plus)                  可使用ChatGPT4.0，绕过ChatGPT的C
+                                               loudflare盾来使用免费网页端ChatG
+                                               PT                              
+sayoroll (nonebot-plugin-sayoroll)       ✅    随机数字或随机事件              
+激战2 (nonebot-plugin-gw2)               ✅    使用api获取星岬岛信息           
+今日老婆 (nonebot-plugin-today-waifu)    ❌    随机抽取群友作为老婆吧！        
+来份精致的睡眠套餐                       ❌    发送sleep禁言，参数为时间，单位 
+(nonebot-plugin-sleep)                         ：小时， 最低1小时，最高24小时  
+nonebot_api_paddle (nonebot-api-paddle)  ❌    nonebot_api_paddleocr           
+AI生成PPT                                ❌    在nonebot框架下实现一个AI生成指 
+(nonebot-plugin-chatppt)                       定主题PPT的文件并上传到群文件中 
+Steam游戏状态                            ❌    播报群友的Steam游戏状态         
+(nonebot-plugin-steam-game-status)                                             
+nonebot-plugin-bilichat                  ✅    全功能的 bilibili 内容解析器及订
+(nonebot-plugin-bilichat)                      阅器                            
+GenshinUID                               ✅    SayuCore连接器, 基于 Alconna Uni
+(nonebot-plugin-genshinuid)                    Message 的多适配器桥            
+B站直播间路灯                            ❌    通过弹幕记录直播高能点          
+(nonebot-plugin-blive-danmaku)                                                 
+nonebot_plugin_clock                     ✅    QQ机器人智能闹钟插件，支持群聊与
+(nonebot-plugin-clock)                         私聊提醒、支持图片发送、自然语言
+                                               设置、多样化时间格式            
+SDGPT                                    ❌    链接 ChatGPT / Bing / Stable-Dif
+(nonebot-plugin-sdgpt)                         fusion: ChatGPT Bing 聊天, gpt  
+                                               解析自然语言转 Stable-Diffusion 
+                                               生成图像                        
+FuckYou (nonebot-plugin-fuckyou)         ✅    你不讨厌，可全无用处            
+宝可梦融合                               ❌    Pokemon Infinite Fusion的中文版 
+(nonebot-plugin-pokemonfusion)                 融合计算器，支持融合420^2=176400
+                                               种宝可梦                        
+TataruBot2                               ❌    FF14相关轻量功能，如查物价、logs
+(tatarubot2)                                   、看微博等                      
+osu!入群验证 (nonebot-plugin-osuverify)  ✅    osu!账户自动审批入群申请！      
+bilifan (nonebot-plugin-bilifan)         ✅    b站粉丝牌~                      
+Akinator (nonebot-plugin-akinator)       ✅    网络天才                        
+nonebot_plugin_rename                    ❌    用于更改qq机器人的群名片，内置多
+(nonebot-plugin-rename)                        种有趣名片                      
+Nonebot2 AppInsights                     ❌    Nonebot2 Application Insights 日
+(nonebot-plugin-appinsights)                   志连接插件                      
+nonebot_plugin_brainfuck                 ❌    brainfuck解释器，brainfuck是一种
+(nonebot-plugin-brainfuck)                     仅含有八个字符的图灵完备语言    
+运行代码 (nonebot-plugin-coderun)        ❌    基于runoob.com的在线代码运行插件
+公共画板插件                             ❌    可以让所有的 Bot 用户一起来画画 
+(nonebot-plugin-abot-place)                    （参考 Reddit Place）           
+为美好群聊献上爆炎2                      ✅    现在，你的群友可以触发失传已久的
+(nonebot-plugin-megumin)                       爆裂魔法了！                    
+图片翻译                                 ✅    利用api翻译图片并返回翻译后的图 
+(nonebot-plugin-manga-translator)              片                              
+图片水印 (nonebot-plugin-watermarker)    ❌    为bot发出的图片添加水印         
+星穹铁道活动日历                         ❌    查看《崩坏：星穹铁道》官方活动  
+(nonebot-plugin-starrail-calendar)                                             
+wordle_help (nonebot-plugin-wordle-help) ✅    wordle游戏小助手                
+CSGO开箱模拟器                           ❌    nonebot的CS2/CSGO开箱模拟器     
+(nonebot-plugin-csgo-case-simulator)                                           
+CallAPI (nonebot-plugin-callapi)         ❌    使用指令来调用 Bot 的 API       
+nonebot_plugin_penguin                   ✅    使用nonebot2查询企鹅物流掉落物数
+(nonebot-plugin-penguin)                       据                              
+Spark_GPT                                ❌    将poe,chatgpt,slack claude,Newbi
+(nonebot-plugin-spark-gpt)                     ng,SydneyBing,google bard,讯飞星
+                                               火模型(SparkDesk),通义千问等接入
+                                               qq,tg,kook(原开黑啦),discord多平
+                                               台用户绑定实现数据互通,并提供web
+                                               ui进行便捷配置,自适应文转图,实现
+                                               预设人格化bot的便捷创建,使用和管
+                                               理                              
+nonebot-plugin-logpile                   ✅    将 nonebot 的日志记录保存到本地 
+(nonebot-plugin-logpile)                       文件                            
+明日方舟抽卡模拟                         ✅    明模拟日方舟抽卡功能，支持模拟十
+(nonebot-plugin-arkgacha)                      连                              
+og (nonebot-plugin-og)                   ❌    检测链接并发送网站简介及预览图  
+签到                                     ❌    从 hoshino 搬过来的 pcr 签到, 略
+(nonebot-plugin-hoshino-sign)                  作修改。                        
+MultiNCM (nonebot-plugin-multincm)       ✅    网易云多选点歌                  
+小小API调用插件                          ✅    调用api来服务大众！             
+(nonebot-plugin-smallapi)                                                      
+《女神异闻录5》预告信生成器              ❌    可以生成仿《女神异闻录5》中心之 
+(nonebot-plugin-p5generator)                   怪盗团向罪人宣战的预告信        
+SD绘画插件                               ❌    基于stable-diffusion-webui的none
+(nonebot-plugin-sd-webui)                      bot绘画插件，支持文生图、图生图 
+                                               、参数指定、模型管理、翻译等功能
+会话id (nonebot_plugin_session)          ✅    会话信息提取与会话id定义插件    
+便携插件安装器                           ❌    一个nonebot2的插件便捷安装和升级
+(nonebot-plugin-pluginupdatecheck)             插件（基于nb-cli和pip)          
+股票看盘助手                             ❌    股票波动超过设定值提醒，省去一直
+(nonebot-plugin-stockhelper)                   盯盘的烦恼                      
+githubcard                               ✅    检测GitHub仓库链接并自动发送卡片
+(nonebot-plugin-githubcard)                    信息，支持仓库、Issue、Pull Requ
+                                               est、Release                    
+nonebot-plugin-lua                       ❌    在nonebot中执行lua（experimental
+(nonebot-plugin-lua)                           ）                              
+魔方 (nonebot-plugin-cube)               ❌    这是一个魔方插件                
+homo_mathematician                       ✅    任何实数都用连续的114514通过加减
+(nonebot-plugin-homo-mathematician)            乘除达成, 任给一组数据都能找出其
+                                               内在规律(函数表达式)            
+数字华容道 (nonebot-plugin-puzzle)       ❌    这是一个数字华容道插件          
+本子标题关键词提取                       ❌    为了方便各位平时搜索本子用，发扬
+(nonebot-plugin-herocard)                      hero精神                        
+NAGA公交车 (nonebot-plugin-nagabus)      ❌    为群友提供NAGA拼车服务          
+随机抽取设定内容插件                     ❌    适用于nonebot2 v11的随机抽取设定
+(nonebot-plugin-random-draw)                   内容插件                        
+AI绘图                                   ✅    调用stable-diffusion进行AI绘图  
+(nonebot-plugin-stable-diffusion-diao)                                         
+链接防夹                                 ✅    自动转换发送消息中的URL，逃避URL
+(nonebot-plugin-escape-url)                    检测                            
+twitter 推特订阅                         ❌    订阅 twitter 推文               
+(nonebot-plugin-twitter)                                                       
+pcrjjc (nonebot-plugin-pcrjjc)           ✅    公主连结（国服）排名监测工具    
+AI作曲 (nonebot-plugin-audiocraft)       ✅    Nonebot框架下的AI作曲插件       
+战雷查水表                               ❌    搜索warthunder社区查询玩家履历  
+(nonebot-plugin-warthunder-player-check)                                       
+                                                                               
+follow_withdraw                          ❌    当命令消息被撤回时，Bot跟随撤回 
+(nonebot-plugin-follow-withdraw)               命令结果                        
+游戏王小蓝卡查                           ✅    提供游戏王相关服务              
+(nonebot-plugin-ocgbot-v2)                                                     
+Diablo4地狱狂潮boss提醒小助手            ❌    支持订阅，在D4继续上班          
+(nonebot-plugin-helltide)                                                      
+用户信息 (nonebot_plugin_userinfo)       ✅    多平台的用户信息获取插件        
+戳一戳事件 (nonebot-plugin-poke)         ✅    自定义群聊戳一戳事件            
+远程同意好友 (nonebot-plugin-friends)    ✅    自定义远程同意好友和群聊申请    
+NPU                                      ✅    用于检测 Nonebot 插件更新的 None
+(nonebot-plugin-update)                        bot 插件                        
+算法竞赛比赛查询                         ✅    可以查询牛客、atcoder、codeforce
+(nonebot-plugin-cp-broadcast)                  s平台的今天和近几天的比赛信息   
+nonebot-plugin-cfassistant               ✅    一个支持CF(codeforces)平台查询比
+(nonebot-plugin-cfassistant)                   赛/比赛提醒/监测分数变化的nonebo
+                                               t机器人插件                     
+splatoon3游戏日程查询                    ✅    一个基于nonebot2框架的splatoon3 
+(nonebot-plugin-splatoon3-schedule)            游戏日程查询插件                
+猫猫虫咖波图片发送                       ✅    发送capoo指令后bot会随机发出一张
+(nonebot-plugin-capoo)                         capoo的可爱表情包               
+过期事件过滤器                           ✅    自动过滤过期事件                
+(nonebot-plugin-eventexpiry)                                                   
+nonebot-plugin-nobahpicture              ❌    获取碧蓝档案涩图                
+(nonebot-plugin-nobahpicture)                                                  
+Blocker (nonebot-plugin-blocker)         ✅    分群配置关闭Bot插件             
+nonebot-plugin-picture-api               ❌    一款可以自由增删图片指令和api的 
+(nonebot-plugin-picture-api)                   插件                            
+nonebot-plugin-wenan                     ✅    一款可以自由增删文案指令和api的 
+(nonebot-plugin-wenan)                         插件                            
+MongoDB                                  ❌    基于 MongoDB ODM 的数据库管理插 
+(nonebot-plugin-mongodb)                       件                              
+templates_render                         ❌    使用htmlrender和jinja2渲染,使用 
+(nonebot-plugin-templates)                     构建的menu,card或dict进行模板渲 
+                                               染                              
+指定戳一戳 (nonebot-plugin-pokesomeone)  ❌    指定戳某人若干次                
+DALL-E绘图 (nonebot-plugin-dall-e)       ❌    使用DALL·E绘图                  
+方寸狭间 (nonebot-plugin-tempfile)       ✅    临时文件/IO 依赖注入支持        
+bot断连通知                              ✅    bot断连时的通知插件，当前支持邮 
+(nonebot-plugin-disconnect-notice)             件通知，pushplus微信公众号通知，
+                                               server酱公众号通知，pushover多平
+                                               台设备通知                      
+Bot上下线邮件通知                        ✅    Bot上下线发送邮件通知的插件     
+(nonebot-plugin-botmailnotice)                                                 
+The World                                ❌    「ザ・ワールド」ッ！ 時よ止まれ 
+(nonebot-plugin-theworld)                      ！                              
+NoneMeme (nonebot-plugin-nonememe)       ✅    NoneBot 群大佬的日常            
+Among US中的TOH模组职业介绍              ✅    查询TOH模组里职业的玩法描述     
+(nonebot-plugin-aujob)                                                         
+跨平台账户绑定                           ❌    nonebot多适配器通用的跨平台账户 
+(nonebot-plugin-bind)                          绑定插件                        
+Savepic (nonebot-plugin-savepic)         ❌    表情包保存                      
+命运方舟流浪商人卡牌刷新提示             ✅    国服命运方舟流浪商人稀有史诗传说
+(nonebot-plugin-lostark-wandering-trader       卡牌刷新提示                    
+)                                                                              
+CSGO饰品查询机器人                       ✅    一款模拟查找饰品价格的机器人    
+(nonebot-plugin-csornament)                                                    
+MC版本更新检测                           ✅    一个用于检测MC最新版本的插件    
+(nonebot-plugin-mcversion)                                                     
+muteme(我禁我自己）                      ❌    高仿@能干辉的muteme             
+(nonebot-plugin-muteme)                                                        
+剑网三助手                               ✅    JX3API 全功能查询 + WebSocket 事
+(nonebot-plugin-jx3)                           件推送                          
+科大讯飞星火大模型聊天                   ✅    Nonebot框架下的科大讯飞星火大模 
+(nonebot-plugin-xinghuo-api)                   型聊天插件,已适配V2.0版API      
+DicerGirl (dicergirl)                    ✅    新一代跨平台开源 TRPG 骰娘框架  
+周易蓍草占卜                             ❌    基于古蓍草占卜的算法, 简单的使用
+(nonebot-plugin-uvdiviner)                     `.divine`指令.                  
+消息推送插件                             ✅    通过邮件、Feishu Webhook 等方式 
+(nonebot-plugin-push)                          推送消息                        
+SUDO (nonebot-plugin-sudo)               ❌    以指定用户身份执行命令          
+arxiv订阅 (nonebot-plugin-arxivRSS)      ❌    订阅arxiv指定领域每天更新的论文 
+识别动漫gal角色                          ✅    通过ai.animedb.cn的api识别动漫、
+(nonebot-plugin-anime-trace)                   galgame角色                     
+双向聊天插件                             ✅    一个支持双向聊天的传话插件，可用
+(nonebot-plugin-send-message)                  于临时聊天而不想加好友场景      
+Nonebot Requests                         ✅    封装 ForwardDriver 实现 HttpClie
+(nonebot-plugin-requests)                      nt 功能                         
+httpcat-状态猫😺                         ✅    简单粗暴的httpcat插件，参考了zjk
+(nonebot-plugin-simple-httpcat)                wdy大佬的weather_lite插件       
+二维码 (nonebot-plugin-qrcode2)          ❌    通过pyzbar解析二维码            
+消息伪造 (nonebot-plugin-fakemsg)        ✅    伪造消息                        
+Alconna 帮助工具                         ✅    基于 nonebot-plugin-alconna，给 
+(nonebot-plugin-alchelper)                     出所有命令帮助以及统计          
+nonebot-plugin-souti                     ❌    使用百度不挂科题库, 可以实现文字
+(nonebot-plugin-souti)                         搜题功能                        
+helper_plus (nonebot-plugin-helper-plus) ❌    带有指令调用控制的高级helper    
+女装 ! (nonebot-plugin-wearskirt)        ❌    Nonebot 赛博女装插件            
+森空岛明日方舟签到器                     ✅    私聊机器人以获得自动明日方舟森空
+(nonebot-plugin-skland-arksign)                岛签到服务                      
+nonebot_plugin_group_whitelist           ❌    简易群聊白名单                  
+(nonebot-plugin-group-whitelist)                                               
+文心一言 (nonebot-plugin-ernie)          ✅    Nonebot框架下的文心一言聊天插件 
+青年大学习提交                           ✅    一个可以自动提交多地区青年大学习
+(TeenStudy)                                    的插件                          
+nonebot-plugin-video-api                 ✅    一款可以自由增删视频指令和api的 
+(nonebot-plugin-video-api)                     插件                            
+活字印刷 (nonebot-plugin-ottohzys)       ✅    大家好啊，今天来点大家想看的东西
+聚能环 (nonebot-plugin-ability)          ❌    NoneBot 外置电池                
+Nonebot Agent                            ❌    适配你的插件，让 LLM 来为你处理 
+(nonebot-plugin-agent)                         用户调用                        
+屏蔽词插件                               ❌    接收的消息或机器人发送的消息进行
+(nonebot-plugin-blockwords)                    屏蔽词检查                      
+算法比赛查询和今日比赛自动提醒           ✅    可以查询牛客、atcoder、codeforce
+(nonebot-plugin-matchreminder)                 s平台比赛信息并在今日比赛前进行 
+                                               提醒(请在.env.prod添加或修改超级
+                                               用户，以免出现意料之外的错误)   
+talk with eop ai                         ✅    Nonebot2 一款调用eop api的AI聊天
+(nonebot_plugin_eop_ai)                        插件                            
+nonebot-plugin-playercheck               ✅    一个查询群友音游成分的插件      
+(nonebot-plugin-playercheck)                                                   
+op-finder (nonebot-plugin-op-finder)     ❌    显示当前正在玩原神的人          
+morep-finder                             ❌    显示当前正在玩特定游戏的人      
+(nonebot-plugin-morep-finder)                                                  
+肯定机 (nonebot-plugin-yesman)           ❌    你的发言，值得被肯定            
+FGO猜从者                                ❌    FGO猜从者插件，基于原HoshinoBot 
+(nonebot-plugin-fgoavatarguess)                猜从者模块修改，感谢原作者。    
+VRChat查询                               ✅    使用第三方 API SDK 实现 VRChat  
+(nonebot-plugin-vrchat)                        相关操作，例如查询好友状态      
+BlueArchive Title Generator              ✅    碧蓝档案式标题生成器            
+(nonebot-plugin-batitle)                                                       
+nonebot-plugin-maimaidx                  ✅    移植自 mai-bot 开源项目，基于 no
+(nonebot-plugin-maimaidx)                      nebot2 的街机音游 舞萌DX 的查询 
+                                               插件                            
+nonebot-plugin-getbapics                 ✅    Get BA Pictures                 
+(nonebot_plugin_getbapics)                                                     
+选择困难症 (nonebot-plugin-make-choice)  ✅    选择困难症？Bot帮你选！         
+定时广播插件                             ❌    一款可配置的, 不依赖具体适配器的
+(nonebot-plugin-scheduled-broadcast)           , 基于事件的定时广播插件.       
+Nonebot2 Any 多平台服务                  ❌    Nonebot2 多平台统一事件与消息统 
+(nonebot-plugin-any)                           一构造发送                      
+nonebot-plugin-bertvits2                 ❌    bertvits2语音合成插件           
+(nonebot-plugin-bertvits2)                                                     
+局域网唤醒                               ✅    通过发送魔术封包唤醒Bot所在局域 
+(nonebot-plugin-wake-on-lan)                   网内的设备                      
+DALL-E 3绘图                             ❌    调用NewBing的DALL-E 3进行绘图   
+(nonebot-plugin-bingimagecreator)                                              
+用户 (nonebot-plugin-user)               ✅    管理和绑定不同平台的用户        
+短链接服务支持 (nonebot-plugin-shorturl) ✅    为其他插件提供短链接转换服务    
+文件托管支持                             ✅ 👍 提供跨机文件传输支持，通过 HTTP 
+(nonebot-plugin-filehost)                      服务托管文件                    
+sm.ms图床 (nonebot-plugin-smms)          ✅    sm.ms图床上传与管理             
+群聊 NSFW 图片检测                       ✅    群聊 NSFW 图片检测插件，带有撤回
+(nonebot-plugin-nsfw)                          、警告、禁言等功能。使用 Safety 
+                                               Checker / NSFW Model.           
+碧蓝档案塔罗牌                           ❌    碧蓝档案塔罗牌，运势预测与魔法占
+(nonebot-plugin-batarot)                       卜🔮支持多适配器                
+随机龙图 (nonebot-plugin-longtu)         ✅    2024年是龙年...我都准备好了     
+Phigros查分器(Adapter-qq)                ❌    一个简单的基于PhigrosLibrary的Ph
+(nonebot-plugin-phigros)                       igros查分插件，适用于Adaper-qq  
+AntiMonkey (nonebot-plugin-antimonkey)   ❌    自动检测和撤回包含恶心吗喽的图片
+Waiter 插件                              ✅    提供一个 got-and-reject 会话控制
+(nonebot-plugin-waiter)                        的替代方案，可自由控制超时时间  
+nonebot-plugin-imagemaster               ❌    提供多种图像处理功能的插件      
+(nonebot-plugin-imagemaster)                                                   
+nonebot_plugin_nikke                     ✅    胜利女神：妮姬多功能插件        
+(nonebot-plugin-nikke)                                                         
+随机MC图 (nonebot-plugin-mcpic)          ✅    随机从推特获取并发送MC建筑图片  
+文心一言4适配 (nonebot-plugin-wx4)       ✅    文心一言4适配的连续对话         
+nonebot-plugin-mypower                   ✅    随机生成超能力                  
+(nonebot-plugin-mypower)                                                       
+谷歌Bard聊天                             ❌    Nonebot框架下的谷歌Bard聊天插件 
+(nonebot-plugin-bard)                          ，支持联网搜索和图片识别        
+nonebot-plugin-nekoimage                 ✅    A nonebot plugin for integrating
+(nonebot-plugin-nekoimage)                      with [NekoImageGallery](https:/
+                                               /github.com/hv0905/NekoImageGall
+                                               ery).                           
+最终台词                                 ❌    来一句劲道的最终台词吧,支持多平 
+(nonebot-plugin-finallines)                    台适配                          
+Gemini (nonebot-plugin-gemini)           ❌    Gemini AI 对话                  
+haruka_bot_red                           ❌    将B站UP主的动态和直播信息推送至Q
+(haruka_bot_red)                               Q，适配red协议                  
+SakuraFrp (nonebot-plugin-enatfrp)       ✅    SakuraFrp管理插件，natfrp.com。 
+哪吒监控插件 (nonebot-plugin-nezha)      ❌    哪吒监控插件，使用哪吒监控API。 
+随机发送图片                             ✅    发送自定义指令后bot会随机发出一 
+(nonebot-plugin-randpic)                       张你所存储的图片                
+BA模拟抽卡                               ✅    模拟实现了碧蓝档案游戏的抽卡功能
+(nonebot-plugin-badrawcard)                    , 自动化了更新卡池、FES提高卡池 
+                                               概率                            
+ChatGPT 聊天                             ❌    通过浏览器使用 ChatGPT,兼容 oneb
+(nonebot-plugin-gpt)                           ot v11 与 adapter-qq 适配器     
+黑名单插件                               ❌    一个轻量级的黑名单插件,支持api接
+(nonebot-plugin-easy-blacklist)                入全平台,内存占用优化中         
+定时提醒                                 ✅    主要用来提醒大家别忘记什么事情，
+(nonebot-plugin-reminder)                      可以看成定时提醒插件            
+Chikari_yinpa                            ✅    一个普通的银趴插件              
+(nonebot-plugin-chikari-yinpa)                                                 
+splatoon3游戏nso查询                     ✅    一个基于nonebot2框架的splatoon3 
+(nonebot-plugin-splatoon3-nso)                 游戏nso数据查询插件             
+战地1-马恩私人服务器服务器查询           ✅    Onebot 战地1 马恩私人服务器服务 
+(nonebot-plugin-bf1marneserverlist)            器查询插件                      
+运行状态 (nonebot-plugin-kawaii-status)  ✅    NoneBot2 服务器状态查看插件     
+nonebot-plugin-vits-tts                  ❌    基于vits的tts语音合成           
+(nonebot-plugin-vits-tts)                                                      
+人性化的ChatGLM                          ✅    人性化的ChatGLM插件，支持预设和 
+(nonebot-plugin-chatglm-plus)                  上下文                          
+赛博钓鱼 (nonebot-plugin-fishing)        ✅    你甚至可以电子钓鱼              
+a2s查询 (nonebot-plugin-a2s-query)       ✅    查询value服务器详情             
+nonebot-plugin-dice-narrator             ❌    一只可爱的 AI 掷骰姬，支持各种事
+(nonebot-plugin-dice-narrator)                 件检定                          
+Steam Info (nonebot-plugin-steam-info)   ✅    播报绑定的 Steam 好友状态       
+100%鲜橙汁！                             ✅    PL 的百橙战绩统计插件           
+(nonebot-plugin-orangejuice)                                                   
+Muse Dash                                ❌    基于 NoneBot2 的 MUSE DASH查询插
+(nonebot_plugin_md)                            件                              
+nonebot-plugin-duel                      ✅    决斗插件                        
+(nonebot-plugin-duel)                                                          
+nonebot-plugin-pallas-repeater           ✅    复读鸡                          
+(nonebot-plugin-pallas-repeater)                                               
+人类友好数据配置                         ✅    存储插件数据至nb_cli所在相对路径
+(nonebot-plugin-humanaticstore)                                                
+ghtiles (nonebot-plugin-ghtiles)         ✅    看看你的 GitHub 瓷砖            
+diffsinger (nonebot-plugin-diffsinger)   ✅    用DiffSinger让bot唱歌           
+Chikari_economy                          ❌    一个经济插件（库），可由其他插件
+(nonebot-plugin-chikari-economy)               调用，以便插件间的经济联动      
+nonebot-plugin-auto-bot-selector         ✅    自动Bot选择器，消息推送好帮手   
+(nonebot-plugin-auto-bot-selector)                                             
+nonebot-plugin-nai3                      ✅    通过 NovelAI 生成图片           
+(nonebot-plugin-nai3)                                                          
+Hx_YinYing (nonebot-plugin-hx-yinying)   ✅    快来和可爱的赛博狼狼聊天！      
+飞花令 (nonebot-plugin-fhl)              ✅    飞花令小游戏                    
+淫语 (nonebot-plugin-yinyu)              ✅    把语句变成淫语                  
+Yinying-Chat                             ✅    这是一个通过调用银影API来和银影 
+(nonebot-plugin-yinying-chat)                  聊天的插件                      
+QQ频道-Discord 互通                      ✅    在QQ频道与 Discord 之间同步消息 
+(nonebot-plugin-dcqg-relay)                    的 nonebot2 插件                
+战双表情 (nonebot-plugin-zsmeme)         ✅    发送bwiki的战双表情             
+三爻易数 (nonebot-plugin-sanyao)         ✅    三爻易数排盘                    
+cyberfurry                               ❌    nonebot插件 cyberfurry 与赛博狼 
+(nonebot-plugin-cyberfurry)                    狼对话吧~                       
+HelpWithPic (nonebot-plugin-helpwithpic) ❌    nonebot插件-动态帮助图片制作    
+表情包保存器                             ✅    一款很简单的，用于保存已经不提供
+(nonebot-plugin-sticker-saver)                 保存选项的 QQ 表情包的 Nonebot  
+                                               插件                            
+番剧下载                                 ❌    基于 qBittorrent Web UI 的番剧下
+(nonebot-plugin-anime-downloader)              载 NoneBot 插件                 
+with_ai_agents                           ✅    AI 智能体，提供联网学习能力、页 
+(nonebot-plugin-with-ai-agents)                面提取能力，以及 AI 能帮你做到的
+                                               任何事。                        
+随机毛图                                 ❌    基于NoneBot2进行适配的兽云随机毛
+(nonebot-plugin-RanFurryPic)                   图插件                          
+兽聚动态                                 ❌    基于NoneBot2进行适配的兽聚动态查
+(nonebot-plugin-furryfusion)                   询插件                          
+神秘学助手 (nonebot-plugin-mysticism)    ✅    虽然现在只有塔罗派相关的工具喵  
+BanG Dream! Tsugu Frontend               ❌    基于 tsugu-python-frontend 的 ts
+(nonebot-plugin-tsugu-frontend)                ugu-bangdream-bot 插件          
+库洛游戏信息 (nonebot-plugin-kurogames)  ✅    一款库洛游戏角色信息插件        
+nonebot_plugin_valve_server_query        ✅    NoneBot插件，用于查询V社服务器，
+(nonebot-plugin-valve-server-query)            图片基于html渲染，有权限管理，支
+                                               持在线更新服务器信息            
+科大讯飞星火大模型官方API聊天机器人插件  ✅    调用科大讯飞星火大模型官方API的 
+(nonebot-plugin-sparkapi)                      聊天机器人插件。适用于所有模型版
+                                               本（默认当前最新v4.0），支持上下
+                                               文关联、人物预设、AI绘图、AI生成
+                                               PPT等功能                       
+nonebot-plugin-tsugu-bangdream-bot       ✅    Koishi-Plugin-Tsugu-BanGDream-Bo
+(nonebot-plugin-tsugu-bangdream-bot)           t 的 NoneBot2 实现              
+nonebot-plugin-calc24                    ✅    该插件实现的小游戏的游戏规则为一
+(nonebot-plugin-calc24)                        人一题。在插件启动时使用[/24点] 
+                                               命令启动游戏。使用加减乘除使给出
+                                               的数等于24，在游戏进行时可以直接
+                                               回复[退出]来退出游戏或者[换一题]
+                                               来更换新的题目。如果在5分钟内未 
+                                               回答会自动退出。                
+自定义人格和AI绘图的混合聊天BOT          ❌    基于GPT4+NovelAI V3,Bot在将自然 
+(nonebot-plugin-nai3-bot)                      语言转换为NAI3提示词并绘图发送的
+                                               同时以自定义人格与用户聊天。    
+DG-Lab-Play (nonebot-plugin-dg-lab-play) ✅    在群里和大家一起玩郊狼吧！      
+插件响应鉴权                             ✅    nonebot简单易用的黑名单插件，实 
+(nonebot-plugin-authrespond)                   现分插件拉黑用户/群聊/全局      
+高优先级关闭信号钩子插件                 ✅    提供一个在关闭信号后,Bot断开前执
+(nonebot-plugin-shutdown-hook)                 行的钩子函数                    
+复读姬+1 PlusOne                         ✅    全新复读姬，支持文本、图片、表情
+(nonebot-plugin-plus-one)                      甚至是转发分享卡片复读，任意群聊
+                                               触发 +1，姬就 +1。轻巧、专注，不
+                                               使用任何数据库，不使用任何文件存
+                                               储                              
+ai唱歌 (nonebot-plugin-aising)           ✅    能让b站任何能搜到素材的角色唱歌 
+QQShell                                  ✅    QQShell 是一个类 WebSSH、XShell 
+(nonebot-plugin-qqshell)                       的运行在机器人的 SSH Shell，在 Q
+                                               Q 中自由运行你的命令吧          
+nonebot-plugin-lynchpined                ✅    A nonebot2 plugin to check Lynch
+(nonebot-plugin-lynchpined)                    pin progress.                   
+学园偶像大师算分插件                     ✅    学院偶像大师算分                
+(nonebot-plugin-gakuenImasCalculator)                                          
+颜值评分 (nonebot-plugin-beauty-rater)   ✅    NoneBot2 颜值打分插件           
+nonebot-plugin-xjie-weather              ❌    一个小小的天气插件              
+(nonebot-plugin-xjie-weather)                                                  
+鸣潮抽卡记录分析                         ✅    鸣潮抽卡记录分析                
+(nonebot-plugin-wwgachalogs)                                                   
+峯驰外包                                 ✅    使用 SAA 风格混合发送 SAA 和 alc
+(nonebot-plugin-saalc)                          的消息                         
+nonebot-plugin-easymarkdown              ❌    格式化markdown语法，并转化为可读
+(nonebot-plugin-easymarkdown)                  性较好的图片                    
+多模态AI工具                             ✅    一个可以分析图片，生成图片，PPT 
+(nonebot-plugin-multigpt)                      以及docx的ai插件                
+MCSM小助手                               ✅    对接MCSM，可查看面板、节点、实例
+(nonebot-plugin-mcsm)                          信息以及管理实例                
+绝地潜兵信息查询小助手                   ✅    为了超级地球！                  
+(nonebot-plugin-helldivers)                                                    
+日麻猜手牌小游戏                         ✅    日麻猜手牌小游戏                
+(nonebot-plugin-mahjong-hand-guess)                                            
+asmr (nonebot-plugin-asmr)               ✅    能在群里听音声                  
+EVE ONLINE 多功能机器人版本 - v0.2.3     ❌    EVE ONLINE-游戏查价，合同，游戏 
+(nonebot-plugin-eve-tool)                      信息查询                        
+Daily Task                               ✅    这个插件可以帮助用户管理每日任务
+(nonebot-plugin-daily-task)                    ，包括添加任务、完成任务、查询任
+                                               务等功能。                      
+b站消息转发                              ✅    通过扫码登录b站，并把其他人通过 
+(nonebot-plugin-biliforward)                   私信分享的视频转发到qq群        
+nonebot_plugin_obastatus                 ✅    获取 OpenBMCLAPI 相关数据       
+(nonebot-plugin-obastatus)                                                     
+QQ群-Discord 互通                        ✅    在QQ群与 Discord 之间同步消息的 
+(nonebot-plugin-dcqq-relay)                    nonebot2 插件                   
+指令更新NapCat (nonebot-plugin-ncupdate) ✅    指令更新NapCat                  
+AnyMate小助手 (nonebot-plugin-anymate)   ✅    实现对anymate网站的简单帮助     
+cloudfare R2 客服端                      ✅    cloudfare R2 客服端插件         
+(nonebot-plugin-cfr2)                                                          
+鸣潮wiki (nonebot-plugin-WWwiki)         ✅    查询鸣潮wiki相关内容            
+漫展/展览查询 (nonebot-plugin-acgnshow)  ✅    从哔哩哔哩会员购获取简易展览数据
+再润 (nonebot-plugin-runagain)           ✅    NoneBot2 停机与重启控制插件     
+wordle (nonebot-plugin-wordle-simple)    ✅    英语猜词                        
+每日油价                                 ❌    查询每日地区油价，定时推送油价  
+(nonebot-plugin-daily-oil-price)                                               
+游戏种子搜索                             ✅    搜索游戏种子资源                
+(nonebot-plugin-game-torrent)                                                  
+vv_helper                                ❌    A helper plugin for weiwei lover
+(nonebot-plugin-weiweibot)                     s.                              
+nonebot-plugin-autopush                  ✅    NoneBot2 自动状态推送           
+(nonebot-plugin-autopush)                                                      
+nonebot-plugin-exe-code                  ✅    在对话中执行 Python 代码        
+(nonebot-plugin-exe-code)                                                      
+命令行 (nonebot-plugin-system-command)   ✅    操作Bot所在环境的系统命令行     
+基于清影的AI视频生成                     ❌    基于智谱清言清影cogvideox模型的A
+(nonebot-plugin-cogvideox)                     I视频生成nonebot插件，支持文生视
+                                               频和图文生视频                  
+GPT-SoVITS 语音合成                      ✅    调用 GPT-SoVITS 的 API 生成语音 
+(nonebot-plugin-gpt-sovits)                                                    
+谁是卷王 (nonebot-plugin-wakatime)       ✅    将代码统计嵌入 Bot 中           
+SunoAI音乐生成                           ✅    基于第三方柏拉图的sunoai插件，支
+(nonebot-plugin-sunoai)                        持文生音乐和纯音乐              
+漂流瓶                                   ❌    一个基于nonebot2与onebotv11 使用
+(nonebot_plugin_web_bottle)                    fastapi驱动的漂流瓶插件，有一个 
+                                               简单的web用于审核用户提交的漂流 
+                                               瓶                              
+🦌管签到 (nonebot-plugin-deer-pipe)      ✅    一个🦌管签到插件                
+Alist (nonebot-plugin-alist)             ✅    一个支持多账号的Alist管理插件   
+B站收藏夹监视器                          ✅    监视指定B用户的收藏夹内容       
+(nonebot-plugin-bili-fav-watcher)                                              
+精华消息管理                             ✅    用于整理精华消息                
+(nonebot-plugin-essence-message)                                               
+ba-tools (nonebot-plugin-ba-tools)       ✅    BlueArchive的工具箱             
+聊天截图伪造 (nonebot-plugin-fakepic)    ✅    伪造QQ聊天截图，参考消息伪造插件
+pokepoke_miss                            ✅    wmc的戳一戳回复插件，消息内容、 
+(pokepoke_miss)                                概率都可以定制喔~               
+nonebot-plugin-ehentai-search            ❌    致力于ehentai网站的搜索         
+(nonebot-plugin-ehentai-search)                                                
+mai2_pcount                              ✅    wmc的机厅在线人数信息查询、修改 
+(mai2_pcount)                                  插件~                           
+dify插件 (nonebot-plugin-dify)           ✅    接入dify API                    
+你看我像 (nonebot-plugin-looklike)       ✅    你看我像人吗?                   
+Wait a minute                            ✅    A nonebot plugin for waiting for
+(nonebot-plugin-wait-a-minute)                  an event to complete before clo
+                                               sing it                         
+复读6                                    ✅    当有人发送 `6` 或 `主|蚌|蜯|草| 
+(nonebot-plugin-repesix)                       艹|乐|樂|寄|典|孝|急|麻|悲` 时概
+                                               率触发复读                      
+LiteyukiBot(plugin)                      ✅    插件化轻雪机器人                
+(nonebot-plugin-liteyukibot)                                                   
+nonebot_plugin_mute                      ✅    唔唔？你想被禁言嘛~？           
+(nonebot_plugin_mute)                                                          
+nekro-agent                              ❌    集代码执行/高扩展性为一体的聊天 
+(nekro-agent)                                  机器人，应用了容器化技术快速构建
+                                               沙盒 Agent 执行环境             
+lagrange                                 ✅    一款便于管理 Lagrange.OneBot 的 
+(nonebot_plugin_lagrange)                      插件，可用 WebUi 界面。         
+Minecraft查服                            ❌    Minecraft服务器状态查询，支持IPv
+(nonebot-plugin-mccheck)                       6                               
+maimai DX 查分                           ✅    maimai DX 查分插件              
+(nonebot-plugin-lxns-maimai)                                                   
+无情的发图姬                             ✅    基于图片api的发图插件，支持定时 
+(nonebot-plugin-sendpic)                       任务                            
+悠悠 (nonebot-plugin-yoyogame)           ✅    我他妈当场直接开悠              
+消音器                                   ✅    又一个消息审查插件，可针对不同程
+(nonebot-plugin-tea-silencer)                  度嘴臭配置自动屏蔽、回应规则，支
+                                               持指令拉黑群或用户。            
+阿瓦隆 (nonebot-plugin-avalon)           ✅    阿瓦隆游戏插件，支持 5~10 人游玩
+狼人杀 (nonebot-plugin-werewolf)         ✅    适用于 Nonebot2 的狼人杀插件    
+nonebot-plugin-tarina-lang-turbo         ✅    Enhance tarina.lang to support u
+(nonebot-plugin-tarina-lang-turbo)             ser-level configuration         
+次元星辰                                 ✅    简单好用的漫展信息展示插件，收集
+(nonebot-plugin-ACGalaxy)                      展示漫展信息，支持检索、排序、获
+                                               取定位信息                      
+二维码生成器 (nonebot-plugin-QRrender)   ✅    将文本转为二维码，可自定义样式  
+weather-rank                             ✅    显示已订阅地区的天气排行榜      
+(nonebot-plugin-weather-rank)                                                  
+WITFF (nonebot-plugin-witff)             ✅    基于NoneBot2架构的兽聚查询      
+SSE日志输出流                            ✅    NoneBot 网页终端实时log显示/输出
+(nonebot-plugin-logstream)                     插件                            
+通用信息                                 ✅    多平台的会话信息(用户、群组、频 
+(nonebot-plugin-uninfo)                        道)获取插件                     
+inspect                                  ✅    Inspect on any user, group or ch
+(nonebot-plugin-inspect)                       annel                           
+批量撤回                                 ✅    批量撤回消息                    
+(nonebot-plugin-batch-withdrawal)                                              
+nonebot-plugin-yareminder                ✅    Yet another reminder plugin supp
+(nonebot-plugin-yareminder)                    orting per-task configuration an
+                                               d check-in.                     
+计算器：游戏                             ✅    这是利用机器人复刻 计算器：游戏 
+(nonebot-plugin-calc-game)                     的一个插件。通过给出的操作方式由
+                                               当前数字达到计算目标。          
+趣味内容插件                             ✅    从本地数据库或在线API获取趣味内 
+(nonebot-plugin-fun-content)                   容，如一言、土味情话、舔狗日记等
+                                               。可以分群开关功能，支持定时任务
+                                               。                              
+pjsk-helper                              ✅    基于 Nonebot2 的 Project Sekai  
+(nonebot-plugin-pjsk-helper)                   助手                            
+给我点颜色瞧瞧                           ✅    给你点颜色瞧瞧？给我点颜色瞧瞧（
+(nonebot-plugin-color-see-see)                 让我康康！                      
+GitHub Models                            ✅    一个调用 GitHub Models 的 AI 对 
+(nonebot-plugin-githubmodels)                  话插件                          
+Beat Saber查分器                         ✅    Nonebot2的节奏光剑查分插件,支持B
+(nonebot-plugin-beatsaberscore)                eatLeader&ScoreSaber查分o((>ω< )
+                                               )o                              
+简易编写词库                             ✅    适用于零基础的小白向快速编写功能
+(nonebot-plugin-SimpleToWrite)                 的词库语言插件                  
+nonechat (nonebot-plugin-nonechat)       ❌    大语言模型的简单接入            
+Marsho AI 插件                           ✅    接入 Azure API 或其他 API 的 AI 
+(nonebot-plugin-marshoai)                      聊天插件，支持图片处理，外部函数
+                                               调用，MCP，兼容包括 DeepSeek-R1 
+                                               ， QwQ-32B 在内的多个模型       
+osu! Match Monitor                       ✅    一个监控osu!多人游戏房间动态的插
+(nonebot-plugin-osu-match-monitor)             件                              
+lolinfo (nonebot-plugin-lolinfo)         ✅    查询LOL各种信息🚧               
+BF5_grouptools                           ✅    基于 Nonebot2 的战地 5 QQ 群管理
+(nonebot_plugin_bf5_grouptools)                插件。                          
+MinecraftWatcher                         ✅    一个基于 Motd 监视 Minecraft 多 
+(nonebot_plugin_mc_watcher)                    个服务器状态的 NoneBot 插件。   
+ZXPM插件管理 (nonebot-plugin-zxpm)       ✅    真寻的插件管理系统              
+lingyi_chat (nonebot-plugin-lingyi-chat) ✅    灵翼系列插件-聊天               
+nonebot_plugin_BFVsearch                 ✅    基于 Nonebot2 的战地 5 QQ 群管理
+(nonebot-plugin-bfvsearch)                     插件。                          
+涩涩保存器 (nonebot-plugin-safer18)      ❌    保存涩涩图片的插件              
+nb插件更新器                             ✅    一款全新的检测已安装插件更新情况
+(nonebot-plugin-updater)                       的插件                          
+西工大翱翔门户成绩监控                   ❌    翱翔门户成绩监控插件，能获取成绩
+(nonebot-plugin-npu)                           、排名、绩点，当出现新成绩时推送
+                                               给使用者                        
+运行状态                                 ✅    基于 NoneBot和Lagrange.OneBot 的
+(nonebot-plugin-running-state)                 运行状态插件                    
+真寻日报 (nonebot-plugin-zxreport)       ✅    嗨嗨，这里是小记者真寻哦        
+团购 (nonebot-plugin-buy)                ✅    群内拼团和活动记录              
+自动撤回奶龙                             ✅    一个基于图像分类模型的简单插件~ 
+(nonebot-plugin-nailongremove)                                                 
+PM帮助                                   ❌    自动插件管理器，可以自动生成帮助
+(nonebot-plugin-pmhelp)                        图，并对群/私聊进行权限管理，例 
+                                               如禁用，限流，撤回              
+机厅 (nonebot-plugin-jtj)                ✅    本地机厅管理和人数上报          
+恶魔轮盘赌 (nonebot_plugin_BR)           ✅    与机器人交互实现恶魔轮盘赌规则  
+boom (nonebot-plugin-boom)               ✅    【危险插件】炸炸你的NB          
+涩图插件 (nonebot-plugin-picsetu)        ✅    随机获取一张涩图                
+Gotify (nonebot-plugin-gotify)           ✅    使用Gotify API发送消息          
+语音点歌 (nonebot-plugin-voicemusic)     ✅    用语音收听点歌                  
+FishSpeechTTS                            ✅    小样本TTS,通过fish-speech调用本 
+(nonebot-plugin-fishspeech-tts)                地或在线api发送语音             
+省流 (nonebot-plugin-summary)            ✅    总结群友怪话                    
+DDNet 成绩查询 (nonebot-plugin-ddrace)   ✅    提供 DDNet 成绩查询功能         
+nonebot_plugin_mai_arcade                ✅    NoneBot2插件 为舞萌玩家提供机厅 
+(nonebot-plugin-mai-arcade)                    人数上报、附近机厅查找、线上排卡
+                                               、Nearcade云同步等功能支持      
+防撤回 (nonebot-prevent-withdrawal)      ✅    基于NoneBot的群聊防撤回插件     
+BiliMusic Downloader                     ✅    一款基于 Nonebot2 的 Bilibili 视
+(nonebot_plugin_bilimusic)                     频提取音乐和歌词插件。          
+Bot的消息也是消息 (nonebot-plugin-mmm)   ✅    Bot的消息也是消息!              
+pong (nonebot-plugin-pong)               ✅    ping -> pong                    
+nonebot_plugin_partner_join              ✅    NoneBot2插件 用于生成舞萌DX(maim
+(nonebot-plugin-partner-join)                  aiDX)旅行伙伴加入图片(旋转gif)  
+                                               也可用于类似嵌入相应圆形框架图片
+                                               生成(如将图片嵌入校徽)          
+Pix图库 (nonebot-plugin-zxpix)           ✅    小真寻的pix图库                 
+nonebot_plugin_impart                    ✅    NoneBot2 银趴插件 Plus          
+(nonebot-plugin-impart)                                                        
+每日wife (nonebot-plugin-wife)           ✅    每日随机二次元老婆              
+Comfyui绘图插件 (nonebot-plugin-comfyui) ✅    专门适配Comfyui的绘图插件       
+Ohh My Bot (nonebot-plugin-omb)          ✅    我的Bot我做主~                  
+nonebot-plugin-leetcodeapi-khasa         ✅    A Nonebot plugin for interacting
+(nonebot-plugin-leetcodeAPI-KHASA)              with LeetCode (Using API made b
+                                               y alfaarghya)                   
+PyPi下载统计                             ✅    查询结果由pypistats提供， 数据是
+(nonebot-plugin-pypistats)                     否可信需自己判断                
+更好的广播                               ✅    将你的信息广播到所有群聊，支持多
+(nonebot-plugin-better-broadcast)              种类型                          
+b站弹幕监控 (nonebot-plugin-bililivedm)  ✅    基于ws的b站弹幕监控             
+违禁词撤回 (nonebot-plugin-text-ban)     ✅    违禁词检测，检测到违禁词则禁言  
+自动点赞订阅赞                           ✅    Nonebot2 的点赞、订阅赞功能，每 
+(nonebot-plugin-auto-sendlike)                 天 12 点定时点赞👍！轻量、高效、
+                                               便捷的小插件！                  
+恩情课文                                 ✅    一句话生成恩情课文              
+(nonebot-plugin-kindness-lesson)                                               
+nb商店插件安装器web版                    ✅    Nonebot插件商店安装插件，使用基 
+(nonebot-plugin-manageweb)                     于fastapi和amis的webui安装      
+nonebot-plugin-api-scheduler             ✅    像操作API一样设置定时任务&计划任
+(nonebot-plugin-api-scheduler)                 务                              
+权限控制                                 ✅    对功能进行权限控制以及调用次数限
+(nonebot-plugin-pam)                           制                              
+nonebot-plugin-zepplife                  ✅    基于调用xwteam平台专属api运行的 
+(nonebot-plugin-zepplife)                      机器人插件，目前仅支持Zepp、微信
+                                               、支付宝刷步，后续还会更新其他功
+                                               能                              
+nonebot-plugin-hyp (nonebot-plugin-hyp)  ✅    查询hypixel游戏数据插件         
+ZXWB词库问答                             ✅    小真寻的词库问答，对群组/私聊/全
+(nonebot-plugin-zxwb)                          局进行区分，支持 精准/模糊/正则/
+                                               图片 匹配                       
+链接分享解析 ob 版(不再维护)             ✅    onebot 版, 不再维护, 请使用 none
+(nonebot-plugin-resolver2)                     bot-plugin-parser               
+发言统计                                 ✅    统计群聊发言情况                
+(nonebot-plugin-water-geoup-stats)                                             
+PCR签到重制版                            ✅    对“从 hoshino 搬来的 pcr 签到”插
+(nonebot-plugin-pcr-sign)                      件nonebot_plugin_hoshino_sign 的
+                                               搬运重制（我搬两遍              
+名片赞，表情回应插件                     ✅    nonebot2 名片赞，表情回应插件   
+(nonebot-plugin-emojilike)                                                     
+谷歌 Gemini 多模态助手                   ❌    Nonebot2 的谷歌 Gemini 多模态助 
+(nonebot-plugin-multimodal-gemini)             手，一个命令即可玩转 Gemini 的多
+                                               模态！                          
+nonebot-plugin-csgomarket                ✅    可查询饰品大盘数据，饰品详细信息
+(nonebot-plugin-csgomarket)                    ，饰品涨、跌幅等排行榜          
+奶龙魔法 (nonebot-plugin-nailongmagic)   ✅    世界就是一个巨大的奶龙~         
+南无阿弥陀佛 (nonebot-plugin-amitabha)   ✅    基于nonebot2的群聊自动念佛插件  
+nonebot-plugin-ollama                    ✅    连接你的本地ollama模型          
+(nonebot-plugin-ollama)                                                        
+PicStatus Template ZhenXun               ✅    一个衍生自绪山真寻 Bot 的 PicSta
+(nonebot-plugin-picstatus-template-zhenx       tus 状态模板                    
+un)                                                                            
+nonebot-plugin-arcaea-sticker            ✅    生成Arcaea风格的表情包（跨平台支
+(nonebot-plugin-arcaea-sticker)                持）                            
+简易群聊屏蔽                             ✅    屏蔽某个群聊或只相应某个群聊，方
+(nonebot-plugin-simple-block)                  便开发者进行插件测试            
+好友与群邀请管理                         ✅    处理好友申请和群邀请，支持查看申
+(nonebot-plugin-add-friends)                   请、手动同意或拒绝申请、以及同意
+                                               或拒绝全部申请。                
+求生之路addons文件管理                   ✅    用来对求生之路的addons文件夹进行
+(nonebot-plugin-addons-manager)                管理，方便在QQ群中进行vpk文件的 
+                                               增删改查                        
+nonebot-plugin-flo-luck                  ✅    Florenz版本的 jrrp，主要追加了特
+(nonebot-plugin-flo-luck)                      殊列表与排行功能。              
+加群自动审批                             ✅    帮助管理员审核入群请求，退群自动
+(nonebot-plugin-auto-enter-group)              记录拒绝入群                    
+Prometheus 监控                          ✅    为 NoneBot 和其他插件提供 Promet
+(nonebot-plugin-prometheus)                    heus 监控支持                   
+世界计划小助手                           ✅    世界计划插件，拥有组建车队、生成
+(nonebot-plugin-pjsekaihelper)                 角色表情包、模拟抽卡等功能，持续
+                                               开发中                          
+夸克搜 (nonebot-plugin-quark)            ✅    NoneBot2 夸克资源搜索插件       
+小真寻的WebUi (nonebot-plugin-zxui)      ✅    小真寻的WebUi                   
+他们在聊什么                             ✅    分析群聊记录，生成近期讨论话题的
+(nonebot-plugin-whats-talk-gemini)             总结。                          
+Liar's Bar                               ✅    适用于 nonebot2 框架的 liar's ba
+(nonebot-plugin-liarsbar)                      r 插件                          
+群成员检测 dev版                         ✅    检测群人数，当群剩余的空位人数达
+(nonebot-plugin-number-detection)              到设定值，则自动踢出群员        
+qb管理器                                 ✅    远程管理qbittorrent             
+(nonebot-plugin-qbittorrent-manager)                                           
+音频文件BPM计算器                        ✅    通过上传到群文件方式计算音频文件
+(nonebot-plugin-checkbpm)                      的bpm值（beat per minute）      
+每日天文一图 (nonebot-plugin-apod)       ✅    定时发送 NASA 每日提供的天文图片
+羡慕 koishi (nonebot-plugin-envious)     ✅    复读羡慕，并收纳关键词，自动羡慕
+恶魔轮盘轻量版                           ✅    该插件为用户提供基础的游戏逻辑，
+(nonebot-plugin-emlp-Lightweight)              但需要用户调用该插件提供的函数，
+                                               自己进行传参和交互反馈的制作，不
+                                               拘泥于个人开发者的风格          
+群聊总结                                 ❌    使用 AI 分析群聊记录，生成讨论内
+(nonebot-plugin-summary-group)                 容的总结。                      
+nonebot_plugin_palworld                  ✅    用于管理幻兽帕鲁服务器的插件，支
+(nonebot-plugin-palworld)                      持查看服务器状态、发送公告、管理
+                                               玩家等功能。                    
+玉！ (nonebot-plugin-llm-jade)           ✅    基于 LLM 的玉检测插件           
+nonebot-plugin-pictranslator             ✅    一个支持图片翻译的nonebot2插件  
+(nonebot-plugin-pictranslator)                                                 
+堡垒之夜游戏插件                         ✅    堡垒之夜战绩, 季卡, 商城, vb图查
+(nonebot-plugin-fortnite)                      询                              
+NeuroDraw (nonebot-plugin-neuro-draw)    ✅    Neuro-sama 的每日一签           
+定时提醒 (nonebot-plugin-remind)         ❌    符合中国宝宝体质的定时提醒功能~ 
+中英文笑话 (nonebot-plugin-joke)         ✅    笑一笑，十年少~ 看个笑话吧~     
+群文件管理                               ✅    基于Lagrange.OneBot & NoneBot2的
+(nonebot-plugin-group-file-admin)              群文件管理插件                  
+DeepSeek                                 ✅    接入 DeepSeek 模型，提供智能对话
+(nonebot-plugin-deepseek)                      与问答功能                      
+BotTap                                   ✅    ✨在 NoneBot 中管理你的 NoneBot 
+(nonebot-plugin-bot-tap)                       吧！✨                          
+追番小工具                               ✅    通过mikan project进行每日番剧推 
+(nonebot-plugin-track-anime)                   送： /追番                      
+AI群聊机器人                             ✅    AI群聊机器人                    
+(nonebot-plugin-groups-aichat)                                                 
+SuggarChat Agent聊天插件                 ❌    基于AmritaCore的强大的智能体聊天
+(nonebot-plugin-suggarchat)                    插件                            
+[ 缩写翻译 ] 能不能好好说话 - nbnhhsh    ✅    能不能好好说话 - 使用神奇海螺api
+(nonebot-plugin-nbnhhsh-q)                     查询 @qingzhixing               
+llmchat                                  ✅    支持多API预设、MCP协议、联网搜索
+(nonebot-plugin-llmchat)                       、视觉模型的AI群聊插件          
+LuoguLuck|洛谷运势                       ✅    洛谷同款的今日运势插件！        
+(nonebot-plugin-luoguluck)                                                     
+Vocu 语音插件 (nonebot-plugin-vocu)      ✅    vocu.ai 语音合成                
+简易AI聊天                               ✅    简单好用的AI聊天插件。支持多API 
+(nonebot-plugin-aitalk)                        、图片理解、语音合成、表情包、解
+                                               /禁言、提醒、戳一戳等。支持分群 
+                                               配置提示词。拥有主动回复功能，并
+                                               支持分群配置主动回复关键词和概率
+群昵称更新                               ✅    按时更新群友昵称中日期数字      
+(nonebot-plugin-timed-nickname-updater)                                        
+Meme Stickers                            ❌    一站式制作 PJSK 样式表情包      
+(nonebot-plugin-meme-stickers)                                                 
+nonebot-plugin-whois                     ✅    一个Nonebot2插件用于查询域名的wh
+(nonebot-plugin-whois)                         ois信息                         
+唐菲检测 (nonebot-plugin-tangkiller)     ✅    检测用户所发的唐菲图片          
+卡bin查询                                ❌    用于查询信用卡的卡组织，卡等级，
+(nonebot-plugin-binsearch)                     卡类型，发卡国家或地区等 (图片版
+                                               )                               
+ChatGPT (OpenAI API 接口版)              ✅    通过调用 OpenAI API 接口进行多轮
+(nonebot-plugin-chatgpt-api)                   对话、图像生成等任务，支持 ChatG
+                                               PT、Gemini、DeepSeek 等多个模型 
+                                               ，基于 `nonebot-plugin-chatgpt` 
+                                               插件修改                        
+拟人回复bot                              ✅    根据群聊语境随机攻击群友，基于ll
+(nonebot-plugin-random-reply)                  m选择表情包回复                 
+nonebot-plugin-aiochatllm                ✅    多合一LLM聊天插件               
+(nonebot-plugin-aiochatllm)                                                    
+maimai猜歌小游戏                         ✅    音游猜歌游戏插件，提供开字母、听
+(nonebot-plugin-guess-song)                    歌猜曲、谱面猜歌、猜曲绘、线索猜
+                                               歌等游戏                        
+No Dirty Message                         ✅    基于Trie树的高效群聊违禁词过滤插
+(nonebot-plugin-paminet-nodirtymsg)            件，用于撤回群成员们逆天发言的No
+                                               nebot2插件                      
+SuggarChat CloudFlare扩展                ❌    SuggarChat的CloudFlare WorkersAI
+(nonebot-plugin-suggarex-cf)                    API接口扩展                    
+LLM调用nonebot插件                       ✅    通过LLM结合语境调用已安装的noneb
+(nonebot-plugin-llm-plugins-call)              ot插件，实现更拟人和自然机器人聊
+                                               天风格                          
+丁真语音生成器                           ✅    一款丁真语音生成器，用于合成丁真
+(nonebot-plugin-dingzhen)                      语音并发送                      
+金价查询                                 ✅    提供实时金价查询、定时推送、金价
+(nonebot-plugin-gold-price)                    预警功能。另外能够将历史查询数据
+                                               进行存储并绘制折线图表。数据来源
+                                               于金价API                       
+whoasked (nonebot-plugin-whoasked)       ✅    查询谁@了你或引用了你的消息     
+MoEllm聊天                               ✅    感谢llm，机器人变聪明了✨ 混合专
+(nonebot-plugin-moellmchats)                   家模型调度LLM插件 | 混合调度·联 
+                                               网搜索·上下文优化·个性定制·Token
+                                               节约·更加拟人 ✨                
+JMComic插件                              ✅    JMComic搜索、下载插件，支持全局 
+(nonebot-plugin-jmdownloader)                  屏蔽jm号和tag，仅支持OnebotV11协
+                                               议。                            
+禁漫下载 (nonebot-plugin-jm)             ✅    下载 jm 漫画                    
+nonebot-plugin-zssm                      ✅    这是什么？问一下！用 ai 来解释群
+(nonebot-plugin-zssm)                          友发送的「未知」内容            
+Gemini Vision                            ✅    基于Google Gemini多模态模型的聊 
+(nonebot-plugin-gemini-vision)                 天与图像生成功能                
+nonebot-plugin-OI-helper                 ✅    用于查询 OI/ACM 相关信息（包括 L
+(nonebot-plugin-oi-helper)                     eetCode 每日一题）的 NoneBot2 插
+                                               件。                            
+MC服务器/玩家查询                        ❌    我的世界服务器状态查询或正版玩家
+(nonebot_plugin_mclib)                         信息查询                        
+nonebot-plugin-furryyunhei               ✅    接入 梦梦 的furry云黑api，群内查
+(nonebot-plugin-furryyunhei)                   询云黑                          
+AI 群聊助手 (nonebot-plugin-testhkk)     ✅    基于 OpenAI 的群聊 AI 对话插件  
+报错处理器                               ✅    基于NoneBot2的错误处理插件，支持
+(nonebot-plugin-error-report)                  图片/文字发送、数据库存储及跨平 
+                                               台                              
+ASMR音声分享插件                         ✅    分享ASMR音声资源                
+(nonebot-plugin-asmr100)                                                       
+森空岛 (nonebot-plugin-skland)           ❌    通过森空岛查询游戏数据          
+暗语消息 (nonebot-plugin-argot)          ✅    为消息添加暗语支持              
+github_release_notifier                  ✅    A plugin for nonebot & onebot to
+(nonebot-plugin-github-release-notifier)        notify group members of new com
+                                               mits, issues, and PRs in GitHub 
+                                               repos.                          
+bfvservermap                             ✅    查询服务器地图信息              
+(nonebot-plugin-bfvservermap)                                                  
+贴吧监控 (nonebot-plugin-tieba-monitor)  ✅    监控指定贴吧的新帖子并发送到QQ群
+nonebot-plugin-anywhere-llm              ✅    为插件提供 LLM 访问能力， 统一记
+(nonebot-plugin-anywhere-llm)                  忆管理，支持多种模型参数和自定义
+                                                Prompt                         
+LaTeX 在线渲染插件                       ✅    从互联网服务渲染 LaTeX 公式     
+(nonebot-plugin-latex)                                                         
+mcmod百科插件                            ✅    通过 https://www.mcmod.cn 获取模
+(nonebot-plugin-mcmod)                         组、整合包、教程等信息          
+简易左轮禁言 (nonebot-plugin-revolver)   ✅    简易左轮禁言小游戏插件          
+nonebot-plugin-custom-face               ✅    提供了一些关于QQ自定义表情的API 
+(nonebot-plugin-custom-face)                                                   
+nonebot-plugin-jmcomic                   ✅    下载禁漫并发送                  
+(nonebot-plugin-jmcomic)                                                       
+塔吉多助手                               ✅    主要用于塔吉多APP签到和信息查询 
+(nonebot-plugin-taygedo-helper)                等功能                          
+nonebot-plugin-ban-sticker               ✅    如果你希望在你群禁用表情包      
+(nonebot-plugin-ban-sticker)                                                   
+一言+ (nonebot-plugin-hitokoto-plus)     ✅    （可能是）更好的一言插件！      
+扑克对决                                 ✅    参考小游戏合集重写的扑克对决，大
+(nonebot-plugin-poker)                         部分操作支持“按钮”，规则请看http
+                                               s://github.com/MoonofBridge24/no
+                                               nebot_plugin_poker              
+nonebot-plugin-mhguesser                 ✅    怪物猎人猜BOSS游戏              
+(nonebot-plugin-mhguesser)                                                     
+词库进阶版 (nonebot-plugin-ciku)         ✅    词库进阶版                      
+群聊广告哒咩                             ❌    检测群聊中广告的插件，撤回并禁言
+(nonebot-plugin-noadpls)                       ，转发管理员                    
+Web侧载                                  ❌    为你的NoneBot侧载一个OneBot V11 
+(nonebot-plugin-sideload)                      Web聊天面板                     
+nonebot_plugin_paper                     ✅    Nonebot plugin for arXiv.       
+(nonebot-plugin-paper)                                                         
+doro大冒险 (nonebot-plugin-dorodoro)     ✅    一个基于文字冒险的游戏插件      
+QQ资料查询                               ✅    查询QQ用户的详细资料信息，支持头
+(nonebot-plugin-qqdetail)                      像、昵称、等级等多种信息展示    
+多源日报                                 ✅    获取各种日报信息，支持定时发送和
+(nonebot-plugin-multi-source-daily)            多API源                         
+修复 QQ 图床 SSL 错误                    ✅    如名                            
+(nonebot-plugin-fix-qq-img-ssl)                                                
+真寻农场 (nonebot-plugin-farm)           ✅    快乐的农场时光                  
+nonebot-plugin-ehentai                   ✅    下载eh并发送                    
+(nonebot-plugin-ehentai)                                                       
+PicMenu Next                             ✅    新一代的图片帮助插件            
+(nonebot-plugin-picmenu-next)                                                  
+NYATuringTest                            ✅    群聊特化llm聊天机器人，具有长期 
+(nonebot-plugin-nyaturingtest)                 记忆和情绪模拟能力              
+NoneBotCloversClient                     ❌    对接 NoneBot 框架的 clovers 寄生
+(nonebot-plugin-clovers)                       客户端                          
+nonebot-plugin-pokemonle                 ✅    猜宝可梦                        
+(nonebot-plugin-pokemonle)                                                     
+bfvplayerlist                            ✅    查询bfv服务器玩家列表           
+(nonebot-plugin-bfvplayerlist)                                                 
+nonebot-plugin-emojilike-automonkey      ✅    nonebot2 贴猴插件               
+(nonebot-plugin-emojilike-automonkey)                                          
+nonebot_plugin_df_armor_repair_simulator ✅    《三角洲行动》护甲维修模拟器    
+(nonebot-plugin-df-armor-repair-simulato                                       
+r)                                                                             
+Hacker News                              ✅    获取Hacker News热门文章并进行播 
+(nonebot-plugin-hacker-news)                   报                              
+命令冷却 (nonebot-plugin-limiter)        ✅    通用命令冷却限制器              
+绝区零角色数据获取                       ✅    提供面板服务                    
+(nonebot-plugin-zzzpanel)                                                      
+nonebot-plugin-NobleDuel                 ✅    一个贵族决斗小游戏，包含多种玩法
+(nonebot-plugin-NobleDuel)                                                     
+nonebot_plugin_sunset_reminder           ✅    a plugin to inform flame cloud i
+(nonebot-plugin-sunset-reminder)               nfos.                           
+币安小助手                               ✅    一个功能强大的币安(Binance)插件 
+(nonebot-plugin-binance)                       ，提供行情、交易、资产查询和实时
+                                               价格预警功能。                  
+nonebot-plugin-orm                       ✅ 👍 SQLAlchemy ORM support for noneb
+(nonebot-plugin-orm)                           ot                              
+依赖注入扩展 (nonebot-plugin-exdi)       ✅    允许对非handle函数进行依赖注入  
+喜（悲）报生成器 (nonebot-plugin-xibao)  ✅    生成喜报（或是悲报，管他呢）    
+维维表情包搜索器                         ✅    根据关键词搜索维维语录以及对应图
+(nonebot-plugin-vv)                            片                              
+三角洲鼠鼠偷吃模拟器                     ✅    适用于nonebot的三角洲鼠鼠偷吃模 
+(nonebot-plugin-deltaforce-simulator)          拟器（开容器模拟器）机器人插件  
+LitePerm 权限管理插件                    ✅    基于权限节点/权限组/特殊权限的权
+(nonebot_plugin_liteperm)                      限管理插件。                    
+LazyTea                                  ✅    图形化管理您的NoneBot--今天也来 
+(nonebot_plugin_lazytea)                       杯红茶吗?                       
+nonebot-plugin-flomic                    ✅    Nonebot plugin for using jmcomic
+(nonebot-plugin-flomic)                         crawler with multiple functions
+                                               .                               
+更好的电子钓鱼 (nonebot-plugin-fishing2) ✅    赛博钓鱼……但是加强版本          
+LLM-Helper                               ✅    一个支持多平台的帮助插件，基于 L
+(nonebot-plugin-llm-helper)                    LM 解析 Github 仓库或代码。     
+猜猜病                                   ✅    你能通过对话猜出病人得了什么病吗
+(nonebot-plugin-guess-disease)                 ？                              
+三角洲助手                               ✅    主要有扫码登录、查看三角洲战绩等
+(nonebot-plugin-delta-helper)                  功能                            
+AWS Manager                              ✅    Manage AWS EC2, Lightsail, and C
+(nonebot-plugin-awsmgmt)                       ost Explorer via commands.      
+LazyTea命令拓展                          ✅    允许通过命令管理LazyTea         
+(nonebot_plugin_lazytea_shell_extension)                                       
+                                                                               
+天气查询 (nonebot-plugin-nmcweather)     ✅    通过NMC API查询实时天气         
+FinalShell 离线激活码                    ✅    FinalShell Offline Activation Co
+(nonebot-plugin-fuckfinalshell)                de                              
+EconomyValue (nonebot-plugin-value)      ✅    Nonebot通用经济API插件          
+MC玩家皮肤渲染                           ✅    正版玩家信息查询与皮肤渲染      
+(nonebot-plugin-mcplayer-render)                                               
+Alisten (nonebot-plugin-alisten)         ✅    NoneBot 听歌房插件              
+nonebot-plugin-simple-setu               ✅    一个简单到不能再简单的色图插件  
+(nonebot-plugin-simple-setu)                                                   
+Anipusher推送机                          ✅    nonebot-plugin-anipusher：一个消
+(nonebot-plugin-anipusher)                     息推送插件，支持Emby及AniRss的We
+                                               bhook信息推送                   
+HuaEr聊天bot                             ✅    基于SiliconFlow API的Nonebot2的 
+(nonebot-plugin-huaer-bot)                     多组群聊天插件，支持人格设定、ma
+                                               rkdown显示、联网搜索、检索增强生
+                                               成（RAG）等功能                 
+卖若插件 (nonebot-plugin-sell-poor)      ✅    基于 LLM 的卖若插件             
+抽象 (nonebot-plugin-abs)                ✅    抽象                            
+ImageLibrary                             ✅    一个共享给所有人的Bot图库       
+(nonebot-plugin-imagelibrary)                                                  
+让我看看！！                             ✅    赛博露阴癖, 将你的代码展示到群聊
+(nonebot_plugin_exhibitionism)                                                 
+Akash Image Generator                    ✅    AI image generation using Akash 
+(nonebot-plugin-akashgen)                      Network                         
+图片手办化 (nonebot-plugin-figurine)     ✅    一个图片手办化插件              
+分布式黑名单插件                         ✅    基于PostgreSQL的分布式黑名单系统
+(nonebot-plugin-distributed-blacklist)         ，支持多节点同步                
+蔚蓝档案今日运势                         ✅    《蔚蓝档案》今日运势插件，支持多
+(nonebot-plugin-bafortune)                     平台                            
+禁止复读                                 ✅    智能检测群聊中的复读行为，并对最
+(nonebot-plugin-repeat-checker)                后一位复读的成员进行禁言。支持文
+                                               本、图片及混合消息的相似度检测。
+夸克自动转存                             ✅    配合 quark-auto-save(https://git
+(nonebot-plugin-quark-autosave)                hub.com/Cp0204/quark-auto-save) 
+                                               使用, 支持添加，删除，列出，运行
+                                               任务                            
+谁是卧底小游戏                           ✅    这是一个用于QQ群的谁是卧底小游戏
+(nonebot-plugin-who-is-spy)                    插件                            
+DMP 饥荒管理平台机器人                   ✅    基于 NoneBot2 的饥荒管理平台 (DM
+(nonebot-plugin-dst-qq)                        P) QQ 机器人插件，支持游戏信息查
+                                               询、命令执行和消息互通功能，具有
+                                               多级缓存系统和数据压缩归档功能。
+复盘打卡                                 ✅    用于交易日复盘打卡签到的插件（支
+(nonebot-plugin-fupan)                         持群聊/私聊数据分离）           
+algo helper                              ❌    支持 oj算法比赛日程查询/订阅,洛 
+(nonebot-plugin-algo)                          谷/Codeforces信息绑定/查询~     
+言令                                     ✅    利用 LLM 将自然语言转换为机器人 
+(nonebot-plugin-llm-extension)                 指令                            
+nonebot-plugin-htmlkit                   ✅ 👍 轻量级的 HTML 渲染工具          
+(nonebot-plugin-htmlkit)                                                       
+怪物猎人集会码插件                       ✅    记录怪物猎人集会码              
+(nonebot-plugin-mhcodes)                                                       
+链接分享解析 Alconna 版                  ✅    支持B站|抖音|快手|微博|小红书|Yo
+(nonebot-plugin-parser)                        uTube|TikTok|Twitter|AcFun|NGA  
+kook卡片消息编写适配插件                 ✅    该插件为用户提供类MessageSegment
+(nonebot-plugin-kookcardmessage)               的卡片消息编写方式，以简化用户ko
+                                               ok卡片消息的编辑和方便用户的维护
+MC新闻更新检测 (nonebot-plugin-mcnews)   ✅    Minecraft 官方新闻推送          
+远程文件打开                             ✅    通过检测特定私聊关键词来打开对应
+(nonebot-plugin-open-file)                     文件                            
+nonebot-plugin-memory                    ✅    对跟bot对话的每个人形成记忆，生 
+(nonebot-plugin-memory)                        成有趣用户档案，用于下次生成回复
+pxchat                                   ✅    基于AI的聊天插件，支持大模型任意
+(nonebot-plugin-pxchat)                        切换、上下文记忆、群聊智能参与、
+                                               图片识别、MCP等功能             
+每日必应壁纸 (nonebot-plugin-daily-bing) ✅    定时发送必应每日提供的壁纸      
+海龟汤游戏                               ❌    AI驱动的海龟汤(情境猜谜)游戏    
+(nonebot-plugin-ai-turtle-soup)                                                
+B站解析助手                              ✅    主要功能：1. 提取分享小程序/图文
+(nonebot-plugin-bili-helper)                   卡片的视频链接2. 预览视频热评   
+nonebot_plugin_markdown2img              ✅    可作为函数调用的Markdown渲染图片
+(nonebot-plugin-markdown2img)                  插件                            
+每日人品 3                               ✅    更加现代化的 NoneBot2 每日人品插
+(nonebot-plugin-jrrp3)                         件，支持查询今日、本周、本月和历
+                                               史平均人品，自定义运势，以及数据
+                                               持久化存储。                    
+图像对称                                 ✅    提供图像上下左右四个方向的对称变
+(nonebot-plugin-image-symmetry)                换功能                          
+魔裁 Memes                               ✅    生成「魔法少女的魔法审判」的表情
+(nonebot-plugin-manosaba-memes)                包                              
+电子课程表                               ✅    绑定课表、查看课程、查看群友的课
+(nonebot-plugin-course-schedule)               程，以及……上课排行              
+iPinfo (nonebot-plugin-ipinfo)           ✅    查询 IP 地址的信息              
+模板绘图 (nonebot-plugin-templates-draw) ✅    一个模板绘图插件                
+manosoba-reply-generator                 ✅    a reply img generator from the g
+(nonebot-plugin-manosoba-reply-generator       ame manosoba                    
+)                                                                              
+安安的素描本聊天框                       ✅    生成夏目安安的素描本聊天框，支持
+(nonebot-plugin-anans-sketchbook)              文本和图片                      
+安安说                                   ✅    一个向安安的素描本上渲染文字并发
+(nonebot-plugin-anan-say)                      送出去的插件                    
+TerraLink (nonebot-plugin-terralink)     ✅    泰拉瑞亚 TModLoader 群服互通插件
+火车迷铁路工具箱                         ✅    这是一个火车迷也许觉得很好用的铁
+(nonebot-plugin-railwaytools)                  路机器人工具箱                  
+御神签                                   ❌    依赖SuggarChat的聊天御神签抽签插
+(nonebot-plugin-omikuji)                       件模块                          
+今天是什么小猪 (nonebot-plugin-rollpig)  ✅    抽取属于自己的小猪              
+Instagram RapidAPI 解析                  ✅    基于 RapidAPI 的 Instagram 图文/
+(nonebot-plugin-instagram)                     视频解析插件 (支持合并转发)     
+MC服务器状态查询                         ✅    一款原版风格、美观高效的 Minecra
+(nonebot-plugin-mcserver-status-check)         ft 服务器状态查询插件           
+pErithacus                               ✅    pErithacus 是一个基于 NoneBot2  
+(nonebot-plugin-pErithacus)                    框架的聊天插件，可以根据用户设定
+                                               的关键词自动回复相关内容。该插件
+                                               提供了完整的词条管理功能，让用户
+                                               能够轻松创建、编辑和管理自定义回
+                                               复内容。                        
+快捷回复                                 ✅    一个功能强大的快捷回复插件，支持
+(nonebot-plugin-quickreply)                    分群/私聊、配置化限制最大快捷回 
+                                               复数量。                        
+即梦                                     ✅    使用即梦 OpenAPI 进行 AI 绘画与 
+(nonebot-plugin-jimeng)                        视频生成                        
+nonebot_plugin_boardgamehelper           ✅    一个 NoneBot2 桌游约车助手插件，
+(nonebot-plugin-boardgamehelper)               提供桌游群招募、发车、封车等功能
+                                               。                              
+nonebot-plugin-ai-groupmate              ✅    AI虚拟群友                      
+(nonebot-plugin-ai-groupmate)                                                  
+汉化进度记录                             ✅    记录和管理漫画汉化组的工作进度  
+(nonebot-plugin-trans-progress)                                                
+词汇黑名单审查                           ✅    拦截包含黑名单词汇或匹配正则表达
+(nonebot-plugin-word-censor)                   式的机器人发送消息              
+互联网异常事件监测                       ✅    基于 Cloudflare Radar 的全球互联
+(nonebot-plugin-internet-outage)               网异常事件自动推送              
+群消息中继                               ✅    在多个群之间转发消息的插件：可为
+(nonebot-plugin-group-relay)                   每个监听群配置一个或多个目标群，
+                                               将本群的普通消息同步到目标群。  
+Tavily Search                            ✅    基于 Tavily API 的 NoneBot2 插件
+(nonebot-plugin-tavily)                        ，提供联网搜索、内容提取和智能抓
+                                               取功能                          
+战地6战绩查询 (nonebot-plugin-bf6-stats) ✅    查询BF6 玩家战绩信息            
+nonebot-plugin-bili2mp4                  ✅    在指定群内自动将B站视频解析并下 
+(nonebot-plugin-bili2mp4)                      载为 MP4 发送                   
+基于QQ音乐歌单的音乐推荐                 ✅    基于QQ音乐歌单，支持多群配置、持
+(nonebot-plugin-qqmusic-reco)                  久化管理及定时自定义话术的音乐推
+                                               荐插件                          
+osugreek                                 ✅    在图片中央贴上神秘4k希腊字母并添
+(nonebot-plugin-osugreek)                      加色散效果的插件                
+Uniconfig-配置文件管理器                 ✅    适用于NoneBot的文件配置文件管理 
+(nonebot-plugin-uniconf)                       器                              
+Dice Helper (nonebot-plugin-dice-helper) ✅    NoneBot 可自定义骰子的骰子插件  
+MCP Client                               ✅    NoneBot2 MCP 客户端插件，提供 MC
+(nonebot-plugin-mcpclient)                     P 工具调用能力                  
+BitTorrent磁力搜索                       ✅    适配NoneBot的磁力搜索插件，通过 
+(nonebot-plugin-bittorrents)                   机器人帮你寻找电影、软件或者学习
+                                               资料                            
+拟人化聊天                               ✅    基于群聊与私聊上下文的人设回复插
+(nonebot-plugin-shiro-personification)         件，支持作息模拟、联网检索、风格
+                                               学习与主动私聊。                
+Shiro Web Console                        ✅    通过浏览器查看日志、管理机器人、
+(nonebot-plugin-shiro-web-console)             管理插件并发送消息              
+Phira Server Manager                     ✅    Phira 游戏服务器管理与监控插件  
+(nonebot-plugin-nodejsphira)                                                   
+今日doro结局 (nonebot-plugin-doroending) ✅    获取今日的doro结局              
+自动合成emoji                            ✅    更好的emoji合成，包含自动触发合 
+(nonebot-plugin-auto-emojimix)                 成，长期更新数据                
+nonebot-plugin-peek                      ✅    让群友视奸你的电脑              
+(nonebot-plugin-peek)                                                          
+Nonebot-Plugin-Rikka                     ✅    一个简单的舞萌成绩查询Bot插件， 
+(nonebot-plugin-rikka)                         同时支持落雪咖啡屋和水鱼查分器  
+nonebot-plugin-cardimg                   ✅    基于 nonebot_plugin_htmlkit 渲染
+(nonebot-plugin-cardimg)                       的文本转图片模板插件            
+The Betterest Mute Cat                   ✅    极致的禁言猫猫，支持自然语言禁言
+(nonebot-plugin-mute-cat)                      、定时恢复、每日禁言、长期禁言和
+                                               状态查看                        
+特朗普社媒监控                           ✅    监控特朗普 Truth Social 动态并推
+(nonebot-plugin-trumpwatcher)                  送到订阅群                      
+mc服务器白名单管理工具                   ✅    这是一个控制管理Minecraft服务器 
+(nonebot-plugin-mc-whitelist-controller)       白名单的机器人插件，将mc服务器中
+                                               的玩家id与QQ号绑定，实现对服务器
+                                               内所有玩家的追根溯源            
+nonebot-plugin-nbnhhsh                   ✅    「能不能好好说话？」拼音首字母缩
+(nonebot-plugin-nbnhhsh)                       写翻译 NoneBot2 插件。          
+Codex                                    ✅    Telegram bridge plugin for drivi
+(nonebot-plugin-codex)                         ng Codex from NoneBot           
+nonebot-plugin-sentry-transaction        ✅    NoneBot Event 与 Matcher 的非侵 
+(nonebot-plugin-sentry-transaction)            入式 Sentry tracing             
+计算器：游戏                             ✅    这是利用机器人复刻 计算器：游戏 
+(nonebot-plugin-calcgame-new)                  的一个插件。通过给出的操作方式由
+                                               当前数字达到计算目标。          
+全自动膜拜机                             ✅    当你诵念大佬的尊名时本插件将自动
+(nonebot-plugin-qwqa)                          发送群表情                      
+AppStore游戏榜单                         ✅    实时查询 App Store 中国区畅销榜 
+(nonebot-plugin-appstore-gameranking)          ，并输出指定游戏排名。          
+Endfield (nonebot-plugin-endfield)       ✅    A plugin for Arknights:Endfield 
+舞萌服务器监控                           ✅    一个检测舞萌服务器似了没的bot插 
+(nonebot-plugin-maimaimonitor)                 件，支持上报各种信息            
+CS2 Radar                                ✅    CS2 赛事、选手、5E/完美/官匹战绩
+(nonebot-plugin-cs2radar)                      查询与详细对局分析              
+TS3 Tracker                              ✅    查询 TeamSpeak 3 服务器在线状态 
+(nonebot-plugin-ts3-tracker)                   与频道在线成员。                
+会话配置 (nonebot-plugin-session-config) ✅    会话级配置信息存储插件          
+12306车票查询                            ✅    12306车票查询机器人，助你漫漫回 
+(nonebot-plugin-12306-ticket)                  家路                            
+tg-stickers-downloads                    ✅    Telegram 贴纸包下载插件         
+(nonebot-plugin-tg-stickers-downloads)                                         
+Bot状态监控                              ✅    监控 Bot 在线状态，检测 Bot 离线
+(nonebot-plugin-bot-monitor)                   并发送邮件通知                  
+错误日志转发钉钉机器人                   ✅    在使用 nonebot 自带的 logger 写 
+(nonebot-plugin-dingtalk-logger)               入 ERROR 级别以上的日志时，会自 
+                                               动发送至钉钉机器人              
+明日方舟猜干员游戏                       ✅    明日方舟猜干员游戏 - 支持多种游 
+(nonebot-plugin-arkguesser)                    戏模式和题库设置                
+语录插件                                 ✅    基于Alconna的简单的语录插件, 支 
+(nonebot-plugin-quotation)                     持添加语录别名以及审查用户添加的
+                                               语录                            
+舞立方插件 (nonebot-plugin-dancecube)    ✅    提供舞立方战力分析等基础功能    
+苏大电费查询                             ✅    苏大宿舍电费查询与低余额提醒插件
+(nonebot_plugin_suda_electricity)                                              
+LibAmritaCore                            ✅    适用于NoneBot2的高性能Agent框架 
+(nonebot-plugin-amrita)                        （AmritaCore）支持库            
+osu!mania 工具箱                         ✅    提供多种osu!mania高级分析功能和 
+(nonebot-plugin-osumania-toolkit)              实用工具                        
+酷我音乐 (nonebot-plugin-kuwo)           ✅    酷我音乐搜索与直链发送插件      
+Hermes Agent                             ✅    通过 Hermes Agent API Server 实 
+(nonebot-plugin-hermes)                        现多平台 AI 聊天机器人          
+赛马娘插件                               ✅    赛马娘模拟抽卡、新闻推送、生日推
+(nonebot-plugin-umamusume)                     送                              
+编程命名风格转换                         ✅    一键在 snake_case / camelCase / 
+(nonebot-plugin-namepy)                        PascalCase / kebab-case / UPPER_
+                                               SNAKE_CASE / Train-Case 之间互转
+                                               的命名风格小工具                
+dot-skill 角色扮演                       ✅    加载 dot-skill / colleague-skill
+(nonebot-plugin-dotcharacter)                   蒸馏的角色 Persona，通过 QQ 进 
+                                               行 AI 角色扮演对话。支持群聊 @机
+                                               器人、多模型切换（DeepSeek/OpenA
+                                               I/Kimi 等）、管理员权限控制。   
+BiliLive                                 ✅    将B站UP主的动态和直播信息推送至Q
+(nonebot-plugin-bililive)                      Q                               
+B50分析                                  ✅    舞萌DX B50数据分析，生成锐评文本
+(nonebot-plugin-b50-analysis)                  和分析图                        
+PicStatus-ng                             ✅    以图片形式显示当前设备的运行状态
+(nonebot-plugin-picstatus-ng)                                                  
+星穹铁道猫猫糕搜索＆上传                 ✅    面向 NoneBot 插件市场发布的猫猫 
+(nonebot-plugin-catcake)                       糕查询/上传插件。               
+nonebot-plugin-onebot2tg                 ✅    OneBot V11 与 Telegram 双向消息 
+(nonebot-plugin-onebot2tg)                     转发插件                        
+精华消息管理                             ✅    设置和移除群聊精华消息          
+(nonebot-plugin-set-essence-msg)                                               
+舞萌排行榜                               ✅    一个基于 NoneBot2 的舞萌 DX 分群
+(nonebot-plugin-maimai-raking)                 排行榜插件                      
+Permission (nonebot-plugin-permission)   ✅    权限实现                        
+群热度统计                               ✅    统计群内热度，支持实时查询和昨日
+(nonebot-plugin-group-heat)                    热度图                          
+Just Enough Katakanas                    ✅    A plugin to convert English text
+(nonebot-plugin-just-enough-katakanas)          to Katakana.Supports both dicti
+                                               onary-based and phonetic convers
+                                               ion methods.                    
+课程表插件                               ✅    课程表查询、课前提醒、节假日识别
+(nonebot-plugin-class-schedule)                                                
+Ret 2 Shell 播报与查询                   ✅    Ret 2 Shell (回归终端) 赛事事件 
+(nonebot-plugin-ret2shell)                     播报与信息查询                  
+Uptime Kuma                              ✅    通过 Uptime Kuma Push Monitor 监
+(nonebot-plugin-uptimekuma)                    控 NoneBot 运行状态和每个适配器 
+                                               账号连接状态                    
+开源依赖安全助手                         ✅    查询 PyPI、npm、Maven、Go、crate
+(nonebot-plugin-depsafe)                       s.io 等生态包的 OSV.dev 公开漏洞
+                                               信息。                          
+哔哩哔哩文件下载器                       ✅    从B站视频下载音频(M4A)、视频(MP4
+(nonebot-plugin-bilidownloader-woju)           )和封面图                       
+KeyReply                                 ✅    基于 NoneBot2 的轻量级关键词自动
+(nonebot-plugin-keyreply)                      回复插件                        
+帮撤回                                   ✅    帮助普通群员撤回自己超时无法撤回
+(nonebot-plugin-helper-recall)                 的消息                          
+VOICEVOX BRIDGE                          ✅    使用本地引擎或 Web API 的 VOICEV
+(nonebot-plugin-voicevox-bridge)               OX 语音合成插件                 
+nonebot-plugin-anime                     ✅    Bangumi 番剧查询等查看番剧角色详
+(nonebot-plugin-anime)                         情                              
+抽奖报名                                 ✅    适用于 OneBot V11 的群聊定时抽奖
+(nonebot-plugin-lottery-signup)                、即时抽奖和限额报名插件        
+nonebot-plugin-mail                      ✅    QQ 邮件登记机器人插件，支持 Noti
+(nonebot-plugin-mail)                          on 邮件登记、查询、签收和群聊信 
+                                               封图片智能识别。                
+BAWiki Revive                            ✅    蔚蓝档案综合插件 堂堂复活（还没 
+(nonebot-plugin-bawiki-revive)                 完全复活 目前只有 Arona 数据源查
+                                               询）                            
+Roblox查询插件                           ✅    Roblox平台综合查询工具，支持用户
+(nonebot-plugin-roblox-search)                 /游戏/群组、好友粉丝关注列表查询
+B站查询与提醒                            ✅    B站用户与视频查询插件，支持订阅 
+(nonebot-plugin-bili-query)                    用户更新提醒                    
+pxchat-enhanced                          ✅    基于AI大模型的拟人化聊天插件，支
+(nonebot-plugin-pxchat-enhanced)               持多模型切换、上下文记忆、群聊智
+                                               能参与、短期状态追踪、群成员记忆
+                                               、图片识别、MCP工具调用、自动禁 
+                                               言等功能                        
+网心云多账号版                           ✅    自动登录网心云并执行定时请求，支
+(nonebot-plugin-onething-monitor)              持多账号(短信/Cookie)、设备列表 
+                                               聚合查询                        
+群聊史官                                 ✅    统计群成员每日发言字数，生成话痨
+(nonebot-plugin-group-historian)               榜图片                          
+GSPanel Lite                             ✅    通过 Enka 查询原神、崩铁、绝区零
+(nonebot-plugin-gspanel-lite)                  、终末地 UID 公开展示信息       
+PicStatus-Re                             ✅    以图片形式显示当前设备的运行状态
+(nonebot-plugin-picstatus-re)                                                  
+shitbot                                  ✅    个人自用自己手搓框架的多功能bot,
+(nonebot-plugin-shitbot)                        还在开发中                     
+Git 仓库订阅拉取                         ✅    按群订阅 Git 仓库更新，支持多仓 
+(nonebot-plugin-git-poller)                    库、多分支定时拉取              
+ZikeQuote3                               ✅    LLM 介入，功能丰富的群聊语录自动
+(nonebot_plugin_zikequote3)                    收集与管理插件，支持自动收集、后
+                                               台管理、生成排行榜、展示等功能  
+Nonebot, RUOK?                           ✅    Bot health monitoring, session t
+(nonebot-plugin-ruok)                          racking, and WebUI              
+今天是什么小猪（今日小猪）Plus           ✅    每天抽取小猪、收集图鉴并提升 EX 
+(nonebot-plugin-rollpig-plus)                  等级，还可体验烤群友、预约烤猪、
+                                               猪圈日报与多 Bot 同步           
+Palworld (nonebot-plugin-palworld-sync)  ✅    幻兽帕鲁服务器 REST API 插件    
+老虎机 (nonebot-plugin-slot-machine)     ✅    一个老虎机游戏插件              
+彩六数据查询 (nonebot-plugin-R6States)   ✅    查询指定玩家的数据              
+nonebot_plugin_astra_bot                 ✅    AI-powered QQ group chat bot wit
+(nonebot-plugin-astra-bot)                     h multi-LLM support, memory syst
+                                               em, plugin mechanism, and web se
+                                               arch                            
+代理扫描                                 ✅    扫描并缓存 Clash HTTP 代理、出口
+(nonebot-plugin-proxy-probe)                    IP 与属地                      
+HiBank 城市银行查询                      ✅    查询 HiBank 城市银行分布与银行网
+(nonebot-plugin-hibank)                        点信息的 NoneBot2 插件。        
+CS2赛事助手                              ✅    实时追踪 Counter-Strike 2 职业赛
+(nonebot-plugin-cs2match)                      事，开赛自动提醒、关键赛况与大比
+                                               分异动推送                      
+nonebot_plugin_asf                       ✅    Control ArchiSteamFarm from Tele
+(nonebot-plugin-asf)                           gram through ASF IPC.           
+智能消息存储                             ✅    支持群聊/私聊消息归档、检索和 AI
+(nonebot-plugin-smart-message-storage)          图片理解总结的 NoneBot2 插件。 
+CNRail (nonebot-plugin-cnrail)           ✅    查询 12306 列车时刻表           
+SUES校园服务 (nonebot-plugin-sues-bill)  ✅    电费查询、充值及校园卡余额查询  
+nonebot-plugin-llm-qa-system             ✅    基于 Ollama + RAG 的智能问答系统
+(nonebot-plugin-llm-qa-system)                                                 
+AI绘图                                   ✅    AI绘图插件，支持调用本地或远程的
+(nonebot-plugin-easy-aidraw)                   绘图API生成图片                 
+nonebot-plugin-aawarframe                ✅    aa 的 Warframe 插件             
+(nonebot-plugin-aawarframe)                                                    
+AI-group-friend                          ✅    群聊特化LLM聊天机器人，具有记忆 
+(nonebot-plugin-aigf)                          和表情包功能                    
+Bilibili 动态/直播订阅                   ✅    基于 OneBot V11 的 Bilibili 动态
+(nonebot-plugin-bilibili)                      、视频与直播订阅推送插件，支持扫
+                                               码登录、图片卡片、关键词过滤、@ 
+                                               全体和 Web 管理后台。           
+AutoSpeak                                ✅    定时自动发言插件（群聊/私聊、JSO
+(nonebot-plugin-autospeak)                     N配置、多条随机消息、按星期发送 
+                                               、预设占位符）                  
+Napcat QRCode                            ✅    监控 NapCat 登录状态，并推送离线
+(nonebot-plugin-ncqrcode)                      通知与二维码                    
+Live Tennis 网球比分                     ✅    Live tennis scores, today's fixt
+(nonebot-plugin-livetennis)                    ures and player rankings (ATP/WT
+                                               A/Challenger/ITF/juniors) via th
+                                               e Live Tennis API / 实时网球比分
+                                               、今日赛程与球员排名查询        
+Mimo Console                             ✅    NoneBot2 的轻量 WebUI 管理面板  
+(nonebot-plugin-mimo-console)                                                  
+退休倒计时                               ✅    计算预计退休日期以及距离退休还有
+(nonebot-plugin-retirement-countdown)          多少天                          
+Chikari_Yinpa_Fix                        ✅    一个普通的银趴插件（修复版）    
+(nonebot-plugin-chikari-yinpa-fix)                                             
+Komari 探针状态截图                      ✅    渲染 Komari 探针面板并发送 1080p
+(nonebot-plugin-komari-status)                  截图到群聊                     
