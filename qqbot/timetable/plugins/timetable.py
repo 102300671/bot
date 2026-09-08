@@ -1,7 +1,7 @@
 """课表查询插件。
 
 查询应急管理大学教务系统教师端课表页面（公开接口，无需登录），
-按班级/学期查询后渲染成图片发送；指定周次/星期时返回过滤后的文本。
+按班级/学期查询后渲染成图片发送；指定周次/星期时返回过滤后的课表图片。
 
 注意：需要在 .env.prod 中配置 COMMAND_START=[""]，QQ 官方机器人私聊/群消息
 不带 / 前缀即可触发命令（nonebot 默认命令前缀为 /）。
@@ -30,7 +30,8 @@ API_PATH = "/Teacher/TimeTableHandler.ashx"
 
 USAGE = (
     "用法: 查课表 [学期] 班级 [周次] [星期]\n"
-    "学期可省略，默认当前学期；周次/星期可省略，省略则返回完整课表图片。\n"
+    "学期可省略，默认当前学期；周次/星期可省略，省略则返回完整课表图片，"
+    "指定则返回过滤后的课表图片（渲染失败自动回退文本）。\n"
     "示例: 查课表 软件B241\n"
     "示例: 查课表 软件B241 3 星期一\n"
     "示例: 查课表 2025-2026春季 软件B241 18"
@@ -155,77 +156,108 @@ def _merge_week_runs(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return merged
 
 
-def build_html(class_name: str, sem_name: str, data: dict[str, Any]) -> str:
+def build_html(
+    class_name: str,
+    sem_name: str,
+    data: dict[str, Any],
+    week: int | None = None,
+    day: int | None = None,
+) -> str:
     """把课表数据渲染成 HTML 页面。
 
-    布局策略：同一天内按“轨道”排布课程，时段重叠的课程分到不同轨道
-    （横向并排），时段不重叠的课程共用同一轨道（纵向衔接），避免
-    rowspan 相互冲突导致浏览器把单元格推入新列、整表错位。
+    通用布局策略（适配不同班级课表）：
+    - 同一节课次范围内（同段）的课程合并为一个“组”，在同一格内纵向堆叠，
+      避免同段课程（如 1-4 周 + 5-13 周）各自占列产生空列；
+    - 组与组时段重叠（如横跨多节的课程设计）才分到不同轨道横向并排；
+    - 每天轨道数按当天实际需要动态计算，不为无重叠的天生成多余列。
+
+    week / day 用于过滤：week 只保留该周上课的课程，day 只渲染该天
+    （如「查课表 软件B241 3 星期一」渲染第 3 周星期一的课表图片）。
     """
     patterns = data.get("ClassTimePatterns", [])
     starts, ends, n = _slot_maps(patterns)
+    days = [day - 1] if day is not None else list(range(7))
 
-    # 按天收集课程，并合并周次连续的重复条目
+    # 按天收集课程（按周次过滤），并合并周次连续的重复条目
     by_day: list[list[dict[str, Any]]] = [[] for _ in range(7)]
     for c in data.get("Data", []):
+        if week is not None and not _course_in_week(c, week):
+            continue
         p0 = starts.get(c.get("TimeSlotStart"))
         p1 = ends.get(c.get("TimeSlotEnd"))
         if not p0 or not p1:
             continue
-        for d, key in enumerate(DAY_KEYS):
-            if c.get(key):
+        for d in days:
+            if c.get(DAY_KEYS[d]):
                 by_day[d].append({**c, "_p0": p0, "_p1": p1})
 
-    day_courses: list[list[dict[str, Any]]] = []
-    for d in range(7):
-        merged = _merge_week_runs(by_day[d])
-        merged.sort(key=lambda c: (c["_p0"], c["_p1"] - c["_p0"]))
-        day_courses.append(merged)
+    day_courses = [_merge_week_runs(by_day[d]) for d in range(7)]
 
-    # 轨道分配：同轨道内课程时段两两不重叠
+    # 按 (起始节, 结束节) 分组：同段课程合并为同一格内的堆叠块
+    groups: list[list[dict[str, Any]]] = []
+    for d in range(7):
+        gmap: dict[tuple[int, int], dict[str, Any]] = {}
+        order: list[tuple[int, int]] = []
+        for c in day_courses[d]:
+            k = (c["_p0"], c["_p1"])
+            if k not in gmap:
+                gmap[k] = {"p0": k[0], "p1": k[1], "courses": []}
+                order.append(k)
+            gmap[k]["courses"].append(c)
+        gs = [gmap[k] for k in order]
+        gs.sort(key=lambda g: (g["p0"], g["p1"] - g["p0"]))
+        groups.append(gs)
+
+    # 轨道分配（组层面）：同轨道内各组时段两两不重叠
     tracks: list[list[list[dict[str, Any]]]] = []
     for d in range(7):
         day_tracks: list[list[dict[str, Any]]] = []
-        for c in day_courses[d]:
-            p0, p1 = c["_p0"], c["_p1"]
+        for g in groups[d]:
             placed = False
             for track in day_tracks:
-                if all(p1 < t["_p0"] or p0 > t["_p1"] for t in track):
-                    track.append(c)
+                if all(g["p1"] < t["p0"] or g["p0"] > t["p1"] for t in track):
+                    track.append(g)
                     placed = True
                     break
             if not placed:
-                day_tracks.append([c])
+                day_tracks.append([g])
         for track in day_tracks:
-            track.sort(key=lambda c: c["_p0"])
+            track.sort(key=lambda g: g["p0"])
         tracks.append(day_tracks)
 
-    max_tracks = max((len(t) for t in tracks), default=1)
-
-    head = "".join(f'<th colspan="{max_tracks}">{day}</th>' for day in DAYS)
+    head = "".join(
+        f'<th colspan="{len(tracks[d])}">{DAYS[d]}</th>' for d in days
+    )
     body_rows = []
-    next_free = [[0] * max_tracks for _ in range(7)]
+    next_free = [[0] * len(tracks[d]) for d in range(7)]
     for i in range(n):
         tds = [f'<td class="period">{i + 1}</td>']
-        for d in range(7):
-            day_tracks = tracks[d]
-            for t in range(max_tracks):
-                if t >= len(day_tracks):
-                    tds.append('<td class="daycell"></td>')
-                    continue
+        for d in days:
+            for t in range(len(tracks[d])):
                 if i < next_free[d][t]:
                     continue
-                cur = next((c for c in day_tracks[t] if c["_p0"] == i + 1), None)
+                cur = next((g for g in tracks[d][t] if g["p0"] == i + 1), None)
                 if cur is None:
                     tds.append('<td class="daycell"></td>')
                     next_free[d][t] = i + 1
                 else:
-                    span = cur["_p1"] - cur["_p0"] + 1
+                    span = cur["p1"] - cur["p0"] + 1
+                    inner = "".join(_course_block(c) for c in cur["courses"])
                     tds.append(
-                        f'<td class="daycell" rowspan="{span}">{_course_block(cur)}</td>'
+                        f'<td class="daycell" rowspan="{span}">'
+                        f'<div class="group">{inner}</div></td>'
                     )
                     next_free[d][t] = i + span
         body_rows.append(f'<tr>{"".join(tds)}</tr>')
+
+    sub = sem_name
+    extra = []
+    if week is not None:
+        extra.append(f"第{week}周")
+    if day is not None:
+        extra.append(DAYS[day - 1])
+    if extra:
+        sub += " · " + " ".join(extra)
 
     return f"""<!DOCTYPE html>
 <html><head><meta charset="utf-8"><style>
@@ -237,13 +269,15 @@ table {{ border-collapse: collapse; margin: 0 auto; background: #fff; }}
 th, td {{ border: 1px solid #c9d4e0; padding: 4px 6px; text-align: center; vertical-align: middle; }}
 th {{ background: #34495e; color: #fff; font-size: 14px; font-weight: 600; }}
 td.period {{ background: #eef2f7; font-weight: bold; width: 34px; color: #34495e; }}
-td.daycell {{ min-width: 64px; max-width: 76px; height: 52px; }}
+td.daycell {{ min-width: 64px; height: 52px; }}
 .course {{ padding: 2px 0; }}
+.group {{ display: flex; flex-direction: column; height: 100%; }}
+.group .course {{ flex: 1 1 0; min-height: 0; overflow: hidden; }}
 .c-name {{ font-size: 13px; font-weight: 700; color: #16537e; word-break: break-all; }}
 .c-meta {{ font-size: 11px; color: #5d6d7e; line-height: 1.45; word-break: break-all; }}
 </style></head><body>
 <h2>{html.escape(class_name)} 课表</h2>
-<div class="sub">{html.escape(sem_name)}</div>
+<div class="sub">{html.escape(sub)}</div>
 <table>
 <tr><th>节次</th>{head}</tr>
 {''.join(body_rows)}
@@ -466,21 +500,20 @@ async def _handle_query(bot: Bot, event: Event, args_text: str) -> None:
                 )
                 return
 
-            if week is None and day is None:
-                html_str = build_html(class_name, sem["Name"], data)
-                try:
-                    img = await render_html(html_str, width=1140, device_pixel_ratio=2.0)
-                    await bot.send(
-                        event,
-                        MessageSegment.file_image(img.data, f"{class_name}课表.png"),
-                    )
-                except Exception:
-                    logger.exception("课表图片渲染失败，改用文本回复")
-                    await bot.send(event, MessageSegment.text(build_text(class_name, sem["Name"], data)))
-            else:
+            try:
+                html_str = build_html(class_name, sem["Name"], data, week=week, day=day)
+                img = await render_html(html_str, width=1140, device_pixel_ratio=2.0)
                 await bot.send(
-                    event, MessageSegment.text(build_filtered_text(class_name, sem["Name"], data, week, day))
+                    event,
+                    MessageSegment.file_image(img.data, f"{class_name}课表.png"),
                 )
+            except Exception:
+                logger.exception("课表图片渲染失败，改用文本回复")
+                if week is None and day is None:
+                    text = build_text(class_name, sem["Name"], data)
+                else:
+                    text = build_filtered_text(class_name, sem["Name"], data, week, day)
+                await bot.send(event, MessageSegment.text(text))
     except httpx.HTTPError:
         logger.exception("查询课表接口请求失败")
         await bot.send(event, MessageSegment.text("查询课表失败（网络错误），请稍后再试。"))
