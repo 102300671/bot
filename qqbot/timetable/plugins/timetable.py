@@ -3,14 +3,14 @@
 查询应急管理大学教务系统教师端课表页面（公开接口，无需登录），
 按班级/学期查询后渲染成图片发送；指定周次/星期时返回过滤后的课表图片。
 
-注意：需要在 .env.prod 中配置 COMMAND_START=[""]，QQ 官方机器人私聊/群消息
-不带 / 前缀即可触发命令（nonebot 默认命令前缀为 /）。
+命令前缀为 /（.env.prod 中 COMMAND_START=["/"]），使用标准 GNU 风格选项，
+严格选项制，不接受位置参数。
 
 用法:
-    查课表 [学期] 班级 [周次] [星期]
-    例: 查课表 软件B241
-    例: 查课表 软件B241 3 星期一
-    例: 查课表 2025-2026春季 软件B241 18
+    /timetable -c 班级 [-s 学期] [-w 周次] [-d 星期]
+    例: /timetable -c 软件B241
+    例: /timetable -c 软件B241 -w 3 -d 一
+    例: /timetable -c 软件B241 -s 2025-2026春季 -w 18
 """
 
 import html
@@ -18,7 +18,7 @@ import json
 from typing import Any
 
 import httpx
-from nonebot import get_plugin_config, logger
+from nonebot import get_driver, get_plugin_config, logger
 from nonebot.adapters.qq import Bot, Event, Message, MessageSegment
 from nonebot.params import CommandArg
 from nonebot.plugin import on_command
@@ -26,15 +26,22 @@ from pydantic import BaseModel
 
 from nonebot_plugin_htmlrender import render_html
 
+import qq_panels
+
 API_PATH = "/Teacher/TimeTableHandler.ashx"
 
 USAGE = (
-    "用法: 查课表 [学期] 班级 [周次] [星期]\n"
-    "学期可省略，默认当前学期；周次/星期可省略，省略则返回完整课表图片，"
-    "指定则返回过滤后的课表图片（渲染失败自动回退文本）。\n"
-    "示例: 查课表 软件B241\n"
-    "示例: 查课表 软件B241 3 星期一\n"
-    "示例: 查课表 2025-2026春季 软件B241 18"
+    "用法: /timetable -c 班级 [-s 学期] [-w 周次] [-d 星期]\n"
+    "选项:\n"
+    "  -c, --class <班级>     班级名（必填），如 软件B241\n"
+    "  -s, --semester <学期>  学期，省略则查当前学期，如 2025-2026春季\n"
+    "  -w, --week <周次>      周次，如 3（也支持 第3周、3周）\n"
+    "  -d, --day <星期>       星期，如 星期一/周一/一/1（1=周一）\n"
+    "  -h, --help             显示本帮助\n"
+    "省略 -w/-d 返回完整课表图片，指定则返回过滤后的课表图片（渲染失败自动回退文本）。\n"
+    "示例: /timetable -c 软件B241\n"
+    "示例: /timetable -c 软件B241 -w 3 -d 一\n"
+    "示例: /timetable -c 软件B241 -s 2025-2026春季 -w 18"
 )
 
 DAYS = ["星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"]
@@ -58,7 +65,7 @@ class Config(BaseModel):
 
 config = get_plugin_config(Config)
 
-timetable = on_command("查课表", aliases={"课表", "timetable"}, priority=5, block=True)
+timetable = on_command("timetable", aliases={"课表"}, priority=5, block=True)
 
 
 async def _request(
@@ -107,19 +114,22 @@ def _slot_maps(patterns: list[dict[str, Any]]) -> tuple[dict[int, int], dict[int
     return starts, ends, len(patterns)
 
 
-def _course_block(c: dict[str, Any]) -> str:
-    weeks = f"{c.get('WeekStart', '?')}-{c.get('WeekEnd', '?')}周"
-    if c.get("WeekInterval"):
-        weeks += "、隔周"
+def _course_block(c: dict[str, Any], show_weeks: bool = True) -> str:
     room = "".join(filter(None, [c.get("Building"), c.get("Classroom")]))
-    return (
-        '<div class="course">'
-        f'<div class="c-name">{html.escape(str(c.get("LUName", "")))}</div>'
-        f'<div class="c-meta">{html.escape(str(c.get("FullName", "")))}</div>'
-        + (f'<div class="c-meta">{html.escape(room)}</div>' if room else "")
-        + f'<div class="c-meta">{weeks}</div>'
-        "</div>"
-    )
+    parts = [
+        '<div class="course">',
+        f'<div class="c-name">{html.escape(str(c.get("LUName", "")))}</div>',
+        f'<div class="c-meta">{html.escape(str(c.get("FullName", "")))}</div>',
+    ]
+    if room:
+        parts.append(f'<div class="c-meta">{html.escape(room)}</div>')
+    if show_weeks:
+        weeks = f"{c.get('WeekStart', '?')}-{c.get('WeekEnd', '?')}周"
+        if c.get("WeekInterval"):
+            weeks += "、隔周"
+        parts.append(f'<div class="c-meta">{weeks}</div>')
+    parts.append("</div>")
+    return "".join(parts)
 
 
 def _merge_week_runs(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -172,7 +182,7 @@ def build_html(
     - 每天轨道数按当天实际需要动态计算，不为无重叠的天生成多余列。
 
     week / day 用于过滤：week 只保留该周上课的课程，day 只渲染该天
-    （如「查课表 软件B241 3 星期一」渲染第 3 周星期一的课表图片）。
+    （如「/timetable -c 软件B241 -w 3 -d 一」渲染第 3 周星期一的课表图片）。
     """
     patterns = data.get("ClassTimePatterns", [])
     starts, ends, n = _slot_maps(patterns)
@@ -226,13 +236,16 @@ def build_html(
         tracks.append(day_tracks)
 
     head = "".join(
-        f'<th colspan="{len(tracks[d])}">{DAYS[d]}</th>' for d in days
+        f'<th colspan="{max(len(tracks[d]), 1)}">{DAYS[d]}</th>' for d in days
     )
     body_rows = []
     next_free = [[0] * len(tracks[d]) for d in range(7)]
     for i in range(n):
         tds = [f'<td class="period">{i + 1}</td>']
         for d in days:
+            if not tracks[d]:
+                # 当天无任何轨道（如查询无课的某天），补空白列对齐表头
+                tds.append('<td class="daycell"></td>')
             for t in range(len(tracks[d])):
                 if i < next_free[d][t]:
                     continue
@@ -242,7 +255,10 @@ def build_html(
                     next_free[d][t] = i + 1
                 else:
                     span = cur["p1"] - cur["p0"] + 1
-                    inner = "".join(_course_block(c) for c in cur["courses"])
+                    # 指定周次查询时，整表已按该周过滤，课程卡片不再显示周次行
+                    inner = "".join(
+                        _course_block(c, show_weeks=week is None) for c in cur["courses"]
+                    )
                     tds.append(
                         f'<td class="daycell" rowspan="{span}">'
                         f'<div class="group">{inner}</div></td>'
@@ -268,11 +284,10 @@ h2 {{ margin: 0; font-size: 20px; text-align: center; color: #1f2d3d; }}
 table {{ border-collapse: collapse; margin: 0 auto; background: #fff; }}
 th, td {{ border: 1px solid #c9d4e0; padding: 4px 6px; text-align: center; vertical-align: middle; }}
 th {{ background: #34495e; color: #fff; font-size: 14px; font-weight: 600; }}
-td.period {{ background: #eef2f7; font-weight: bold; width: 34px; color: #34495e; }}
-td.daycell {{ min-width: 64px; height: 52px; }}
+td.period {{ background: #eef2f7; font-weight: bold; width: 34px; color: #34495e; height: 46px; }}
+td.daycell {{ min-width: 64px; }}
 .course {{ padding: 2px 0; }}
-.group {{ display: flex; flex-direction: column; height: 100%; }}
-.group .course {{ flex: 1 1 0; min-height: 0; overflow: hidden; }}
+.group {{ display: flex; flex-direction: column; justify-content: center; }}
 .c-name {{ font-size: 13px; font-weight: 700; color: #16537e; word-break: break-all; }}
 .c-meta {{ font-size: 11px; color: #5d6d7e; line-height: 1.45; word-break: break-all; }}
 </style></head><body>
@@ -355,6 +370,48 @@ def _parse_day(token: str) -> int | None:
     return _DAY_ALIASES.get(t)
 
 
+# GNU 风格选项表：-缩写 / --全名 -> 内部键
+_OPTIONS = {
+    "-c": "class", "--class": "class",
+    "-s": "semester", "--semester": "semester",
+    "-w": "week", "--week": "week",
+    "-d": "day", "--day": "day",
+    "-h": "help", "--help": "help",
+}
+
+
+def _parse_options(args_text: str) -> tuple[dict[str, str] | None, str | None]:
+    """解析 GNU 风格选项（-x 值 / --xxx 值 / --xxx=值）。
+
+    严格选项制：不接受位置参数；未知选项、选项缺值均返回错误提示。
+    返回 (opts, None) 或 (None, 错误消息)。
+    """
+    tokens = args_text.split()
+    opts: dict[str, str] = {}
+    i = 0
+    while i < len(tokens):
+        tok = tokens[i]
+        key, sep, inline = tok.partition("=")
+        name = _OPTIONS.get(key) if sep else _OPTIONS.get(tok)
+        if name is None:
+            if tok.startswith("-"):
+                return None, f"未知选项「{tok}」。\n{USAGE}"
+            return None, f"不支持位置参数「{tok}」，请使用选项形式（如 -c {tok}）。\n{USAGE}"
+        if name == "help":
+            opts["help"] = "1"
+            i += 1
+            continue
+        if sep:
+            opts[name] = inline
+            i += 1
+        else:
+            if i + 1 >= len(tokens):
+                return None, f"选项 {tok} 缺少值。\n{USAGE}"
+            opts[name] = tokens[i + 1]
+            i += 2
+    return opts, None
+
+
 def _course_in_week(c: dict[str, Any], week: int) -> bool:
     """课程在指定周是否上课（WeekInterval 非 0 视为隔周，按起始周奇偶推算）。"""
     ws, we = c.get("WeekStart"), c.get("WeekEnd")
@@ -417,10 +474,45 @@ def build_filtered_text(
 
 
 async def _handle_query(bot: Bot, event: Event, args_text: str) -> None:
-    parts = args_text.split()
-    if not parts:
+    opts, err = _parse_options(args_text)
+    if err is not None:
+        await bot.send(event, MessageSegment.text(err))
+        return
+    assert opts is not None
+    if not opts or opts.get("help"):
         await bot.send(event, MessageSegment.text(USAGE))
         return
+
+    class_name = opts.get("class", "").strip()
+    if not class_name:
+        await bot.send(
+            event, MessageSegment.text(f"缺少必填选项 -c/--class <班级>。\n{USAGE}")
+        )
+        return
+
+    week: int | None = None
+    if "week" in opts:
+        week = _parse_week(opts["week"])
+        if week is None:
+            await bot.send(
+                event,
+                MessageSegment.text(
+                    f"周次「{opts['week']}」无法识别，请填数字（如 3、第3周）。\n{USAGE}"
+                ),
+            )
+            return
+
+    day: int | None = None
+    if "day" in opts:
+        day = _parse_day(opts["day"])
+        if day is None:
+            await bot.send(
+                event,
+                MessageSegment.text(
+                    f"星期「{opts['day']}」无法识别，请填 星期一/周一/一/1 这样的格式。\n{USAGE}"
+                ),
+            )
+            return
 
     try:
         async with httpx.AsyncClient(follow_redirects=True) as client:
@@ -429,63 +521,28 @@ async def _handle_query(bot: Bot, event: Event, args_text: str) -> None:
                 await bot.send(event, MessageSegment.text("获取学期列表失败，请稍后再试。"))
                 return
 
-            # 解析参数: [学期] 班级 [周次] [星期]
-            # 首个 token 若是学期关键词则消费掉，否则视为班级名（学期取当前）
+            # -s 指定学期则模糊匹配，省略则取当前学期（列表第一项）
             sem: dict[str, Any] | None = None
-            idx = 0
-            matches = _match_semester(sems, parts[0])
-            if matches:
+            sem_query = opts.get("semester")
+            if sem_query:
+                matches = _match_semester(sems, sem_query)
+                if not matches:
+                    await bot.send(
+                        event,
+                        MessageSegment.text(
+                            f"学期「{sem_query}」没有匹配项，请检查学期名称（如 2025-2026春季）。\n{USAGE}"
+                        ),
+                    )
+                    return
                 if len(matches) > 1:
                     options = "\n".join(s["Name"] for s in matches)
                     await bot.send(
                         event,
-                        MessageSegment.text(f"学期「{parts[0]}」匹配到多个，请写完整一些:\n{options}"),
+                        MessageSegment.text(f"学期「{sem_query}」匹配到多个，请写完整一些:\n{options}"),
                     )
                     return
                 sem = matches[0]
-                idx = 1
-            if idx >= len(parts):
-                await bot.send(event, MessageSegment.text(USAGE))
-                return
-            class_name = parts[idx]
-            idx += 1
-
-            week: int | None = None
-            day: int | None = None
-            if idx < len(parts):
-                week = _parse_week(parts[idx])
-                if week is not None:
-                    idx += 1
-                    if idx < len(parts):
-                        day = _parse_day(parts[idx])
-                        if day is None:
-                            await bot.send(
-                                event,
-                                MessageSegment.text(
-                                    f"星期「{parts[idx]}」无法识别，请填 星期一/周一/1 这样的格式。\n{USAGE}"
-                                ),
-                            )
-                            return
-                        idx += 1
-                else:
-                    # 允许省略周次直接填星期，如「查课表 软件B241 周一」
-                    day = _parse_day(parts[idx])
-                    if day is None:
-                        await bot.send(
-                            event,
-                            MessageSegment.text(
-                                f"「{parts[idx]}」无法识别。\n"
-                                f"周次请填数字（如 3、第3周），星期请填 星期一/周一/1 这样的格式。\n{USAGE}"
-                            ),
-                        )
-                        return
-                    idx += 1
-
-            if idx < len(parts):
-                await bot.send(event, MessageSegment.text(USAGE))
-                return
-
-            if sem is None:
+            else:
                 sem = sems[0]
 
             data = await _get_timetable(client, class_name, int(sem["Id"]))
@@ -525,3 +582,71 @@ async def _handle_query(bot: Bot, event: Event, args_text: str) -> None:
 @timetable.handle()
 async def _handler(bot: Bot, event: Event, args: Message = CommandArg()) -> None:
     await _handle_query(bot, event, str(args))
+
+
+# --- 指令面板自动注册 ---
+# 机器人上线时自动在 c2c（单聊）/ group（群聊）场景注册指令面板，
+# 用户点击后面板指令自动填入聊天输入框（仅 /timetable，不带参数）。
+# 通过 remark 标识做幂等：已存在且内容一致则跳过，内容变化则更新，
+# 避免每次重启都新建面板（一个机器人最多 20 个面板）。
+
+_PANEL_MARKER = "timetable-plugin-auto"
+_PANEL_SCOPES = ("c2c", "group")
+
+
+def _build_panel() -> qq_panels.Panel:
+    return qq_panels.Panel(
+        items=[
+            qq_panels.PanelItem(type="command", name="/timetable", desc="查询课表"),
+        ],
+        remark=_PANEL_MARKER,
+    )
+
+
+def _panel_items_same(
+    a: list[qq_panels.PanelItem] | None, b: list[qq_panels.PanelItem] | None
+) -> bool:
+    """比较两组面板元素内容是否一致（忽略 None 字段，按顺序逐项比较）。"""
+    norm = lambda items: [i.model_dump(exclude_none=True) for i in (items or [])]
+    return norm(a) == norm(b)
+
+
+async def _ensure_panel(bot: Bot, scope: str) -> None:
+    """确保指定场景存在内容最新的课表指令面板（幂等）。"""
+    panel = _build_panel()
+    try:
+        result = await bot.get_panels(scope=scope, limit=50)
+    except Exception:
+        logger.exception(f"查询 {scope} 场景指令面板列表失败")
+        return
+
+    existing = next(
+        (r for r in result.records if r.panel and r.panel.remark == _PANEL_MARKER),
+        None,
+    )
+    if existing is None:
+        try:
+            ret = await bot.post_panels(scope=scope, target_type="all", panel=panel)
+            logger.info(f"{scope} 指令面板已创建: {ret.panel_id}")
+        except Exception:
+            logger.exception(f"创建 {scope} 指令面板失败")
+        return
+
+    if existing.panel and _panel_items_same(existing.panel.items, panel.items):
+        logger.debug(f"{scope} 指令面板已存在且内容一致，跳过: {existing.panel_id}")
+        return
+
+    try:
+        await bot.put_panel(panel_id=existing.panel_id, panel=panel)
+        logger.info(f"{scope} 场景指令面板已更新: {existing.panel_id}")
+    except Exception:
+        logger.exception(f"更新 {scope} 指令面板失败")
+
+
+@get_driver().on_bot_connect
+async def _register_timetable_panels(bot: Bot) -> None:
+    """机器人连接成功后自动注册 c2c / 群聊指令面板。"""
+    if not isinstance(bot, Bot):
+        return
+    for scope in _PANEL_SCOPES:
+        await _ensure_panel(bot, scope)
