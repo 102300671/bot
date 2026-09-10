@@ -11,8 +11,10 @@
     例: /timetable -c 软件B241
     例: /timetable -c 软件B241 -w 3 -d 一
     例: /timetable -c 软件B241 -s 2025-2026春季 -w 18
+    /today -c 班级  （自动计算本周周次与今日星期）
 """
 
+import datetime
 import html
 import json
 from typing import Any
@@ -41,7 +43,8 @@ USAGE = (
     "省略 -w/-d 返回完整课表图片，指定则返回过滤后的课表图片（渲染失败自动回退文本）。\n"
     "示例: /timetable -c 软件B241\n"
     "示例: /timetable -c 软件B241 -w 3 -d 一\n"
-    "示例: /timetable -c 软件B241 -s 2025-2026春季 -w 18"
+    "示例: /timetable -c 软件B241 -s 2025-2026春季 -w 18\n"
+    "快捷今日: /today -c 软件B241  （自动计算周次与星期）"
 )
 
 DAYS = ["星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"]
@@ -61,11 +64,25 @@ class Config(BaseModel):
     """教务系统地址。"""
     timetable_timeout: float = 30.0
     """查询接口超时时间（秒）。"""
+    semester_start: str = "2026-09-07"
+    """学期开始日期，用于自动计算周次（格式 YYYY-MM-DD）。"""
 
 
 config = get_plugin_config(Config)
 
+
+def _current_week_and_day() -> tuple[int, int]:
+    """根据配置的学期开始日期自动计算当前周次与星期（1=周一）。"""
+    now = datetime.datetime.now()
+    day = now.weekday() + 1  # 1=周一 ... 7=周日
+    start = datetime.datetime.strptime(config.semester_start, "%Y-%m-%d").date()
+    today = now.date()
+    week = max(1, (today - start).days // 7 + 1)
+    return week, day
+
+
 timetable = on_command("timetable", aliases={"课表"}, priority=5, block=True)
+today = on_command("today", aliases={"今日课表"}, priority=5, block=True)
 
 
 async def _request(
@@ -584,6 +601,56 @@ async def _handler(bot: Bot, event: Event, args: Message = CommandArg()) -> None
     await _handle_query(bot, event, str(args))
 
 
+@today.handle()
+async def _today_handler(bot: Bot, event: Event, args: Message = CommandArg()) -> None:
+    args_text = str(args)
+    opts, err = _parse_options(args_text)
+    if err is not None:
+        await bot.send(event, MessageSegment.text(err))
+        return
+    assert opts is not None
+    if not opts or opts.get("help"):
+        await bot.send(event, MessageSegment.text(USAGE))
+        return
+
+    class_name = opts.get("class", "").strip()
+    if not class_name:
+        await bot.send(
+            event, MessageSegment.text(f"缺少必填选项 -c/--class <班级>。\n{USAGE}")
+        )
+        return
+
+    auto_week, auto_day = _current_week_and_day()
+
+    if "week" in opts:
+        week = _parse_week(opts["week"])
+        if week is None:
+            await bot.send(
+                event,
+                MessageSegment.text(
+                    f"周次「{opts['week']}」无法识别，请填数字（如 3、第3周）。\n{USAGE}"
+                ),
+            )
+            return
+    else:
+        week = auto_week
+
+    if "day" in opts:
+        day = _parse_day(opts["day"])
+        if day is None:
+            await bot.send(
+                event,
+                MessageSegment.text(
+                    f"星期「{opts['day']}」无法识别，请填 星期一/周一/一/1 这样的格式。\n{USAGE}"
+                ),
+            )
+            return
+    else:
+        day = auto_day
+
+    await _handle_query(bot, event, f"-c {class_name} -w {week} -d {day}")
+
+
 # --- 指令面板自动注册 ---
 # 机器人上线时自动在 c2c（单聊）/ group（群聊）场景注册指令面板，
 # 用户点击后面板指令自动填入聊天输入框（仅 /timetable，不带参数）。
@@ -640,7 +707,7 @@ async def _ensure_panel(bot: Bot, scope: str) -> None:
         await bot.put_panel(panel_id=existing.panel_id, panel=panel)
         logger.info(f"{scope} 场景指令面板已更新: {existing.panel_id}")
     except Exception:
-        logger.exception(f"更新 {scope} 指令面板失败")
+        logger.exception(f"更新 {scope} 场景指令面板失败")
 
 
 @get_driver().on_bot_connect
