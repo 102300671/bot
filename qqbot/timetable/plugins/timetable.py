@@ -4,15 +4,15 @@
 按班级/学期查询后渲染成图片发送；指定周次/星期时返回过滤后的课表图片。
 
 命令前缀为 /（.env.prod 中 COMMAND_START=["/"]），使用标准 GNU 风格选项，
-严格选项制，不接受位置参数。
+严格选项制，不接受位置参数（除 today/week 子命令外）。
 
 用法:
     /timetable -c 班级 [-s 学期] [-w 周次] [-d 星期]
+    /timetable today -c 班级  （自动计算本周周次与今日星期）
+    /timetable week -c 班级  （自动计算本周周次，显示整周）
     例: /timetable -c 软件B241
     例: /timetable -c 软件B241 -w 3 -d 一
     例: /timetable -c 软件B241 -s 2025-2026春季 -w 18
-    /today -c 班级  （自动计算本周周次与今日星期）
-
 """
 
 import datetime
@@ -34,7 +34,10 @@ import qq_panels
 API_PATH = "/Teacher/TimeTableHandler.ashx"
 
 USAGE = (
-    "用法: /timetable -c 班级 [-s 学期] [-w 周次] [-d 星期]\n"
+    "用法: /timetable [-c 班级] [-s 学期] [-w 周次] [-d 星期]\n"
+    "子命令:\n"
+    "  today  自动计算本周周次与今日星期（快捷今日）\n"
+    "  week   自动计算本周周次，显示整周课表\n"
     "选项:\n"
     "  -c, --class <班级>     班级名（必填），如 软件B241\n"
     "  -s, --semester <学期>  学期，省略则查当前学期，如 2025-2026春季\n"
@@ -44,8 +47,8 @@ USAGE = (
     "省略 -w/-d 返回完整课表图片，指定则返回过滤后的课表图片（渲染失败自动回退文本）。\n"
     "示例: /timetable -c 软件B241\n"
     "示例: /timetable -c 软件B241 -w 3 -d 一\n"
-    "示例: /timetable -c 软件B241 -s 2025-2026春季 -w 18\n"
-    "快捷今日: /today -c 软件B241  （自动计算周次与星期）"
+    "示例: /timetable today -c 软件B241\n"
+    "示例: /timetable week -c 软件B241"
 )
 
 DAYS = ["星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"]
@@ -83,7 +86,6 @@ def _current_week_and_day() -> tuple[int, int]:
 
 
 timetable = on_command("timetable", aliases={"课表"}, priority=5, block=True)
-today = on_command("today", aliases={"今日课表"}, priority=5, block=True)
 
 
 async def _request(
@@ -491,7 +493,7 @@ def build_filtered_text(
     return "\n".join(lines)
 
 
-async def _handle_query(bot: Bot, event: Event, args_text: str) -> None:
+async def _handle_query(bot: Bot, event: Event, args_text: str, mode: str = "normal") -> None:
     opts, err = _parse_options(args_text)
     if err is not None:
         await bot.send(event, MessageSegment.text(err))
@@ -507,6 +509,8 @@ async def _handle_query(bot: Bot, event: Event, args_text: str) -> None:
             event, MessageSegment.text(f"缺少必填选项 -c/--class <班级>。\n{USAGE}")
         )
         return
+
+    auto_week, auto_day = _current_week_and_day()
 
     week: int | None = None
     if "week" in opts:
@@ -532,6 +536,17 @@ async def _handle_query(bot: Bot, event: Event, args_text: str) -> None:
             )
             return
 
+    # 子命令默认值
+    if mode == "today":
+        if week is None:
+            week = auto_week
+        if day is None:
+            day = auto_day
+    elif mode == "week":
+        if week is None:
+            week = auto_week
+        day = None  # 整周显示
+
     try:
         async with httpx.AsyncClient(follow_redirects=True) as client:
             sems = await _get_semesters(client)
@@ -539,7 +554,6 @@ async def _handle_query(bot: Bot, event: Event, args_text: str) -> None:
                 await bot.send(event, MessageSegment.text("获取学期列表失败，请稍后再试。"))
                 return
 
-            # -s 指定学期则模糊匹配，省略则取当前学期（列表第一项）
             sem: dict[str, Any] | None = None
             sem_query = opts.get("semester")
             if sem_query:
@@ -599,57 +613,21 @@ async def _handle_query(bot: Bot, event: Event, args_text: str) -> None:
 
 @timetable.handle()
 async def _handler(bot: Bot, event: Event, args: Message = CommandArg()) -> None:
-    await _handle_query(bot, event, str(args))
-
-
-@today.handle()
-async def _today_handler(bot: Bot, event: Event, args: Message = CommandArg()) -> None:
-    args_text = str(args)
-    opts, err = _parse_options(args_text)
-    if err is not None:
-        await bot.send(event, MessageSegment.text(err))
-        return
-    assert opts is not None
-    if not opts or opts.get("help"):
-        await bot.send(event, MessageSegment.text(USAGE))
-        return
-
-    class_name = opts.get("class", "").strip()
-    if not class_name:
-        await bot.send(
-            event, MessageSegment.text(f"缺少必填选项 -c/--class <班级>。\n{USAGE}")
-        )
-        return
-
-    auto_week, auto_day = _current_week_and_day()
-
-    if "week" in opts:
-        week = _parse_week(opts["week"])
-        if week is None:
-            await bot.send(
-                event,
-                MessageSegment.text(
-                    f"周次「{opts['week']}」无法识别，请填数字（如 3、第3周）。\n{USAGE}"
-                ),
-            )
-            return
-    else:
-        week = auto_week
-
-    if "day" in opts:
-        day = _parse_day(opts["day"])
-        if day is None:
-            await bot.send(
-                event,
-                MessageSegment.text(
-                    f"星期「{opts['day']}」无法识别，请填 星期一/周一/一/1 这样的格式。\n{USAGE}"
-                ),
-            )
-            return
-    else:
-        day = auto_day
-
-    await _handle_query(bot, event, f"-c {class_name} -w {week} -d {day}")
+    text = str(args).strip()
+    mode = "normal"
+    if text.startswith("today "):
+        mode = "today"
+        text = text[len("today "):].strip()
+    elif text == "today":
+        mode = "today"
+        text = ""
+    elif text.startswith("week "):
+        mode = "week"
+        text = text[len("week "):].strip()
+    elif text == "week":
+        mode = "week"
+        text = ""
+    await _handle_query(bot, event, text, mode=mode)
 
 
 # --- 指令面板自动注册 ---
