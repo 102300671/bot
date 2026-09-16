@@ -320,25 +320,99 @@ td.daycell {{ min-width: 64px; }}
 </body></html>"""
 
 
-def build_text(class_name: str, sem_name: str, data: dict[str, Any]) -> str:
-    """渲染失败时的纯文本兜底。"""
+def _day_courses(
+    data: dict[str, Any], day_idx: int, week: int | None,
+) -> list[tuple[int, int, dict[str, Any]]]:
+    """返回指定天(0=周一..6=周日)的课程列表，每项为 (节次起始, 节次结束, 课程)。
+
+    week=None 表示不过滤。
+    """
     patterns = data.get("ClassTimePatterns", [])
     starts, ends, _ = _slot_maps(patterns)
+    courses = data.get("Data", [])
+    result = []
+    for c in courses:
+        if week is not None and not _course_in_week(c, week):
+            continue
+        p0 = starts.get(c.get("TimeSlotStart"))
+        p1 = ends.get(c.get("TimeSlotEnd"))
+        if not p0 or not p1:
+            continue
+        if c.get(DAY_KEYS[day_idx]):
+            result.append((p0, p1, c))
+    result.sort(key=lambda x: x[0])
+    return result
+
+
+def _format_course_line(
+    p0: int, p1: int, c: dict[str, Any], show_weeks: bool
+) -> str:
+    """格式化单节课为一行文本。"""
+    room = "".join(filter(None, [c.get("Building"), c.get("Classroom")]))
+    meta_parts = [x for x in [str(c.get("FullName") or ""), room] if x]
+    meta = " ".join(meta_parts)
+    course_name = str(c.get("LUName", ""))
+    if p0 == p1:
+        slot = f"{p0}节"
+    else:
+        slot = f"{p0}-{p1}节"
+    week_txt = f" {c.get('WeekStart')}-{c.get('WeekEnd')}周" if show_weeks else ""
+    if c.get("WeekInterval"):
+        week_txt += "、隔周"
+    return f"┌ {slot} ┐ {course_name}（{meta}{week_txt}）"
+
+
+def _render_day_block(day_name: str, course_lines: list[str]) -> str:
+    """渲染单天的课程区块。"""
+    lines = [f"─── {day_name} ───"]
+    if not course_lines:
+        lines.append("  无课")
+    else:
+        lines.extend(f"  {cl}" for cl in course_lines)
+    return "\n".join(lines)
+
+
+def build_text(class_name: str, sem_name: str, data: dict[str, Any]) -> str:
+    """渲染失败时的纯文本兜底（格式化课表）。"""
     lines = [f"【{class_name} 课表】{sem_name}"]
     for d, day in enumerate(DAYS):
-        courses = [c for c in data.get("Data", []) if c.get(DAY_KEYS[d])]
-        if not courses:
+        courses = _day_courses(data, d, week=None)
+        course_lines = [
+            _format_course_line(p0, p1, c, show_weeks=True)
+            for p0, p1, c in courses
+        ]
+        lines.append(_render_day_block(day, course_lines))
+    return "\n".join(lines)
+
+
+def build_filtered_text(
+    class_name: str, sem_name: str, data: dict[str, Any], week: int | None, day: int | None
+) -> str:
+    """按周次/星期过滤后的文本课表（格式化课表）。"""
+    title = f"【{class_name}】{sem_name}"
+    extra = []
+    if week is not None:
+        extra.append(f"第{week}周")
+    if day is not None:
+        extra.append(DAYS[day - 1])
+    if extra:
+        title += " " + " ".join(extra)
+
+    selected_days = [day - 1] if day is not None else list(range(7))
+    lines = [title]
+    any_found = False
+    for d in selected_days:
+        courses = _day_courses(data, d, week=week)
+        course_lines = [
+            _format_course_line(p0, p1, c, show_weeks=(week is None))
+            for p0, p1, c in courses
+        ]
+        if not course_lines:
             continue
-        items = []
-        for c in courses:
-            p0 = starts.get(c.get("TimeSlotStart"), "?")
-            p1 = ends.get(c.get("TimeSlotEnd"), "?")
-            room = "".join(filter(None, [c.get("Building"), c.get("Classroom")]))
-            items.append(
-                f"{p0}-{p1}节 {c.get('LUName')}（{c.get('FullName')} {room} "
-                f"{c.get('WeekStart')}-{c.get('WeekEnd')}周）"
-            )
-        lines.append(f"{day}: " + " | ".join(items))
+        any_found = True
+        lines.append(_render_day_block(DAYS[d], course_lines))
+    if not any_found:
+        lines.append("没有课")
     return "\n".join(lines)
 
 
@@ -440,57 +514,6 @@ def _course_in_week(c: dict[str, Any], week: int) -> bool:
     if c.get("WeekInterval") and (week - ws) % 2 != 0:
         return False
     return True
-
-
-def _course_line(c: dict[str, Any], starts: dict[int, int], ends: dict[int, int], with_weeks: bool) -> str:
-    p0 = starts.get(c.get("TimeSlotStart"), "?")
-    p1 = ends.get(c.get("TimeSlotEnd"), "?")
-    room = "".join(filter(None, [c.get("Building"), c.get("Classroom")]))
-    meta = " ".join(filter(None, [str(c.get("FullName") or ""), room]))
-    week_txt = f" {c.get('WeekStart')}-{c.get('WeekEnd')}周" if with_weeks else ""
-    return f"{p0}-{p1}节 {c.get('LUName')}{week_txt}（{meta}）"
-
-
-def build_filtered_text(
-    class_name: str, sem_name: str, data: dict[str, Any], week: int | None, day: int | None
-) -> str:
-    """按周次/星期过滤后的文本课表。"""
-    patterns = data.get("ClassTimePatterns", [])
-    starts, ends, _ = _slot_maps(patterns)
-    courses = data.get("Data", [])
-
-    title = f"【{class_name}】{sem_name}"
-    extra = []
-    if week is not None:
-        extra.append(f"第{week}周")
-    if day is not None:
-        extra.append(DAYS[day - 1])
-    if extra:
-        title += " " + " ".join(extra)
-
-    selected_days = [day - 1] if day is not None else list(range(7))
-    lines = [title]
-    any_found = False
-    for d in selected_days:
-        items = [
-            (starts.get(c.get("TimeSlotStart"), 99), c)
-            for c in courses
-            if c.get(DAY_KEYS[d]) and (week is None or _course_in_week(c, week))
-        ]
-        if not items:
-            continue
-        any_found = True
-        items.sort(key=lambda ic: ic[0])
-        if len(selected_days) > 1:
-            lines.append(f"{DAYS[d]}:")
-            indent = "  "
-        else:
-            indent = ""
-        for _, c in items:
-            lines.append(f"{indent}{_course_line(c, starts, ends, with_weeks=week is None)}")
-    if not any_found:
-        lines.append("没有课")
-    return "\n".join(lines)
 
 
 async def _handle_query(bot: Bot, event: Event, args_text: str, mode: str = "normal") -> None:
