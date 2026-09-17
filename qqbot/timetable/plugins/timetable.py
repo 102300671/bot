@@ -33,8 +33,39 @@ import qq_panels
 
 API_PATH = "/Teacher/TimeTableHandler.ashx"
 
+# 应急管理大学作息时间表（校历规定：每年"五一"和"十一"调换）
+# 每项为 (start_time, end_time)，索引对齐 1~10 节
+WINTER_TIMES = [
+    ("08:00", "08:45"), ("08:55", "09:40"),
+    ("10:10", "10:55"), ("11:05", "11:50"),
+    ("14:00", "14:45"), ("14:55", "15:40"),
+    ("16:10", "16:55"), ("17:05", "17:50"),
+    ("19:00", "19:45"), ("19:55", "20:40"),
+]
+SUMMER_TIMES = [
+    ("08:00", "08:45"), ("08:55", "09:40"),
+    ("10:10", "10:55"), ("11:05", "11:50"),
+    ("14:30", "15:15"), ("15:25", "16:10"),
+    ("16:40", "17:25"), ("17:35", "18:20"),
+    ("19:20", "20:05"), ("20:15", "21:00"),
+]
+
+_TIME_SCHEDULES = {"winter": WINTER_TIMES, "summer": SUMMER_TIMES}
+_TIME_ALIASES = {
+    "冬": "winter", "冬季": "winter", "冬令时": "winter", "winter": "winter",
+    "夏": "summer", "夏季": "summer", "夏令时": "summer", "summer": "summer",
+}
+
+
+def _auto_schedule(date: datetime.date) -> str:
+    """根据日期自动选择夏/冬季作息：5月1日-10月7日夏季，10月8日-4月30日冬季。"""
+    md = (date.month, date.day)
+    if (5, 1) <= md <= (10, 7):
+        return "summer"
+    return "winter"
+
 USAGE = (
-    "用法: /timetable [-c 班级] [-s 学期] [-w 周次] [-d 星期]\n"
+    "用法: /timetable [-c 班级] [-s 学期] [-w 周次] [-d 星期] [-t 夏/冬]\n"
     "子命令:\n"
     "  today  自动计算本周周次与今日星期（快捷今日）\n"
     "  week   自动计算本周周次，显示整周课表\n"
@@ -43,12 +74,14 @@ USAGE = (
     "  -s, --semester <学期>  学期，省略则查当前学期，如 2025-2026春季\n"
     "  -w, --week <周次>      周次，如 3（也支持 第3周、3周）\n"
     "  -d, --day <星期>       星期，如 星期一/周一/一/1（1=周一）\n"
+    "  -t, --time <夏/冬>     强制指定作息时间表（夏/冬），省略则按日期自动判断\n"
     "  -h, --help             显示本帮助\n"
-    "省略 -w/-d 返回完整课表图片，指定则返回过滤后的课表图片（渲染失败自动回退文本）。\n"
+    "指定 -w 周次时节次列自动显示对应作息时间；省略 -w 返回完整课表图片（不显示时间）。\n"
     "示例: /timetable -c 软件B241\n"
     "示例: /timetable -c 软件B241 -w 3 -d 一\n"
     "示例: /timetable today -c 软件B241\n"
-    "示例: /timetable week -c 软件B241"
+    "示例: /timetable week -c 软件B241\n"
+    "示例: /timetable -c 软件B241 -w 5 -t 冬  强制使用冬季作息时间"
 )
 
 DAYS = ["星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"]
@@ -192,6 +225,7 @@ def build_html(
     data: dict[str, Any],
     week: int | None = None,
     day: int | None = None,
+    times: list[tuple[str, str]] | None = None,
 ) -> str:
     """把课表数据渲染成 HTML 页面。
 
@@ -261,7 +295,15 @@ def build_html(
     body_rows = []
     next_free = [[0] * len(tracks[d]) for d in range(7)]
     for i in range(n):
-        tds = [f'<td class="period">{i + 1}</td>']
+        if times and i < len(times):
+            ts, te = times[i]
+            period_cell = (
+                f'<td class="period">{i + 1}'
+                f'<div class="ptime">{ts}<br>{te}</div></td>'
+            )
+        else:
+            period_cell = f'<td class="period">{i + 1}</td>'
+        tds = [period_cell]
         for d in days:
             if not tracks[d]:
                 # 当天无任何轨道（如查询无课的某天），补空白列对齐表头
@@ -292,6 +334,10 @@ def build_html(
         extra.append(f"第{week}周")
     if day is not None:
         extra.append(DAYS[day - 1])
+    if times is not None:
+        # 标注当前使用哪套作息时间表
+        is_summer = times == SUMMER_TIMES
+        extra.append("夏令时" if is_summer else "冬令时")
     if extra:
         sub += " · " + " ".join(extra)
 
@@ -304,7 +350,8 @@ h2 {{ margin: 0; font-size: 20px; text-align: center; color: #1f2d3d; }}
 table {{ border-collapse: collapse; margin: 0 auto; background: #fff; }}
 th, td {{ border: 1px solid #c9d4e0; padding: 4px 6px; text-align: center; vertical-align: middle; }}
 th {{ background: #34495e; color: #fff; font-size: 14px; font-weight: 600; }}
-td.period {{ background: #eef2f7; font-weight: bold; width: 34px; color: #34495e; height: 46px; }}
+td.period {{ background: #eef2f7; font-weight: bold; width: 48px; color: #34495e; height: 46px; }}
+.ptime {{ font-size: 9px; font-weight: normal; color: #7f8c9b; line-height: 1.35; margin-top: 2px; }}
 td.daycell {{ min-width: 64px; }}
 .course {{ padding: 2px 0; }}
 .group {{ display: flex; flex-direction: column; justify-content: center; }}
@@ -396,6 +443,7 @@ _OPTIONS = {
     "-s": "semester", "--semester": "semester",
     "-w": "week", "--week": "week",
     "-d": "day", "--day": "day",
+    "-t": "time", "--time": "time",
     "-h": "help", "--help": "help",
 }
 
@@ -547,6 +595,28 @@ async def _handle_query(bot: Bot, event: Event, args_text: str, mode: str = "nor
             week = auto_week
         day = None  # 整周显示
 
+    # 作息时间表：仅指定周次时显示，自动按日期判断或 -t 手动覆盖
+    times: list[tuple[str, str]] | None = None
+    if week is not None:
+        if "time" in opts:
+            schedule_name = _TIME_ALIASES.get(opts["time"].strip())
+            if schedule_name is None:
+                await bot.send(
+                    event,
+                    MessageSegment.text(
+                        f"作息时间「{opts['time']}」无法识别，请填 夏/冬。\n{USAGE}"
+                    ),
+                )
+                return
+        else:
+            # 按该周周一日期自动判断夏/冬季
+            sem_start = datetime.datetime.strptime(
+                config.semester_start, "%Y-%m-%d"
+            ).date()
+            week_monday = sem_start + datetime.timedelta(weeks=week - 1)
+            schedule_name = _auto_schedule(week_monday)
+        times = _TIME_SCHEDULES[schedule_name]
+
     try:
         async with httpx.AsyncClient(follow_redirects=True) as client:
             sems = await _get_semesters(client)
@@ -590,7 +660,7 @@ async def _handle_query(bot: Bot, event: Event, args_text: str, mode: str = "nor
                 return
 
             try:
-                html_str = build_html(class_name, sem["Name"], data, week=week, day=day)
+                html_str = build_html(class_name, sem["Name"], data, week=week, day=day, times=times)
                 img = await render_html(html_str, width=1140, device_pixel_ratio=2.0)
                 await bot.send(
                     event,
