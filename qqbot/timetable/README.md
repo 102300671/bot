@@ -30,9 +30,16 @@ pip install -e .
 cp .env.prod.example .env.prod
 vim .env.prod
 
-# 3. 启动机器人
+# 3. 启动机器人（推荐：自动检测渲染后端）
+python bot.py
+
+# 也可使用 nb run（需自行在 .env.prod 中配置渲染参数）
 nb run
 ```
+
+> `bot.py` 会在启动前自动检测运行环境：Termux PRoot 等容器或无 GPU 设备
+> 自动启用 `--use-gl=swiftshader` 软件渲染，有 GPU 的设备使用硬件加速。
+> 若 `.env.prod` 中显式设置了 `RENDER__PROVIDER_CONFIG__LAUNCH_ARGS`，则以配置为准。
 
 ## 配置
 
@@ -109,6 +116,7 @@ timetable/
 ├── plugins/
 │   └── timetable.py    # 课表查询插件主体（命令、查询、HTML 渲染、文本兜底、面板自动注册）
 ├── qq_panels.py        # QQ 指令面板 OpenAPI 封装（Bot 方法扩展，放在根目录供插件导入）
+├── bot.py              # 启动入口：自动检测渲染后端后启动 NoneBot
 ├── data/               # htmlrender 浏览器缓存与临时产物（已忽略，不入库）
 ├── .env.prod           # 本地配置（含密钥，已忽略，不入库）
 ├── .env.prod.example   # 配置模板（入库，复制为 .env.prod 后填写）
